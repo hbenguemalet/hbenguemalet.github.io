@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugo Benguemalet · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f5f7;--fg:#1d1d1f;--mute:#6e6e73;--card:#fff;--line:#d2d2d7;
+--m1:#ff6a3d;--m2:#ff2d55;--d1:#0a84ff;--d2:#5e5ce6;--acc1:var(--m1);--acc2:var(--m2)}
+body.data{--bg:#000;--fg:#f5f5f7;--mute:#a1a1a6;--card:#1c1c1e;--line:#38383a;--acc1:var(--d1);--acc2:var(--d2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:17px/1.47 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;overflow-x:hidden}
+.grad{background:linear-gradient(90deg,var(--acc1),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gm{background:linear-gradient(90deg,var(--m1),var(--m2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gd{background:linear-gradient(90deg,var(--d1),var(--d2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:50;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 50%,transparent);font-size:13px}
+nav b{font-weight:600;white-space:nowrap}
+nav a{color:var(--fg);text-decoration:none;opacity:.8;margin-left:18px}
+#bar{position:fixed;top:48px;left:0;height:2px;width:0;z-index:51;background:linear-gradient(90deg,var(--m1),var(--d1))}
+
+/* hero */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:90px 22px 40px;position:relative;overflow:hidden}
+.blob{position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(80px);opacity:.28;animation:float 18s ease-in-out infinite alternate;pointer-events:none}
+.past .blob{display:none}
+.blob.a{background:var(--m1);top:-25vmax;left:-20vmax}.blob.b{background:var(--d1);bottom:-30vmax;right:-20vmax;animation-delay:-9s}
+@keyframes float{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+.eyebrow{font-size:15px;font-weight:600;color:var(--mute);letter-spacing:.02em}
+h1{font-size:clamp(48px,11vw,112px);line-height:1.02;font-weight:800;letter-spacing:-.045em;margin:14px 0 18px}
+h1 .w{display:inline-block;opacity:0;transform:translateY(40px);filter:blur(10px);animation:in .9s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes in{to{opacity:1;transform:none;filter:none}}
+.lead{font-size:clamp(19px,2.6vw,24px);color:var(--mute);max-width:640px;margin:auto;font-weight:500}
+.cue{margin-top:44px;font-size:13px;color:var(--mute)}
+.cue i{display:block;width:22px;height:36px;border:2px solid var(--line);border-radius:12px;margin:10px auto 0;position:relative}
+.cue i:after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--mute);animation:wheel 1.6s infinite}
+@keyframes wheel{to{transform:translateY(12px);opacity:0}}
+
+/* journey (scroll piloté) */
+#journey{height:100svh;min-height:560px;position:relative}
+.pin{position:relative;height:100%;padding-top:48px;box-sizing:border-box;display:grid;place-items:center;overflow:hidden}
+#svg{width:min(92vw,520px);height:min(52svh,600px);margin-bottom:22svh;overflow:visible}
+.track{fill:none;stroke:var(--line);stroke-width:18;stroke-linecap:round;opacity:.45}
+.ink{fill:none;stroke-width:6;stroke-linecap:round}
+.blabel{font:800 22px Inter;letter-spacing:-.03em;opacity:0;transition:opacity .5s,transform .5s}
+.hit{fill:none;stroke:transparent;stroke-width:70;cursor:pointer;pointer-events:none}
+.ready .hit{pointer-events:stroke}
+.cap{position:absolute;left:0;right:0;bottom:11svh;transition:bottom .5s;text-align:center;padding:0 24px;pointer-events:none}
+.cap p{position:absolute;left:0;right:0;font-size:clamp(24px,4.6vw,44px);font-weight:700;letter-spacing:-.035em;line-height:1.1;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.cap p.on{opacity:1;transform:none}
+.choose{position:absolute;bottom:6svh;display:flex;gap:12px;opacity:0;transform:translateY(20px);transition:.5s;pointer-events:none}
+.ready .cap{bottom:24svh}
+.ready .choose{opacity:1;transform:none;pointer-events:auto}
+.btn{border:0;border-radius:980px;padding:13px 24px;font:600 17px Inter;color:#fff;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:scale(1.04)}
+.btn.m{background:linear-gradient(90deg,var(--m1),var(--m2));box-shadow:0 8px 30px -8px var(--m2)}
+.btn.d{background:linear-gradient(90deg,var(--d1),var(--d2));box-shadow:0 8px 30px -8px var(--d1)}
+
+/* runner */
+.rn .leg,.rn .arm{transform-box:fill-box;transform-origin:50% 0}
+.running .leg.l{animation:lA .3s infinite}.running .leg.r{animation:lB .3s infinite}
+.running .arm.l{animation:aA .3s infinite}.running .arm.r{animation:aB .3s infinite}
+.running .bob{animation:bob .15s infinite alternate}
+.idle .bob{animation:bob 1.3s infinite alternate ease-in-out}
+@keyframes lA{50%{transform:scaleY(.55)}}@keyframes lB{0%,100%{transform:scaleY(.55)}50%{transform:none}}
+@keyframes aA{0%,100%{transform:rotate(28deg)}50%{transform:rotate(-28deg)}}
+@keyframes aB{0%,100%{transform:rotate(-28deg)}50%{transform:rotate(28deg)}}
+@keyframes bob{to{transform:translateY(-2.5px)}}
+
+/* fil conducteur */
+.thread{position:fixed;top:48px;bottom:0;width:28px;z-index:6;pointer-events:none;opacity:0;transition:opacity .5s,left .9s cubic-bezier(.3,1,.4,1);left:max(4px,calc(50vw - 556px))}
+body.data .thread{left:min(calc(100vw - 32px),calc(50vw + 528px))}
+.thread.show{opacity:1}
+.thread .tl,.thread .tf{position:absolute;left:50%;top:0;width:3px;margin-left:-1.5px;border-radius:2px}
+.thread .tl{bottom:0;background:var(--line);opacity:.55}
+.thread .tf{height:0;background:linear-gradient(var(--acc1),var(--acc2));box-shadow:0 0 12px var(--acc1)}
+.thread svg{position:absolute;left:0;top:0;will-change:transform}
+@media(max-width:760px){.thread{left:-6px;width:20px}body.data .thread{left:calc(100vw - 14px)}.thread svg{width:20px;height:auto}}
+body:not(.chosen) #projets,body:not(.chosen) #contact,body:not(.chosen) .seg-dock,body:not(.chosen) .thread{display:none}
+/* sections */
+section.wrap{max-width:1080px;margin:auto;padding:110px 22px}
+h2{font-size:clamp(36px,7vw,72px);font-weight:800;letter-spacing:-.045em;line-height:1.04}
+.sub{font-size:clamp(18px,2.4vw,22px);color:var(--mute);margin-top:12px;max-width:640px;font-weight:500}
+.reveal{opacity:0;transform:translateY(46px) scale(.98);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.vis{opacity:1;transform:none}
+
+/* segmented */
+.seg-wrap{position:sticky;top:60px;z-index:20;display:flex;justify-content:center;margin:36px 0 26px}
+.seg{display:inline-flex;position:relative;padding:4px;border-radius:980px;background:color-mix(in srgb,var(--card) 70%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:0 10px 30px -15px rgba(0,0,0,.3)}
+.seg button{position:relative;z-index:1;border:0;background:none;color:var(--fg);font:600 15px Inter;padding:10px 22px;border-radius:980px;cursor:pointer;transition:color .4s}
+.seg .knob{position:absolute;top:4px;bottom:4px;left:4px;border-radius:980px;background:linear-gradient(90deg,var(--acc1),var(--acc2));transition:transform .5s cubic-bezier(.3,1.3,.5,1),width .5s}
+.seg button.act{color:#fff}
+
+.seg-wrap{display:none}.bento{margin-top:32px}.seg-wrap.hide{opacity:0;pointer-events:none}
+.seg-dock{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:30;pointer-events:none;opacity:0;transform:translateY(30px);transition:opacity .4s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.seg-dock.show{opacity:1;transform:none}.seg-dock .seg{pointer-events:auto}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.card{grid-column:span 3;background:var(--card);border-radius:28px;padding:28px;position:relative;overflow:hidden;cursor:pointer;transition:box-shadow .3s;transform-style:preserve-3d;will-change:transform;min-height:240px;display:flex;flex-direction:column;border:1px solid color-mix(in srgb,var(--line) 40%,transparent)}
+.card:hover{box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.card.w4{grid-column:span 4}.card.w2{grid-column:span 2}.card.w6{grid-column:span 6}
+.card .k{font-size:13px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.card h3{font-size:clamp(24px,3vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.1;margin:8px 0}
+.card p{color:var(--mute);font-size:16px}
+.big{font-size:clamp(46px,13vw,92px);overflow-wrap:anywhere;font-weight:800;letter-spacing:-.06em;line-height:1;margin-top:auto;padding-top:18px}
+.big small{font-size:18px;letter-spacing:-.01em;font-weight:600;color:var(--mute);margin-left:6px}
+.more{position:absolute;right:20px;bottom:20px;width:34px;height:34px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-size:22px;font-weight:400;transition:transform .3s}
+.card:hover .more{transform:rotate(90deg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:16px}
+.chip{font-size:12px;font-weight:600;padding:5px 11px;border-radius:980px;background:color-mix(in srgb,var(--acc1) 14%,transparent);color:var(--acc1)}
+.fade{animation:cardIn .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.97)}}
+
+/* terminal */
+.term{background:#0d0d0f;color:#e5e5ea;border-radius:16px;padding:16px 18px;font:13.5px/1.6 "JetBrains Mono",monospace;margin-top:16px;min-height:178px;white-space:pre-wrap;border:1px solid #2c2c2e}
+.term .dots{display:flex;gap:6px;margin-bottom:10px}.term .dots i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.term .dots i+i{background:#febc2e}.term .dots i+i+i{background:#28c840}
+.kw{color:#ff7ab2}.str{color:#fc6a5d}.num{color:#d9c97c}.caret{display:inline-block;width:8px;height:15px;background:var(--d1);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* roadmap */
+.road{margin-top:18px;display:grid;gap:10px}
+.step{display:flex;align-items:center;gap:12px;font-weight:600}
+.step i{width:12px;height:12px;border-radius:50%;border:2px solid var(--acc1);flex:none}
+.step.done i{background:var(--acc1)}
+.step span{margin-left:auto;font-size:12px;color:var(--mute);font-weight:500}
+
+
+/* visualisations */
+.viz{margin:18px 0 38px;position:relative;min-height:60px}
+.pgrid{display:grid;grid-template-columns:repeat(20,1fr);gap:4px}
+.pgrid i{aspect-ratio:1;border-radius:2px;background:var(--line);opacity:.35;transition:background .5s,opacity .4s}
+.pgrid i.on{opacity:1;background:var(--acc1)}
+.pgrid i.s2{background:var(--acc2)}.pgrid i.s3{background:var(--mute);opacity:.5}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:12px;color:var(--mute);font-weight:500}
+.legend b{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:0}
+.vizsvg{width:100%;height:auto;display:block;overflow:visible}
+.node{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.node.on{transform:none}
+.link{stroke:var(--acc1);stroke-width:1.6;fill:none;transition:stroke-dashoffset .7s ease}
+.gbl{display:grid;gap:10px}
+.gbr{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;align-items:center;padding:10px 12px;border-radius:14px;transition:background .4s}
+.gbr.act{background:color-mix(in srgb,var(--acc1) 10%,transparent)}
+.gbr .ic{font-size:20px;grid-row:span 2;text-align:center}
+.gbr b{font-size:14px}
+.gbr .pb{height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.gbr .pb span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc1),var(--acc2))}
+.qr{display:grid;grid-template-columns:repeat(21,1fr);gap:1px;width:120px;padding:8px;background:#fff;border-radius:10px;box-shadow:0 10px 30px -12px rgba(0,0,0,.35);transform:rotate(3deg)}
+.stage{height:160px;margin-top:12px;border-radius:18px;background:color-mix(in srgb,var(--acc1) 6%,transparent);display:grid;place-items:center;overflow:hidden;position:relative}
+.stage>*{animation:cardIn .5s both}
+.stage .lbl{position:absolute;left:12px;bottom:8px;font-size:11px;font-weight:600;color:var(--mute)}
+.wave{animation:wv 3s linear infinite}@keyframes wv{to{transform:translateX(-40px)}}
+.qr i{aspect-ratio:1;background:#1d1d1f;opacity:0}.qr i.on{opacity:1}
+.phone{width:min(250px,100%);margin:auto;border-radius:34px;padding:12px;background:#111;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.screen{background:#fafafa;border-radius:24px;padding:14px 12px;min-height:250px;color:#1d1d1f;overflow:hidden}
+.screen h4{font-size:15px;font-weight:800;letter-spacing:-.02em;margin:2px 4px 10px}
+.alb{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:7px 4px;opacity:0;transform:translateX(30px);transition:.5s cubic-bezier(.2,.8,.2,1)}
+.alb.on{opacity:1;transform:none}
+.cov{width:38px;height:38px;border-radius:7px}
+.ln{height:7px;border-radius:4px;background:#d2d2d7;margin:3px 0}
+.stars{display:flex;gap:3px;margin-top:5px}.stars i{width:7px;height:7px;border-radius:50%;background:#d2d2d7;transition:background .2s}.stars i.on{background:#ff6a3d}
+.sc{font:700 17px Inter;letter-spacing:-.02em;text-align:right}
+.sc em{display:block;font-style:normal;font-size:10px;font-weight:700;color:#fff;border-radius:6px;padding:1px 6px;margin-top:3px;opacity:0;transform:scale(.6);transition:.4s cubic-bezier(.3,1.6,.5,1)}
+.sc em.on{opacity:1;transform:none}
+.rbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px;grid-column:2/4}
+.rbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc1),var(--acc2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.rbar.wip span{background:linear-gradient(90deg,var(--acc1) 0 40%,var(--acc2) 50%,var(--acc1) 60%);background-size:250% 100%;animation:shim 1.6s linear infinite}
+@keyframes shim{from{background-position:100% 0}to{background-position:-150% 0}}
+.road .step{display:grid;grid-template-columns:12px 1fr auto;column-gap:12px}
+
+/* sheet */
+#sheet{position:fixed;inset:0;z-index:100;display:grid;place-items:end center;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .35s}
+#sheet.open{opacity:1;pointer-events:auto}
+#sheet .in{background:var(--card);color:var(--fg);width:min(720px,100%);max-height:86svh;overflow:auto;border-radius:28px 28px 0 0;padding:34px 28px 44px;transform:translateY(100%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+@media(min-width:760px){#sheet{place-items:center}#sheet .in{border-radius:28px;transform:translateY(40px) scale(.96)}}
+#sheet.open .in{transform:none}
+#sheet h3{font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:1.08}
+#sheet .meta{color:var(--mute);margin:6px 0 18px;font-weight:500}
+#sheet li{margin:0 0 10px 18px}
+#close{position:sticky;top:0;float:right;width:34px;height:34px;border-radius:50%;border:0;background:var(--line);color:var(--fg);font-size:18px;cursor:pointer}
+
+footer{text-align:center;padding:100px 22px 120px}
+footer .mail{display:inline-block;margin-top:22px;font-size:clamp(20px,4vw,30px);font-weight:700;letter-spacing:-.03em;color:var(--fg);text-decoration:none;border-bottom:2px solid var(--acc1)}
+footer .s{color:var(--mute);margin-top:40px;font-size:13px}
+
+@media(max-width:1000px){.card.w4,.card.t6{grid-column:span 6}.card.w2{grid-column:span 3}}
+@media(max-width:760px){.card,.card.w4,.card.w2{grid-column:span 6}.card{min-height:0;padding:22px;border-radius:24px}nav a.hide{display:none}section.wrap{padding:80px 16px}.bento{gap:12px}}
+@media(max-width:400px){nav a.gh{display:none}nav a{margin-left:14px}h1{font-size:44px}.seg button{padding:9px 16px}.btn{padding:12px 20px;font-size:16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,h1 .w{opacity:1;transform:none;filter:none}}
+</style>
+</head>
+<body>
+<nav><b>Hugo Benguemalet</b><div><a class="gh" href="https://github.com/hbenguemalet" rel="noopener">GitHub</a><a class="hide" href="#journey">Trajectoire</a><a href="#projets">Projets</a><a href="#contact">Contact</a></div></nav>
+<div id="bar"></div>
+<div class="thread" id="thread" aria-hidden="true"><i class="tl"></i><i class="tf" id="tf"></i>
+ <svg id="tsvg" viewBox="-14 -46 28 52" width="28" height="52"><g id="trunner" class="idle rn">
+  <ellipse cx="0" cy="0" rx="9" ry="3" fill="#000" opacity=".2"/>
+  <g class="bob">
+   <rect class="leg l" x="-6" y="-15" width="5" height="15" rx="2.5" fill="#a9cce0"/><rect class="leg r" x="1" y="-15" width="5" height="15" rx="2.5" fill="#a9cce0"/>
+   <rect class="arm l" x="-11" y="-28" width="4" height="13" rx="2" fill="#8d5a3c"/><rect class="arm r" x="7" y="-28" width="4" height="13" rx="2" fill="#8d5a3c"/>
+   <rect id="tshirt" x="-8" y="-30" width="16" height="17" rx="5" fill="#fafafa" style="transition:fill .5s"/>
+   <circle cx="0" cy="-36" r="6.5" fill="#8d5a3c"/><circle cx="0" cy="-36" r="6.6" fill="#161616"/><g fill="none" stroke-linecap="round"><g stroke="#2a2320" stroke-width="1.9"><path d="M-5.77 -37.65 Q-7.71 -38.80 -7.88 -27.90 M-5.09 -39.18 Q-7.24 -39.85 -7.05 -27.00 M-4.01 -40.46 Q-5.05 -42.46 -5.61 -27.00 M-2.63 -41.39 Q-4.10 -43.10 -3.70 -27.90 M-1.04 -41.91 Q-0.86 -44.16 -1.47 -27.00 M0.63 -41.97 Q0.29 -44.20 0.88 -27.00 M2.25 -41.56 Q3.59 -43.37 3.16 -27.90 M3.69 -40.73 Q4.59 -42.80 5.17 -27.00 M4.85 -39.53 Q6.95 -40.35 6.74 -27.00 M5.64 -38.05 Q7.49 -39.34 7.73 -27.90"/></g><g stroke="#5a4d44" stroke-width="0.75" opacity=".9"><path d="M-6.21 -37.92 Q-8.03 -39.08 -8.28 -27.50 M-4.25 -40.92 Q-5.18 -42.87 -6.01 -26.60 M-0.99 -42.42 Q-0.75 -44.57 -1.87 -26.60 M2.56 -41.97 Q3.90 -43.66 2.76 -27.50 M5.34 -39.71 Q7.37 -40.43 6.34 -26.60"/></g></g>
+  </g></g></svg></div>
+
+<header class="hero">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div style="position:relative">
+    <p class="eyebrow">Portfolio · Master Management digital &amp; projet entrepreneurial</p>
+    <h1 id="h1">Du management à la <span class="grad" style="white-space:nowrap;background:linear-gradient(90deg,var(--m1),var(--m2),var(--d2),var(--d1));-webkit-background-clip:text;background-clip:text">data.</span></h1>
+    <p class="lead">Le management, que je pratique. La data, que je construis. En reconversion pour un master et une alternance à la rentrée 2027.</p>
+    <div class="cue">Faire défiler<i></i></div>
+  </div>
+</header>
+
+<section id="journey">
+  <div class="pin" id="pin">
+    <svg id="svg" viewBox="0 0 400 600" aria-label="Un chemin qui se divise en deux : management à gauche, data à droite">
+      <defs>
+        <linearGradient id="gm" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff6a3d"/><stop offset="1" stop-color="#ff2d55"/></linearGradient>
+        <linearGradient id="gd" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0a84ff"/><stop offset="1" stop-color="#5e5ce6"/></linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <path class="track" id="tT"/><path class="track" id="tL"/><path class="track" id="tR"/>
+      <path class="ink" id="iT" stroke="currentColor"/>
+      <path class="ink" id="iL" stroke="url(#gm)" filter="url(#glow)"/>
+      <path class="ink" id="iR" stroke="url(#gd)" filter="url(#glow)"/>
+      <path class="hit" id="hL" data-b="management"/><path class="hit" id="hR" data-b="data"/>
+      <text class="blabel" id="lL" x="70" y="22" text-anchor="middle" fill="url(#gm)">Management</text>
+      <text class="blabel" id="lR" x="330" y="22" text-anchor="middle" fill="url(#gd)">Data</text>
+      <g id="walker"><g id="tilt"><g id="runner" class="idle rn">
+        <ellipse cx="0" cy="0" rx="9" ry="3" fill="#000" opacity=".2"/>
+        <g class="bob">
+          <rect class="leg l" x="-6" y="-15" width="5" height="15" rx="2.5" fill="#a9cce0"/>
+          <rect class="leg r" x="1" y="-15" width="5" height="15" rx="2.5" fill="#a9cce0"/>
+          <rect class="arm l" x="-11" y="-28" width="4" height="13" rx="2" fill="#8d5a3c"/>
+          <rect class="arm r" x="7" y="-28" width="4" height="13" rx="2" fill="#8d5a3c"/>
+          <rect id="shirt" x="-8" y="-30" width="16" height="17" rx="5" fill="#fafafa" style="transition:fill .5s"/>
+          <circle cx="0" cy="-36" r="6.5" fill="#8d5a3c"/>
+          <circle cx="0" cy="-36" r="6.6" fill="#161616"/><g fill="none" stroke-linecap="round"><g stroke="#2a2320" stroke-width="1.9"><path d="M-5.77 -37.65 Q-7.71 -38.80 -7.88 -27.90 M-5.09 -39.18 Q-7.24 -39.85 -7.05 -27.00 M-4.01 -40.46 Q-5.05 -42.46 -5.61 -27.00 M-2.63 -41.39 Q-4.10 -43.10 -3.70 -27.90 M-1.04 -41.91 Q-0.86 -44.16 -1.47 -27.00 M0.63 -41.97 Q0.29 -44.20 0.88 -27.00 M2.25 -41.56 Q3.59 -43.37 3.16 -27.90 M3.69 -40.73 Q4.59 -42.80 5.17 -27.00 M4.85 -39.53 Q6.95 -40.35 6.74 -27.00 M5.64 -38.05 Q7.49 -39.34 7.73 -27.90"/></g><g stroke="#5a4d44" stroke-width="0.75" opacity=".9"><path d="M-6.21 -37.92 Q-8.03 -39.08 -8.28 -27.50 M-4.25 -40.92 Q-5.18 -42.87 -6.01 -26.60 M-0.99 -42.42 Q-0.75 -44.57 -1.87 -26.60 M2.56 -41.97 Q3.90 -43.66 2.76 -27.50 M5.34 -39.71 Q7.37 -40.43 6.34 -26.60"/></g></g>
+        </g>
+      </g></g></g>
+    </svg>
+    <div class="cap">
+      <p id="c0">Tout commence à l'IAE Valenciennes.</p>
+      <p id="c1">Puis le chemin <span class="grad" style="background:linear-gradient(90deg,var(--m1),var(--d1));-webkit-background-clip:text;background-clip:text">se divise.</span></p>
+      <p id="c2"><span class="gm">Management</span> à gauche.<br><span class="gd">Data</span> à droite.</p>
+    </div>
+    <div class="choose"><button class="btn m" data-b="management">Management</button><button class="btn d" data-b="data">Data</button></div>
+  </div>
+</section>
+
+<section class="wrap" id="projets">
+  <h2 class="reveal" id="ptitle"></h2>
+  <p class="sub reveal" id="psub"></p>
+  <div class="seg-wrap" id="segwrap"><div class="seg"><span class="knob"></span><button data-b="management">Management</button><button data-b="data">Data</button></div></div>
+  <div class="bento" id="bento"></div>
+</section>
+
+<footer id="contact" class="reveal">
+  <h2>Me <span class="grad">contacter.</span></h2>
+  <p class="sub" style="margin:12px auto 0">Reconversion vers la data · master et alternance · rentrée 2027.</p>
+  <a class="mail" href="mailto:hugo.benguemalet@gmail.com">hugo.benguemalet@gmail.com</a>
+  <p class="s"><a href="https://github.com/hbenguemalet" rel="noopener" style="color:var(--fg);font-weight:600">GitHub · hbenguemalet</a> · Saint-Amand-les-Eaux, Hauts-de-France</p>
+</footer>
+
+<div class="seg-dock" id="dock"><div class="seg"><span class="knob"></span><button data-b="management">Management</button><button data-b="data">Data</button></div></div>
+<div id="sheet"><div class="in"><button id="close" aria-label="Fermer">✕</button><div id="sheetBody"></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const T="M200 470 L200 360", L="M200 360 C200 280 75 300 75 205 S 115 75 70 40", R="M200 360 C200 280 325 300 325 205 S 285 75 330 40";
+[["tT",T],["iT",T],["tL",L],["iL",L],["hL",L],["tR",R],["iR",R],["hR",R]].forEach(([i,d])=>$(i).setAttribute("d",d));
+const len={};["iT","iL","iR"].forEach(i=>{const p=$(i),l=p.getTotalLength();len[i]=l;p.style.strokeDasharray=l;p.style.strokeDashoffset=l});
+
+/* ---------- données ---------- */
+const DATA={
+management:{title:'Expériences en <span class="gm">management.</span>',sub:"Créer une structure, coordonner des équipes, piloter un produit. Ce que j'ai déjà fait.",items:[
+ {id:"arta",w:"w4",k:"Alternance · depuis 2026",viz:"grid",t:"Artapisserie.fr",p:"Assistant chef de produit sur un catalogue e-commerce.",big:25000,unit:"produits",
+  meta:"Assistant chef de produit · alternance · depuis janvier 2026",li:["Référencement et qualité des données produits.","Suivi du cycle de vie à partir des ventes, des prix et du déstockage.","Plan d'assortiment, veille concurrentielle et analyse des résultats.","Contrôle des supports de communication (charte, shootings)."],chips:["E-commerce","Données produits","PrestaShop"]},
+ {id:"bsc",w:"w2",k:"Licence 2",viz:"team",t:"Black Swan Conseil",p:"Une association créée de A à Z.",big:6,unit:"personnes",
+  meta:"Projet de groupe · équipe de 6 · Licence 2",li:["Conception et lancement : statuts, vision stratégique, gouvernance.","Prospection et négociation de partenariats avec des acteurs économiques locaux et nationaux.","Réunions de suivi, analyse des KPIs et présentation des résultats aux partenaires.","Suivi des engagements juridiques et commerciaux."],chips:["Asana","Excel · reporting","Partenariats"]},
+ {id:"gbp",w:"w3",k:"Licence 3 · international",viz:"gb",t:"Global Business Projects",p:"Port d'Anvers-Bruges, guide digital pour étudiants internationaux, programme de tutorat.",big:3,unit:"projets",
+  meta:"Projets internationaux · équipes interculturelles · Licence 3",li:["<b>Port d'Anvers-Bruges</b> : analyse de l'image de marque et recommandations pour sa réputation auprès du public francophone, présentées à des professionnels du secteur.","<b>Guide digital interactif</b> (QR codes, mobile) pour l'accueil des étudiants internationaux, conçu à partir d'observations terrain et d'interviews.","<b>Programme de tutorat</b> et promotion de la filière Global Business.","Animation de groupes multilingues (Belgique, France, international)."],chips:["Design Thinking","Gantt","Anglais C1"]},
+ {id:"melo",w:"w3 t6",k:"2024 – en cours · bêta iOS",viz:"phone",t:"Melorata",p:"Le Letterboxd de la musique. J'y tiens le rôle produit.",bigTxt:"iOS",unit:"bêta",
+  meta:"Application de notation musicale · projet en équipe · 2024 – en cours",li:["Conception produit : fonctionnalités et parcours utilisateur.","Tests de l'application, identification et remontée des bugs.","Retours sur la direction artistique avec la graphiste.","Structuration de ma base Excel pour importer mes notes dans l'app : le pont vers la data."],chips:["Produit","Tests","UX"]}
+]},
+data:{title:'Projets <span class="gd">data.</span>',sub:"De mes premiers classeurs Excel jusqu'au data engineering. Chaque projet publié ici, au fil de l'eau.",items:[
+ {id:"disco",w:"w4",k:"Projet personnel · 2024 – en cours",t:"Ma collection d'albums, analysée.",p:"Une centaine d'albums alimentés par mes écoutes Apple Music. Notes, classements et mise à jour automatique.",term:1,
+  meta:"Excel, IA, Python, Power BI · 2024 – en cours",li:["Base d'une centaine d'albums alimentée par mes données d'écoute Apple Music.","Notes et classements : chaque album est noté, classé par artiste et par genre, puis mis à jour sans ressaisie.","Mise à jour automatique de la collection par un bot Python piloté par l'IA.","Visualisation de la collection dans Power BI : tableaux de bord et indicateurs.","Bot Python écrit avec l'appui de l'IA ; règles et logique définies par moi, code testé et ajusté."],chips:["Excel","IA","Python","Power BI"],repo:"https://github.com/hbenguemalet/Excel_Melorata"},
+ {id:"road",w:"w2 t6",k:"Feuille de route",t:"Prochaines étapes",road:1,
+  meta:"Bootcamp data autodidacte · depuis septembre 2026",li:["<b>SQL</b> : analyse e-commerce (jeu de données Olist), jointures, CTE, fonctions fenêtres.","<b>Python</b> : nettoyage, analyse et visualisation avec pandas.","<b>Power BI</b> : tableau de bord interactif avec DAX.","<b>Pipeline de données</b> : ETL automatisé, Docker, dbt, vers le data engineering."],chips:["SQL","Python","Power BI","ETL"]}
+]}};
+
+/* ---------- runner ---------- */
+const walker=$("walker"),runner=$("runner"),tilt=$("tilt");let px=200;
+function place(x,y){const s=.75+.65*(y/590),dx=x-px;tilt.setAttribute("transform",Math.abs(dx)>.2?`rotate(${Math.max(-14,Math.min(14,dx*7))})`:"");walker.setAttribute("transform",`translate(${x} ${y}) scale(${s.toFixed(3)})`);px=x}
+function run(on){runner.classList.toggle("running",on);runner.classList.toggle("idle",!on);if(!on)tilt.setAttribute("transform","")}
+place(200,360);
+
+/* ---------- intro automatique ---------- */
+const J=$("journey"),pin=$("pin"),thread=$("thread"),trun=$("trunner");
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const tween=(d,fn)=>new Promise(r=>{const t0=performance.now();const f=n=>{const k=cl((n-t0)/d);fn(k);k<1?requestAnimationFrame(f):r()};requestAnimationFrame(f)});
+const ease=k=>1-Math.pow(1-k,3);
+let played=false,at={b:null,f:0},mv=0;
+const cap=i=>[0,1,2].forEach(j=>$("c"+j).classList.toggle("on",j===i));
+const wt=ms=>new Promise(r=>setTimeout(r,ms));
+function playIntro(){if(played)return;played=true;
+  $("iT").style.strokeDashoffset=0;$("iL").style.strokeDashoffset=0;$("iR").style.strokeDashoffset=0;
+  $("lL").style.opacity=1;$("lR").style.opacity=1;
+  cap(2);pin.classList.add("ready")}
+new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){playIntro();o.disconnect()}},{threshold:.55}).observe(J);
+
+/* le personnage se place sur la bonne branche */
+const onPath=(b,f)=>{const id=b==="management"?"iL":"iR",P=$(id).getPointAtLength(len[id]*f);place(P.x,P.y)};
+async function goBranch(b,to=.55){if(!played)return;const my=++mv,from=at;run(true);
+  const g=k=>my===mv;
+  if(from.b&&from.b!==b)await tween(250,k=>g()&&onPath(from.b,from.f*(1-k)));
+  const f0=from.b===b?from.f:0;
+  await tween(380,k=>g()&&onPath(b,f0+(to-f0)*ease(k)));
+  if(my===mv){at={b,f:to};run(false)}}
+
+/* fil conducteur latéral */
+let sT;
+function onScroll(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;$("bar").style.width=(max>0?y/max*100:0)+"%";
+  const jb=J.offsetTop+J.offsetHeight,start=jb-innerHeight*.3,p=max-start>0?cl((y-start)/(max-start)):0;
+  document.body.classList.toggle("past",y>innerHeight*1.1);thread.classList.toggle("show",y>jb-innerHeight*.5);
+  $("dock").classList.toggle("show",y>jb-innerHeight*.5);
+  const H=innerHeight-48-52;$("tsvg").style.transform=`translateY(${p*H}px)`;$("tf").style.height=(p*H+44)+"px";
+  trun.classList.add("running");trun.classList.remove("idle");clearTimeout(sT);sT=setTimeout(()=>{trun.classList.remove("running");trun.classList.add("idle")},180);
+}
+addEventListener("scroll",()=>requestAnimationFrame(onScroll),{passive:true});onScroll();
+
+/* ---------- projets ---------- */
+let cur=null;
+function syncSeg(){document.querySelectorAll(".seg").forEach(sg=>{const btns=[...sg.querySelectorAll("button")];btns.forEach(x=>x.classList.toggle("act",x.dataset.b===cur));const a=btns.find(x=>x.dataset.b===cur),k=sg.querySelector(".knob");if(a&&a.offsetWidth){k.style.width=a.offsetWidth+"px";k.style.transform=`translateX(${a.offsetLeft-4}px)`}})}
+function smoothTo(y){const y0=scrollY,d=y-y0,t0=performance.now();const f=n=>{const k=cl((n-t0)/550),e=1-Math.pow(1-k,3);scrollTo({top:y0+d*e,behavior:"instant"});if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function toTop(){requestAnimationFrame(()=>smoothTo(Math.max(0,$("projets").getBoundingClientRect().top+scrollY-56)))}
+function setBranch(b,scroll){
+  if(cur===b&&!scroll) return; cur=b; gen++; busyUntil=performance.now()+750;
+  document.body.classList.toggle("data",b==="data");
+  
+  syncSeg();
+  $("ptitle").innerHTML=DATA[b].title;$("psub").textContent=DATA[b].sub;
+  $("bento").innerHTML=DATA[b].items.map((it,i)=>`
+   <article class="card ${it.w} fade" style="animation-delay:${i*80}ms" data-id="${it.id}">
+    <span class="k">${it.k}</span><h3>${it.t}</h3>${it.p?`<p>${it.p}</p>`:""}
+    ${it.big!=null?`<div class="big grad"><span class="count" data-to="${it.big}" ${it.viz==="grid"?"data-sync=1":""}>0</span><small>${it.unit}</small></div>`:""}
+    ${it.bigTxt?`<div class="big grad">${it.bigTxt}<small>${it.unit}</small></div>`:""}
+    ${it.term?`<div class="term" aria-label="Exemple de requête SQL"><div class="dots"><i></i><i></i><i></i></div><span class="code"></span><span class="caret"></span></div>`:""}
+    ${it.viz?`<div class="viz" data-viz="${it.viz}"></div>`:""}
+    ${it.road?`<div class="viz" data-viz="road"></div>`:""}
+    <span class="more">+</span>
+   </article>`).join("");
+  document.querySelectorAll(".count:not([data-sync])").forEach(countUp);
+  document.querySelectorAll("[data-viz]").forEach(el=>onSee(el,()=>VIZ[el.dataset.viz](el)));
+  const tm=document.querySelector(".term .code");if(tm)typeSQL(tm);
+  bindTilt();
+  if(scroll) $("projets").scrollIntoView({behavior:"smooth"});
+}
+function countUp(el){const to=+el.dataset.to,t0=performance.now(),d=1400;
+  const f=n=>{const k=cl((n-t0)/d),v=Math.round(to*(1-Math.pow(1-k,4)));el.textContent=v.toLocaleString("fr-FR");if(k<1)requestAnimationFrame(f)};
+  const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){requestAnimationFrame(f);io.disconnect()}});io.observe(el)}
+const SQL=[["kw","SELECT "],["","album, artiste, note,\n  "],["kw","CASE WHEN "],["","note >= "],["num","9"],["kw"," THEN "],["str","'Vinyle'"],["","\n       "],["kw","WHEN "],["","note >= "],["num","8"],["kw"," THEN "],["str","'CD'"],["kw","\n  END "],["kw","AS "],["","achat\n"],["kw","FROM "],["","collection\n"],["kw","ORDER BY "],["","note "],["kw","DESC"],["",";"]];
+let typing;
+function typeSQL(el){clearTimeout(typing);let i=0,j=0;el.innerHTML="";
+  const go=()=>{if(i>=SQL.length){typing=setTimeout(()=>typeSQL(el),4000);return}
+    const [c,s]=SQL[i];let span=el.lastChild;if(j===0){span=document.createElement("span");if(c)span.className=c;el.append(span)}
+    span.textContent+=s[j++];if(j>=s.length){i++;j=0}typing=setTimeout(go,28+Math.random()*40)};
+  const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){go();io.disconnect()}});io.observe(el)}
+function bindTilt(){if(!matchMedia("(hover:hover)").matches)return;
+  document.querySelectorAll(".card").forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg)`};c.onmouseleave=()=>c.style.transform=""})}
+
+
+/* ---------- visualisations par projet ---------- */
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let gen=0; // invalide les boucles quand on change de branche
+let busyUntil=0;
+const vio=new IntersectionObserver(es=>es.forEach(e=>e.target._v=e.isIntersecting),{rootMargin:"80px"});
+const vis=async(el,g)=>{while(!el._v&&g===gen)await wait(250)};
+function onSee(el,fn){const g0=gen;vio.observe(el);const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){io.disconnect();setTimeout(()=>{if(g0===gen)fn()},Math.max(0,busyUntil-performance.now()))}},{threshold:0,rootMargin:"0px 0px -15% 0px"});io.observe(el)}
+
+const GB=[
+ // 1. Port : un navire arrive au port, le public francophone réagit
+ async(st,g)=>{st.innerHTML=`<svg class="vizsvg" viewBox="0 0 300 150" style="height:150px">
+   <g fill="none" stroke="var(--acc1)" stroke-width="3"><path d="M250 112V40h22M262 40v18M238 112V60h-14"/><path d="M246 40l26 0" opacity=".5"/></g>
+   <rect x="215" y="108" width="85" height="8" fill="var(--mute)" opacity=".5"/>
+   <g class="wave"><path d="M-20 118 q10-6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0" stroke="var(--d1)" stroke-width="2.5" fill="none" opacity=".6"/></g>
+   <g id="ship" transform="translate(-90 0)"><path d="M10 100h80l-10 16H22z" fill="var(--fg)"/><rect x="24" y="86" width="16" height="14" fill="var(--acc1)"/><rect x="42" y="86" width="16" height="14" fill="var(--acc2)"/><rect x="60" y="86" width="16" height="14" fill="var(--d1)"/><rect x="33" y="72" width="16" height="14" fill="var(--d2)"/><rect x="51" y="72" width="16" height="14" fill="var(--acc1)"/></g>
+   <g id="bub"></g></svg><span class="lbl">Image de marque → public francophone</span>`;
+  const sh=st.querySelector("#ship"),t0=performance.now();
+  await new Promise(res=>{const f=n=>{const k=Math.min(1,(n-t0)/1500),e=1-Math.pow(1-k,3);sh.setAttribute("transform",`translate(${-90+215*e} ${Math.sin(n/180)*1.5})`);k<1?requestAnimationFrame(f):res()};requestAnimationFrame(f)});
+  const bub=st.querySelector("#bub");for(const[x,y,t]of[[40,20,"FR"],[105,8,"♥"],[170,26,"👍"]]){if(g!==gen)return;
+   bub.insertAdjacentHTML("beforeend",`<g class="node" style="transform-origin:${x+18}px ${y+14}px"><rect x="${x}" y="${y}" width="36" height="26" rx="13" fill="var(--card)" stroke="var(--line)"/><path d="M${x+12} ${y+25}l-4 8 10-8" fill="var(--card)"/><text x="${x+18}" y="${y+18}" text-anchor="middle" font-size="12" font-weight="700" font-family="Inter" fill="var(--acc1)">${t}</text></g>`);
+   const n=bub.lastChild;requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add("on")));await wait(350)}
+  await wait(900)},
+ // 2. Guide digital : le QR code se génère, scanné par un téléphone
+ async(st,g)=>{st.innerHTML='<div class="qr">'+'<i></i>'.repeat(441)+'</div><span class="lbl">Guide mobile pour étudiants internationaux</span>';
+  const q=[...st.querySelectorAll(".qr i")],fin=(x,y)=>{for(const[a,b]of[[0,0],[14,0],[0,14]])if(x>=a&&x<a+7&&y>=b&&y<b+7){const u=x-a,v=y-b;return u==0||v==0||u==6||v==6||(u>1&&u<5&&v>1&&v<5)}return null};
+  const idx=q.map((_,i)=>i).sort(()=>Math.random()-.5);
+  for(let k=0;k<idx.length;k++){if(g!==gen)return;const i=idx[k],f=fin(i%21,i/21|0);if(f===true||(f===null&&Math.random()<.45))q[i].classList.add("on");if(k%8==0)await wait(16)}
+  await wait(1500)},
+ // 3. Tutorat : étudiants FR et internationaux forment des binômes
+ async(st,g)=>{const N=5,ns="http://www.w3.org/2000/svg";st.innerHTML=`<svg class="vizsvg" viewBox="0 0 300 150" style="height:150px"><g id="ln"></g><g id="pp"></g>
+   <text x="40" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="var(--acc1)" font-family="Inter">FR</text><text x="260" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="var(--d1)" font-family="Inter">INTER</text></svg><span class="lbl">Programme de tutorat</span>`;
+  const sv=st.querySelector("svg"),ln=sv.querySelector("#ln"),pp=sv.querySelector("#pp"),Y=i=>32+i*25,perm=[...Array(N).keys()].sort(()=>Math.random()-.5);
+  const mk=(cx,cy,c)=>{const e=document.createElementNS(ns,"circle");e.setAttribute("cx",cx);e.setAttribute("cy",cy);e.setAttribute("r",8);e.setAttribute("fill",c);e.setAttribute("class","node");pp.append(e);requestAnimationFrame(()=>requestAnimationFrame(()=>e.classList.add("on")));return e};
+  const A=[],B=[];for(let i=0;i<N;i++){A.push(mk(40,Y(i),"var(--acc1)"));B.push(mk(260,Y(i),"var(--d1)"));await wait(90)}
+  const L=[];for(let i=0;i<N;i++){if(g!==gen)return;const l=document.createElementNS(ns,"line"),y2=Y(perm[i]);for(const[k,v]of Object.entries({x1:40,y1:Y(i),x2:260,y2,class:"link"}))l.setAttribute(k,v);const len=Math.hypot(220,y2-Y(i));l.style.strokeDasharray=len;l.style.strokeDashoffset=len;ln.append(l);L.push(l);requestAnimationFrame(()=>requestAnimationFrame(()=>l.style.strokeDashoffset=0));await wait(260)}
+  await wait(500);const t0=performance.now();
+  await new Promise(res=>{const f=n=>{const k=Math.min(1,(n-t0)/900),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    for(let i=0;i<N;i++){const ty=Y(i),by=Y(perm[i]),my=32+i*25;A[i].setAttribute("cx",40+(140-40)*e);A[i].setAttribute("cy",ty+(my-ty)*e);B[perm[i]].setAttribute("cx",260+(160-260)*e);B[perm[i]].setAttribute("cy",by+(my-by)*e);
+     L[i].setAttribute("x1",40+(140-40)*e);L[i].setAttribute("y1",ty+(my-ty)*e);L[i].setAttribute("x2",260+(160-260)*e);L[i].setAttribute("y2",by+(my-by)*e)}
+    k<1?requestAnimationFrame(f):res()};requestAnimationFrame(f)});
+  await wait(1200)}
+];
+const VIZ={
+ // Artapisserie : 25 000 produits, 1 carré = 250 produits, puis cycle de vie qui vit
+ async grid(el){const g=gen;el.innerHTML='<div class="pgrid">'+'<i></i>'.repeat(100)+'</div><div class="legend"><span><b style="background:var(--acc1)"></b>En ligne</span><span><b style="background:var(--acc2)"></b>Prix / promo</span><span><b style="background:var(--mute)"></b>Déstockage</span><span>1 carré = 250 produits</span></div>';
+  const t=[...el.querySelectorAll("i")],ord=t.map((_,i)=>i).sort(()=>Math.random()-.5),cnt=el.closest(".card").querySelector(".count");
+  for(let k=0;k<ord.length;k++){if(g!==gen)return;t[ord[k]].classList.add("on");if(cnt)cnt.textContent=((k+1)*250).toLocaleString("fr-FR");if(k%2==1)await wait(16)}
+  while(g===gen){await vis(el,g);const x=t[Math.random()*100|0],r=Math.random();x.classList.remove("s2","s3");if(r<.35)x.classList.add("s2");else if(r<.55)x.classList.add("s3");await wait(140)}},
+ // Black Swan : 6 personnes qui forment l'asso, puis les partenaires, puis les échanges
+ async team(el){const g=gen,W=300,H=170,cx=150,cy=88,N=6,R=52,ns="http://www.w3.org/2000/svg";
+  el.innerHTML=`<svg class="vizsvg" viewBox="0 0 ${W} ${H}"></svg>`;const sv=el.firstChild,mk=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+  const links=mk("g",{}),nodes=mk("g",{}),dots=mk("g",{});sv.append(links,nodes,dots);
+  const P=[...Array(N)].map((_,i)=>{const a=-Math.PI/2+i*2*Math.PI/N;return[cx+R*Math.cos(a),cy+R*.82*Math.sin(a)]});
+  const partners=[[22,30],[278,30],[22,146],[278,146]];
+  const line=(a,b,dash)=>{const l=mk("line",{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:"link"});const L=Math.hypot(b[0]-a[0],b[1]-a[1]);l.style.strokeDasharray=dash?"4 5":L;l.style.strokeDashoffset=L;links.append(l);requestAnimationFrame(()=>requestAnimationFrame(()=>l.style.strokeDashoffset=0));return l};
+  const node=(p,r,fill,label)=>{const gN=mk("g",{class:"node"});gN.append(mk("circle",{cx:p[0],cy:p[1],r,fill}));if(label){const t=mk("text",{x:p[0],y:p[1]+4,"text-anchor":"middle","font-size":label.length>2?9:11,"font-weight":700,fill:"#fff","font-family":"Inter"});t.textContent=label;gN.append(t)}nodes.append(gN);requestAnimationFrame(()=>requestAnimationFrame(()=>gN.classList.add("on")))};
+  node([cx,cy],20,"url(#gmV)","ASSO");sv.insertAdjacentHTML("afterbegin",'<defs><linearGradient id="gmV"><stop offset="0" stop-color="#ff6a3d"/><stop offset="1" stop-color="#ff2d55"/></linearGradient></defs>');
+  for(const p of P){if(g!==gen)return;await wait(220);line([cx,cy],p);node(p,11,"var(--fg)")}
+  await wait(400);for(let i=0;i<N;i++)line(P[i],P[(i+1)%N]);
+  await wait(500);for(const q of partners){if(g!==gen)return;await wait(200);const near=P.reduce((a,b)=>Math.hypot(b[0]-q[0],b[1]-q[1])<Math.hypot(a[0]-q[0],a[1]-q[1])?b:a);line(near,q,1);node(q,13,"var(--mute)","€")}
+  // échanges : impulsions entre l'asso, l'équipe et les partenaires
+  while(g===gen){await vis(el,g);const a=Math.random()<.5?[cx,cy]:P[Math.random()*N|0],b=Math.random()<.5?partners[Math.random()*4|0]:P[Math.random()*N|0];
+   const d=mk("circle",{r:3,fill:"var(--acc2)"});dots.append(d);const t0=performance.now();
+   await new Promise(res=>{const f=n=>{const k=Math.min(1,(n-t0)/700);d.setAttribute("cx",a[0]+(b[0]-a[0])*k);d.setAttribute("cy",a[1]+(b[1]-a[1])*k);d.setAttribute("opacity",1-k*.6);k<1?requestAnimationFrame(f):res()};requestAnimationFrame(f)});d.remove();await wait(120)}},
+ // Global Business : chaque projet a sa scène
+ async gb(el){const g=gen,items=[["⚓","Port d'Anvers-Bruges","Image de marque"],["▦","Guide digital","QR codes · mobile"],["⇄","Tutorat","Étudiants FR / internationaux"]];
+  el.innerHTML='<div class="gbl">'+items.map(i=>`<div class="gbr"><span class="ic">${i[0]}</span><b>${i[1]} <span style="color:var(--mute);font-weight:500">· ${i[2]}</span></b><div class="pb"><span></span></div></div>`).join("")+'</div><div class="stage"></div>';
+  const rows=[...el.querySelectorAll(".gbr")],st=el.querySelector(".stage");
+  const prog=(bar,dur)=>{const t0=performance.now();const f=n=>{const k=Math.min(1,(n-t0)/dur);bar.style.width=k*100+"%";if(k<1&&g===gen)requestAnimationFrame(f)};requestAnimationFrame(f)};
+  while(g===gen){await vis(el,g);for(let r=0;r<3;r++){if(g!==gen)return;rows.forEach((x,i)=>x.classList.toggle("act",i===r));const bar=rows[r].querySelector(".pb span");prog(bar,3600);await GB[r](st,g);await wait(400)}
+   rows.forEach(x=>{x.classList.remove("act");x.querySelector(".pb span").style.width=0})}},
+ // Melorata : l'app note des albums, la règle vinyle/CD de ma collection s'affiche
+ async phone(el){const g=gen,A=[[["#ff6a3d","#ff2d55"],9.4],[["#5e5ce6","#0a84ff"],8.2],[["#30d158","#0a84ff"],7.1],[["#ffd60a","#ff6a3d"],9.0]];
+  el.innerHTML='<div class="phone"><div class="screen"><h4>Mes notes</h4>'+A.map(a=>`<div class="alb"><div class="cov" style="background:linear-gradient(135deg,${a[0][0]},${a[0][1]})"></div><div><div class="ln" style="width:80%"></div><div class="ln" style="width:50%;opacity:.6"></div><div class="stars">${"<i></i>".repeat(5)}</div></div><div class="sc"><span>0,0</span></div></div>`).join("")+'</div></div>';
+  const rows=[...el.querySelectorAll(".alb")];
+  while(g===gen){await vis(el,g);for(let i=0;i<rows.length;i++){if(g!==gen)return;const r=rows[i],v=A[i][1],sp=r.querySelector(".sc span"),st=[...r.querySelectorAll(".stars i")];
+    r.classList.add("on");await wait(250);
+    for(let k=0;k<=20;k++){const x=v*k/20;sp.textContent=x.toFixed(1).replace(".",",");st.forEach((s,j)=>s.classList.toggle("on",x/2>j+.25));await wait(30)}
+    await wait(250)}
+   await wait(2600);rows.forEach(r=>r.classList.remove("on"));await wait(600)}},
+ // Feuille de route data
+ async road(el){const S=[["Excel · IA",100,"fait"],["SQL",0,"en cours",1],["Python",0,"à venir"],["Power BI",0,"à venir"],["Pipeline ETL",0,"à venir"]];
+  el.innerHTML='<div class="road">'+S.map(s=>`<div class="step ${s[1]?"done":""}"><i></i>${s[0]}<span>${s[2]}</span><div class="rbar ${s[3]?"wip":""}"><span></span></div></div>`).join("")+'</div>';
+  const bars=[...el.querySelectorAll(".rbar span")];for(let i=0;i<S.length;i++){await wait(220);bars[i].style.width=S[i][3]?"100%":S[i][1]+"%";if(S[i][3])bars[i].style.opacity=.45}}
+};
+
+/* ---------- fiche détail ---------- */
+function openSheet(id){const it=[...DATA.management.items,...DATA.data.items].find(x=>x.id===id);
+  $("sheetBody").innerHTML=`<h3>${it.t}</h3><p class="meta">${it.meta}</p><ul>${it.li.map(l=>`<li>${l}</li>`).join("")}</ul><div class="chips">${it.chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>${it.repo?`<a class="btn d" style="display:inline-block;margin-top:22px;text-decoration:none" href="${it.repo}" rel="noopener">Voir le code sur GitHub ↗</a>`:""}`;
+  $("sheet").classList.add("open")}
+$("sheet").onclick=e=>{if(e.target.id==="sheet"||e.target.id==="close")$("sheet").classList.remove("open")};
+addEventListener("keydown",e=>{if(e.key==="Escape")$("sheet").classList.remove("open")});
+
+/* ---------- interactions ---------- */
+document.addEventListener("click",e=>{
+  const nl=e.target.closest("nav a");if(nl&&!document.body.classList.contains("chosen")&&/#(projets|contact)/.test(nl.getAttribute("href")||"")){e.preventDefault();J.scrollIntoView({behavior:"smooth"});return}
+  const c=e.target.closest(".card");if(c)return openSheet(c.dataset.id);
+  const b=e.target.closest("[data-b]");if(!b)return;
+  if(b.closest(".choose")||b.classList.contains("hit")){setBranch(b.dataset.b);goBranch(b.dataset.b).then(()=>{document.body.classList.add("chosen");busyUntil=performance.now()+900;syncSeg();setTimeout(toTop,60)})}
+  else{setBranch(b.dataset.b);goBranch(b.dataset.b);toTop()}
+});
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("vis")}),{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>ro.observe(el));
+/* titre mot par mot */
+(()=>{const h=$("h1");let d=0;h.childNodes.forEach(n=>{if(n.nodeType===3){const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(w=>{if(!w.trim())return f.append(w);const s=document.createElement("span");s.className="w";s.style.animationDelay=(d++*.12)+"s";s.textContent=w;f.append(s)});n.replaceWith(f)}else{n.classList.add("w");n.style.animationDelay=(d++*.12+.1)+"s"}})})();
+setBranch("management");
+addEventListener("resize",syncSeg);
+</script>
+</body>
+</html>
