@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hugo Benguemalet · Portfolio</title>
+<title>Hugo Benguemalet · Management et data</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f5f5f7;--fg:#1d1d1f;--mute:#6e6e73;--card:#fff;--line:#d2d2d7;
 --m1:#ff6a3d;--m2:#ff2d55;--d1:#0a84ff;--d2:#5e5ce6;--acc1:var(--m1);--acc2:var(--m2)}
-body.data{--bg:#000;--fg:#f5f5f7;--mute:#a1a1a6;--card:#1c1c1e;--line:#38383a;--acc1:var(--d1);--acc2:var(--d2)}
+body.data{--acc1:var(--d1);--acc2:var(--d2)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font:17px/1.47 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;overflow-x:hidden}
+body{background:var(--bg);color:var(--fg);font:17px/1.47 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .grad{background:linear-gradient(90deg,var(--acc1),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .gm{background:linear-gradient(90deg,var(--m1),var(--m2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .gd{background:linear-gradient(90deg,var(--d1),var(--d2));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -29,8 +29,9 @@ nav a{color:var(--fg);text-decoration:none;opacity:.8;margin-left:18px}
 .past .blob{display:none}
 .blob.a{background:var(--m1);top:-25vmax;left:-20vmax}.blob.b{background:var(--d1);bottom:-30vmax;right:-20vmax;animation-delay:-9s}
 @keyframes float{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+.bigname{font:800 clamp(46px,12.5vw,124px)/.95 Inter,system-ui,sans-serif;letter-spacing:-.05em;margin:12px 0 4px}
 .eyebrow{font-size:15px;font-weight:600;color:var(--mute);letter-spacing:.02em}
-h1{font-size:clamp(48px,11vw,112px);line-height:1.02;font-weight:800;letter-spacing:-.045em;margin:14px 0 18px}
+h1{font-size:clamp(30px,6vw,58px);line-height:1.02;font-weight:800;letter-spacing:-.045em;margin:14px 0 18px}
 h1 .w{display:inline-block;opacity:0;transform:translateY(40px);filter:blur(10px);animation:in .9s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes in{to{opacity:1;transform:none;filter:none}}
 .lead{font-size:clamp(19px,2.6vw,24px);color:var(--mute);max-width:640px;margin:auto;font-weight:500}
@@ -107,8 +108,8 @@ h2{font-size:clamp(36px,7vw,72px);font-weight:800;letter-spacing:-.045em;line-he
 .card p{color:var(--mute);font-size:16px}
 .big{font-size:clamp(46px,13vw,92px);overflow-wrap:anywhere;font-weight:800;letter-spacing:-.06em;line-height:1;margin-top:auto;padding-top:18px}
 .big small{font-size:18px;letter-spacing:-.01em;font-weight:600;color:var(--mute);margin-left:6px}
-.more{position:absolute;right:20px;bottom:20px;width:34px;height:34px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-size:22px;font-weight:400;transition:transform .3s}
-.card:hover .more{transform:rotate(90deg)}
+.more{position:absolute;right:20px;bottom:20px;width:34px;height:34px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-size:22px;font-weight:400;}
+
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:16px}
 .chip{font-size:12px;font-weight:600;padding:5px 11px;border-radius:980px;background:color-mix(in srgb,var(--acc1) 14%,transparent);color:var(--acc1)}
 .fade{animation:cardIn .7s cubic-bezier(.2,.7,.2,1) both}
@@ -178,6 +179,7 @@ h2{font-size:clamp(36px,7vw,72px);font-weight:800;letter-spacing:-.045em;line-he
 #sheet.open .in{transform:none}
 #sheet h3{font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:1.08}
 #sheet .meta{color:var(--mute);margin:6px 0 18px;font-weight:500}
+.ah{font-size:20px;font-weight:800;letter-spacing:-.03em;margin:24px 0 6px}.ap{color:var(--mute);font-size:16px}
 #sheet li{margin:0 0 10px 18px}
 #close{position:sticky;top:0;float:right;width:34px;height:34px;border-radius:50%;border:0;background:var(--line);color:var(--fg);font-size:18px;cursor:pointer}
 
@@ -207,7 +209,8 @@ footer .s{color:var(--mute);margin-top:40px;font-size:13px}
 <header class="hero">
   <div class="blob a"></div><div class="blob b"></div>
   <div style="position:relative">
-    <p class="eyebrow">Portfolio · Master Management digital &amp; projet entrepreneurial</p>
+    <p class="eyebrow">Master Management digital &amp; projet entrepreneurial</p>
+    <p class="bigname">Hugo Benguemalet</p>
     <h1 id="h1">Du management à la <span class="grad" style="white-space:nowrap;background:linear-gradient(90deg,var(--m1),var(--m2),var(--d2),var(--d1));-webkit-background-clip:text;background-clip:text">data.</span></h1>
     <p class="lead">Le management, que je pratique. La data, que je construis. En reconversion pour un master et une alternance à la rentrée 2027.</p>
     <div class="cue">Faire défiler<i></i></div>
@@ -278,13 +281,13 @@ const len={};["iT","iL","iR"].forEach(i=>{const p=$(i),l=p.getTotalLength();len[
 const DATA={
 management:{title:'Expériences en <span class="gm">management.</span>',sub:"Créer une structure, coordonner des équipes, piloter un produit. Ce que j'ai déjà fait.",items:[
  {id:"arta",w:"w4",k:"Alternance · depuis 2026",viz:"grid",t:"Artapisserie.fr",p:"Assistant chef de produit sur un catalogue e-commerce.",big:25000,unit:"produits",
-  meta:"Assistant chef de produit · alternance · depuis janvier 2026",li:["Référencement et qualité des données produits.","Suivi du cycle de vie à partir des ventes, des prix et du déstockage.","Plan d'assortiment, veille concurrentielle et analyse des résultats.","Contrôle des supports de communication (charte, shootings)."],chips:["E-commerce","Données produits","PrestaShop"]},
+  meta:"Assistant chef de produit · alternance · depuis janvier 2026",blocs:[["Des prix alignés sur le marché.", "Mise à jour tarifaire à partir d'un benchmark concurrentiel : je relève les prix de la concurrence, je les compare aux nôtres et je propose les ajustements."], ["Un catalogue suivi de la première à la dernière vente.", "Suivi du cycle de vie produit à partir des ventes, des prix et du déstockage, pour guider les décisions de mise en avant et de sortie."], ["Un plan d'assortiment qui s'appuie sur les chiffres.", "Veille concurrentielle et analyse des résultats pour orienter les choix d'assortiment."]],chips:["E-commerce","Données produits","PrestaShop"]},
  {id:"bsc",w:"w2",k:"Licence 2",viz:"team",t:"Black Swan Conseil",p:"Une association créée de A à Z.",big:6,unit:"personnes",
-  meta:"Projet de groupe · équipe de 6 · Licence 2",li:["Conception et lancement : statuts, vision stratégique, gouvernance.","Prospection et négociation de partenariats avec des acteurs économiques locaux et nationaux.","Réunions de suivi, analyse des KPIs et présentation des résultats aux partenaires.","Suivi des engagements juridiques et commerciaux."],chips:["Asana","Excel · reporting","Partenariats"]},
+  meta:"Projet de groupe · équipe de 6 · Licence 2",blocs:[["Une braderie pour un salon de thé.", "J'ai aidé un salon de thé à organiser sa présence à la braderie de Lille."], ["Une artiste brésilienne à l'affiche.", "J'ai négocié l'affichage de ses tableaux, une exposition et un atelier pendant la braderie, avec un pourcentage sur chaque tableau vendu."]],chips:["Asana","Excel · reporting","Partenariats"]},
  {id:"gbp",w:"w3",k:"Licence 3 · international",viz:"gb",t:"Global Business Projects",p:"Port d'Anvers-Bruges, guide digital pour étudiants internationaux, programme de tutorat.",big:3,unit:"projets",
-  meta:"Projets internationaux · équipes interculturelles · Licence 3",li:["<b>Port d'Anvers-Bruges</b> : analyse de l'image de marque et recommandations pour sa réputation auprès du public francophone, présentées à des professionnels du secteur.","<b>Guide digital interactif</b> (QR codes, mobile) pour l'accueil des étudiants internationaux, conçu à partir d'observations terrain et d'interviews.","<b>Programme de tutorat</b> et promotion de la filière Global Business.","Animation de groupes multilingues (Belgique, France, international)."],chips:["Design Thinking","Gantt","Anglais C1"]},
- {id:"melo",w:"w3 t6",k:"2024 – en cours · bêta iOS",viz:"phone",t:"Melorata",p:"Le Letterboxd de la musique. J'y tiens le rôle produit.",bigTxt:"iOS",unit:"bêta",
-  meta:"Application de notation musicale · projet en équipe · 2024 – en cours",li:["Conception produit : fonctionnalités et parcours utilisateur.","Tests de l'application, identification et remontée des bugs.","Retours sur la direction artistique avec la graphiste.","Structuration de ma base Excel pour importer mes notes dans l'app : le pont vers la data."],chips:["Produit","Tests","UX"]}
+  meta:"Projets internationaux · équipes interculturelles · Licence 3",blocs:[["Des personas avant le guide.", "J'ai créé des personas pour cerner les besoins réels des étudiants étrangers."], ["Observer, puis demander.", "Observation sur le terrain et entretien avec un étudiant étranger pour comprendre ce qui compte à son arrivée."], ["Un guide digital pour tout échange international.", "Le guide s'adresse à tout élève Erasmus ou en échange international, et s'appuie sur ces personas et ces entretiens."], ["Le port d'Anvers-Bruges.", "Analyse de l'image de marque et recommandations pour sa réputation auprès du public francophone, présentées à des professionnels du secteur."], ["Un programme de tutorat.", "Tutorat et promotion de la filière Global Business, avec des binômes entre étudiants français et internationaux."]],chips:["Design Thinking","Gantt","Anglais C1"]},
+ {id:"melo",w:"w3 t6",k:"2024 – en cours · bêta iOS",viz:"phone",t:"Melorata",p:"Le Letterboxd de la musique. J'y aide sur la stratégie produit.",bigTxt:"iOS",unit:"bêta",
+  meta:"Application de notation musicale · projet en équipe · 2024 – en cours",blocs:[["Une stratégie produit qui se teste.", "J'ai aidé à définir la stratégie produit, notamment sur les différents systèmes de notation possibles."], ["Une application testée en profondeur.", "Tests approfondis de l'application, avec remontée des bugs et des retours d'usage."], ["Le pont vers la data.", "Ma base Excel de notes, prévue pour importer mes notes dans l'app : le pont vers la data."]],chips:["Produit","Tests","UX"]}
 ]},
 data:{title:'Projets <span class="gd">data.</span>',sub:"De mes premiers classeurs Excel jusqu'au data engineering. Chaque projet publié ici, au fil de l'eau.",items:[
  {id:"disco",w:"w4",k:"Projet personnel · 2024 – en cours",t:"Ma collection d'albums, analysée.",p:"Une centaine d'albums alimentés par mes écoutes Apple Music. Notes, classements et mise à jour automatique.",term:1,
@@ -371,8 +374,7 @@ function typeSQL(el){clearTimeout(typing);let i=0,j=0;el.innerHTML="";
     const [c,s]=SQL[i];let span=el.lastChild;if(j===0){span=document.createElement("span");if(c)span.className=c;el.append(span)}
     span.textContent+=s[j++];if(j>=s.length){i++;j=0}typing=setTimeout(go,28+Math.random()*40)};
   const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){go();io.disconnect()}});io.observe(el)}
-function bindTilt(){if(!matchMedia("(hover:hover)").matches)return;
-  document.querySelectorAll(".card").forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateY(${x*6}deg) rotateX(${-y*6}deg)`};c.onmouseleave=()=>c.style.transform=""})}
+function bindTilt(){}
 
 
 /* ---------- visualisations par projet ---------- */
@@ -463,7 +465,7 @@ const VIZ={
 
 /* ---------- fiche détail ---------- */
 function openSheet(id){const it=[...DATA.management.items,...DATA.data.items].find(x=>x.id===id);
-  $("sheetBody").innerHTML=`<h3>${it.t}</h3><p class="meta">${it.meta}</p><ul>${it.li.map(l=>`<li>${l}</li>`).join("")}</ul><div class="chips">${it.chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>${it.repo?`<a class="btn d" style="display:inline-block;margin-top:22px;text-decoration:none" href="${it.repo}" rel="noopener">Voir le code sur GitHub ↗</a>`:""}`;
+  $("sheetBody").innerHTML=`<h3>${it.t}</h3><p class="meta">${it.meta}</p>${it.blocs?it.blocs.map(b=>`<h4 class="ah">${b[0]}</h4><p class="ap">${b[1]}</p>`).join(""):`<ul>${it.li.map(l=>`<li>${l}</li>`).join("")}</ul>`}<div class="chips">${it.chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>${it.repo?`<a class="btn d" style="display:inline-block;margin-top:22px;text-decoration:none" href="${it.repo}" rel="noopener">Voir le code sur GitHub ↗</a>`:""}`;
   $("sheet").classList.add("open")}
 $("sheet").onclick=e=>{if(e.target.id==="sheet"||e.target.id==="close")$("sheet").classList.remove("open")};
 addEventListener("keydown",e=>{if(e.key==="Escape")$("sheet").classList.remove("open")});
