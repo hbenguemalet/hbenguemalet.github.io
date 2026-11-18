@@ -370,7 +370,7 @@ function countUp(el){const to=+el.dataset.to,t0=performance.now(),d=1400;
 const SQL=[["kw","SELECT "],["","album, artiste, note,\n  "],["kw","CASE WHEN "],["","note >= "],["num","9"],["kw"," THEN "],["str","'Vinyle'"],["","\n       "],["kw","WHEN "],["","note >= "],["num","8"],["kw"," THEN "],["str","'CD'"],["kw","\n  END "],["kw","AS "],["","achat\n"],["kw","FROM "],["","collection\n"],["kw","ORDER BY "],["","note "],["kw","DESC"],["",";"]];
 let typing;
 function typeSQL(el){clearTimeout(typing);let i=0,j=0;el.innerHTML="";
-  const go=()=>{if(i>=SQL.length){typing=setTimeout(()=>typeSQL(el),4000);return}
+  const go=()=>{if(i>=SQL.length)return;
     const [c,s]=SQL[i];let span=el.lastChild;if(j===0){span=document.createElement("span");if(c)span.className=c;el.append(span)}
     span.textContent+=s[j++];if(j>=s.length){i++;j=0}typing=setTimeout(go,28+Math.random()*40)};
   const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){go();io.disconnect()}});io.observe(el)}
@@ -424,7 +424,7 @@ const VIZ={
  async grid(el){const g=gen;el.innerHTML='<div class="pgrid">'+'<i></i>'.repeat(100)+'</div><div class="legend"><span><b style="background:var(--acc1)"></b>En ligne</span><span><b style="background:var(--acc2)"></b>Prix / promo</span><span><b style="background:var(--mute)"></b>Déstockage</span><span>1 carré = 250 produits</span></div>';
   const t=[...el.querySelectorAll("i")],ord=t.map((_,i)=>i).sort(()=>Math.random()-.5),cnt=el.closest(".card").querySelector(".count");
   for(let k=0;k<ord.length;k++){if(g!==gen)return;t[ord[k]].classList.add("on");if(cnt)cnt.textContent=((k+1)*250).toLocaleString("fr-FR");if(k%2==1)await wait(16)}
-  while(g===gen){await vis(el,g);const x=t[Math.random()*100|0],r=Math.random();x.classList.remove("s2","s3");if(r<.35)x.classList.add("s2");else if(r<.55)x.classList.add("s3");await wait(140)}},
+  for(const i of ord.slice(0,22))t[i].classList.add("s2");for(const i of ord.slice(22,34))t[i].classList.add("s3")},
  // Black Swan : 6 personnes qui forment l'asso, puis les partenaires, puis les échanges
  async team(el){const g=gen,W=300,H=170,cx=150,cy=88,N=6,R=52,ns="http://www.w3.org/2000/svg";
   el.innerHTML=`<svg class="vizsvg" viewBox="0 0 ${W} ${H}"></svg>`;const sv=el.firstChild,mk=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e};
@@ -437,26 +437,20 @@ const VIZ={
   for(const p of P){if(g!==gen)return;await wait(220);line([cx,cy],p);node(p,11,"var(--fg)")}
   await wait(400);for(let i=0;i<N;i++)line(P[i],P[(i+1)%N]);
   await wait(500);for(const q of partners){if(g!==gen)return;await wait(200);const near=P.reduce((a,b)=>Math.hypot(b[0]-q[0],b[1]-q[1])<Math.hypot(a[0]-q[0],a[1]-q[1])?b:a);line(near,q,1);node(q,13,"var(--mute)","€")}
-  // échanges : impulsions entre l'asso, l'équipe et les partenaires
-  while(g===gen){await vis(el,g);const a=Math.random()<.5?[cx,cy]:P[Math.random()*N|0],b=Math.random()<.5?partners[Math.random()*4|0]:P[Math.random()*N|0];
-   const d=mk("circle",{r:3,fill:"var(--acc2)"});dots.append(d);const t0=performance.now();
-   await new Promise(res=>{const f=n=>{const k=Math.min(1,(n-t0)/700);d.setAttribute("cx",a[0]+(b[0]-a[0])*k);d.setAttribute("cy",a[1]+(b[1]-a[1])*k);d.setAttribute("opacity",1-k*.6);k<1?requestAnimationFrame(f):res()};requestAnimationFrame(f)});d.remove();await wait(120)}},
+  },
  // Global Business : chaque projet a sa scène
- async gb(el){const g=gen,items=[["⚓","Port d'Anvers-Bruges","Image de marque"],["▦","Guide digital","QR codes · mobile"],["⇄","Tutorat","Étudiants FR / internationaux"]];
-  el.innerHTML='<div class="gbl">'+items.map(i=>`<div class="gbr"><span class="ic">${i[0]}</span><b>${i[1]} <span style="color:var(--mute);font-weight:500">· ${i[2]}</span></b><div class="pb"><span></span></div></div>`).join("")+'</div><div class="stage"></div>';
-  const rows=[...el.querySelectorAll(".gbr")],st=el.querySelector(".stage");
-  const prog=(bar,dur)=>{const t0=performance.now();const f=n=>{const k=Math.min(1,(n-t0)/dur);bar.style.width=k*100+"%";if(k<1&&g===gen)requestAnimationFrame(f)};requestAnimationFrame(f)};
-  while(g===gen){await vis(el,g);for(let r=0;r<3;r++){if(g!==gen)return;rows.forEach((x,i)=>x.classList.toggle("act",i===r));const bar=rows[r].querySelector(".pb span");prog(bar,3600);await GB[r](st,g);await wait(400)}
-   rows.forEach(x=>{x.classList.remove("act");x.querySelector(".pb span").style.width=0})}},
+ async gb(el){const g=gen,items=[["⚓","Port d'Anvers-Bruges","Image de marque"],["▦","Guide digital","Personas · terrain · QR codes"],["⇄","Tutorat","Étudiants FR / internationaux"]];
+  el.innerHTML='<div class="gbl">'+items.map(i=>`<div class="gbr"><span class="ic">${i[0]}</span><b>${i[1]} <span style="color:var(--mute);font-weight:500">· ${i[2]}</span></b><div class="pb"><span style="transition:width .9s cubic-bezier(.2,.8,.2,1)"></span></div></div>`).join("")+'</div>';
+  for(const b of el.querySelectorAll(".pb span")){if(g!==gen)return;await wait(250);b.style.width="100%"}},
  // Melorata : l'app note des albums, la règle vinyle/CD de ma collection s'affiche
  async phone(el){const g=gen,A=[[["#ff6a3d","#ff2d55"],9.4],[["#5e5ce6","#0a84ff"],8.2],[["#30d158","#0a84ff"],7.1],[["#ffd60a","#ff6a3d"],9.0]];
   el.innerHTML='<div class="phone"><div class="screen"><h4>Mes notes</h4>'+A.map(a=>`<div class="alb"><div class="cov" style="background:linear-gradient(135deg,${a[0][0]},${a[0][1]})"></div><div><div class="ln" style="width:80%"></div><div class="ln" style="width:50%;opacity:.6"></div><div class="stars">${"<i></i>".repeat(5)}</div></div><div class="sc"><span>0,0</span></div></div>`).join("")+'</div></div>';
   const rows=[...el.querySelectorAll(".alb")];
-  while(g===gen){await vis(el,g);for(let i=0;i<rows.length;i++){if(g!==gen)return;const r=rows[i],v=A[i][1],sp=r.querySelector(".sc span"),st=[...r.querySelectorAll(".stars i")];
+  {for(let i=0;i<rows.length;i++){if(g!==gen)return;const r=rows[i],v=A[i][1],sp=r.querySelector(".sc span"),st=[...r.querySelectorAll(".stars i")];
     r.classList.add("on");await wait(250);
     for(let k=0;k<=20;k++){const x=v*k/20;sp.textContent=x.toFixed(1).replace(".",",");st.forEach((s,j)=>s.classList.toggle("on",x/2>j+.25));await wait(30)}
     await wait(250)}
-   await wait(2600);rows.forEach(r=>r.classList.remove("on"));await wait(600)}},
+   }},
  // Feuille de route data
  async road(el){const S=[["Excel · IA",100,"fait"],["SQL",0,"en cours",1],["Python",0,"à venir"],["Power BI",0,"à venir"],["Pipeline ETL",0,"à venir"]];
   el.innerHTML='<div class="road">'+S.map(s=>`<div class="step ${s[1]?"done":""}"><i></i>${s[0]}<span>${s[2]}</span><div class="rbar ${s[3]?"wip":""}"><span></span></div></div>`).join("")+'</div>';
