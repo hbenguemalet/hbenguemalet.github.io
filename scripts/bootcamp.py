@@ -127,8 +127,9 @@ def main() -> int:
     else:
         jeton, base = os.environ.get("NOTION_TOKEN"), os.environ.get("NOTION_DB")
         if not (jeton and base):
-            print("NOTION_TOKEN ou NOTION_DB manquant : rien à faire.", file=sys.stderr)
-            return 1
+            # avertissement visible dans l'onglet Actions, sans échec (pas d'e-mail toutes les 3 h)
+            print("::warning::Secret NOTION_TOKEN absent : bootcamp.json n'est pas mis à jour (voir README).")
+            return 0
         taches = lire_notion(jeton, base)
     nouveau = construire(taches, date.today())
     # pas de réécriture (donc pas de commit) si seule l'heure de mise à jour change
