@@ -1,0 +1,36 @@
+name: Synchro bootcamp (Notion)
+
+# Lit l'avancée du bootcamp dans Notion et met à jour bootcamp.json, lu par le portfolio,
+# la page des alternances et le dépôt candidatures. Rien n'est commité si rien n'a changé.
+on:
+  schedule:
+    - cron: "41 */3 * * *"   # toutes les 3 heures (heure UTC)
+  workflow_dispatch:          # bouton « Run workflow » pour forcer une synchro
+
+concurrency:
+  group: bootcamp
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  synchro:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Lire Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB: 41b3800fcdb481fc85e5ef6944950228
+        run: python3 scripts/bootcamp.py
+      - name: Publier
+        run: |
+          git add bootcamp.json
+          if git diff --cached --quiet; then echo "Rien de neuf."; exit 0; fi
+          msg=$(python3 -c 'import json; d = json.load(open("bootcamp.json")); print("Bootcamp : %d/%d tâches (%d %%)" % (d["faites"], d["total"], d["pct"]))')
+          git -c user.name=bootcamp-bot -c user.email=bootcamp-bot@users.noreply.github.com commit -qm "$msg"
+          for i in 1 2 3; do git push -q && break; sleep $((i*10)); git pull -q --rebase; done
