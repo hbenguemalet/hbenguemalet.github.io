@@ -6,10 +6,13 @@
 <title>Hugo Benguemalet · Management et data</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem("theme");if(!t&&matchMedia("(prefers-color-scheme: dark)").matches)t="dark";if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
 :root{--bg:#f5f5f7;--fg:#1d1d1f;--mute:#6e6e73;--card:#fff;--line:#d2d2d7;
 --m1:#ff6a3d;--m2:#ff2d55;--d1:#0a84ff;--d2:#5e5ce6;--acc1:var(--m1);--acc2:var(--m2)}
 body.data{--acc1:var(--d1);--acc2:var(--d2)}
+:root[data-theme=dark]{--bg:#000;--fg:#f5f5f7;--mute:#a1a1a6;--card:#161618;--line:#3a3a3c;color-scheme:dark}
+:root[data-theme=dark] .blob{opacity:.22}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font:17px/1.47 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -187,6 +190,55 @@ footer{text-align:center;padding:100px 22px 120px}
 footer .mail{display:inline-block;margin-top:22px;font-size:clamp(20px,4vw,30px);font-weight:700;letter-spacing:-.03em;color:var(--fg);text-decoration:none;border-bottom:2px solid var(--acc1)}
 footer .s{color:var(--mute);margin-top:40px;font-size:13px}
 
+/* bouton thème */
+.tbtn{border:0;background:none;color:var(--fg);font-size:15px;cursor:pointer;margin-left:16px;opacity:.8;width:28px;height:28px;border-radius:50%;transition:background .2s,transform .3s}
+.tbtn:hover{background:color-mix(in srgb,var(--fg) 10%,transparent);transform:rotate(-20deg)}
+/* reflet qui suit la souris */
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--acc1) 13%,transparent),transparent 60%)}
+.card:hover::after{opacity:1}
+/* collection en direct */
+.live{margin-top:18px;cursor:default}
+.lhead{font-size:12px;font-weight:600;color:var(--mute);margin-bottom:14px}
+.dot{display:inline-block;margin-right:8px;vertical-align:1px;width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 0 0 #30d158;animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{padding:14px;border-radius:18px;background:color-mix(in srgb,var(--acc1) 7%,transparent)}
+.kpi b{display:block;font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:-.04em;line-height:1.1}
+.kpi>span{font-size:12px;font-weight:600;color:var(--mute)}
+.lgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;margin-top:22px}
+.lt{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px}
+.lt small{font-weight:500;color:var(--mute)}
+.top{display:grid;gap:6px;min-height:230px;align-content:start}
+.tr{display:grid;grid-template-columns:22px 34px 1fr auto;gap:10px;align-items:center;padding:6px;border-radius:12px;animation:cardIn .5s both}
+.tr:hover{background:color-mix(in srgb,var(--acc1) 7%,transparent)}
+.tr .rk{font-weight:800;color:var(--mute);font-size:13px;text-align:center}
+.tr .cv{width:34px;height:34px;border-radius:7px}
+.tr .nm{min-width:0}.tr .nm b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tr .nm span{font-size:12px;color:var(--mute)}
+.tr .nt{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.tr .own{font-size:10px;font-weight:700;color:var(--acc1);display:block;text-align:right}
+.styles{display:grid;gap:7px}
+.sty{display:grid;grid-template-columns:88px 1fr 66px;gap:10px;align-items:center;border:0;background:none;color:var(--fg);font:500 13px Inter;padding:5px 6px;border-radius:10px;cursor:pointer;text-align:left;transition:background .2s,opacity .2s}
+.sty:hover{background:color-mix(in srgb,var(--acc1) 8%,transparent)}
+.sty i{display:block;height:9px;border-radius:5px;background:linear-gradient(90deg,var(--acc1),var(--acc2));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.sty em{font-style:normal;font-weight:700;text-align:right;color:var(--mute);font-size:12px}
+.styles.filt .sty:not(.on){opacity:.4}.sty.on{background:color-mix(in srgb,var(--acc1) 12%,transparent)}
+.dist{display:flex;align-items:flex-end;gap:4px;height:70px;margin-top:18px}
+.dist div{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+.dist i{display:block;width:100%;border-radius:4px 4px 1px 1px;background:color-mix(in srgb,var(--acc1) 35%,transparent);height:0;transition:height .9s cubic-bezier(.2,.8,.2,1)}
+.dist div:nth-last-child(-n+2) i{background:linear-gradient(var(--acc2),var(--acc1))}
+.dist span{font-size:10px;color:var(--mute);font-weight:600}
+.lerr{color:var(--mute);font-size:15px;padding:20px 0}
+.skel{height:14px;border-radius:7px;margin:8px 0;background:linear-gradient(90deg,var(--line) 0 40%,color-mix(in srgb,var(--line) 40%,transparent) 50%,var(--line) 60%);background-size:250% 100%;animation:shim 1.4s linear infinite;opacity:.6}
+/* fiche : navigation */
+.snav{display:flex;justify-content:space-between;gap:10px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
+.snav button{border:0;background:color-mix(in srgb,var(--acc1) 10%,transparent);color:var(--acc1);font:600 14px Inter;padding:10px 16px;border-radius:980px;cursor:pointer;max-width:48%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.snav button:hover{background:color-mix(in srgb,var(--acc1) 18%,transparent)}
+.snav button:disabled{visibility:hidden}
+/* copier l'e-mail */
+.copy{display:inline-flex;align-items:center;gap:6px;margin:16px auto 0;border:1px solid var(--line);background:var(--card);color:var(--fg);font:600 14px Inter;padding:9px 16px;border-radius:980px;cursor:pointer;transition:transform .2s}
+.copy:hover{transform:scale(1.04)}
+.copy.ok{border-color:#30d158;color:#30d158}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}.lgrid{grid-template-columns:1fr}.top{min-height:0}}
 @media(max-width:1000px){.card.w4,.card.t6{grid-column:span 6}.card.w2{grid-column:span 3}}
 @media(max-width:760px){.card,.card.w4,.card.w2{grid-column:span 6}.card{min-height:0;padding:22px;border-radius:24px}nav a.hide{display:none}section.wrap{padding:80px 16px}.bento{gap:12px}}
 @media(max-width:400px){nav a.gh{display:none}nav a{margin-left:14px}h1{font-size:44px}.seg button{padding:9px 16px}.btn{padding:12px 20px;font-size:16px}}
@@ -194,7 +246,7 @@ footer .s{color:var(--mute);margin-top:40px;font-size:13px}
 </style>
 </head>
 <body>
-<nav><b>Hugo Benguemalet</b><div><a class="gh" href="https://github.com/hbenguemalet" rel="noopener">GitHub</a><a class="hide" href="#journey">Trajectoire</a><a href="#projets">Projets</a><a href="#contact">Contact</a></div></nav>
+<nav><b>Hugo Benguemalet</b><div><a class="gh" href="https://github.com/hbenguemalet" rel="noopener">GitHub</a><a class="hide" href="#journey">Trajectoire</a><a href="#projets">Projets</a><a href="#contact">Contact</a><button class="tbtn" id="theme" aria-label="Changer de thème">☾</button></div></nav>
 <div id="bar"></div>
 <div class="thread" id="thread" aria-hidden="true"><i class="tl"></i><i class="tf" id="tf"></i>
  <svg id="tsvg" viewBox="-14 -46 28 52" width="28" height="52"><g id="trunner" class="idle rn">
@@ -264,12 +316,12 @@ footer .s{color:var(--mute);margin-top:40px;font-size:13px}
 <footer id="contact" class="reveal">
   <h2>Me <span class="grad">contacter.</span></h2>
   <p class="sub" style="margin:12px auto 0">Reconversion vers la data · master et alternance · rentrée 2027.</p>
-  <a class="mail" href="mailto:hugo.benguemalet@gmail.com">hugo.benguemalet@gmail.com</a>
+  <a class="mail" href="mailto:hugo.benguemalet@gmail.com">hugo.benguemalet@gmail.com</a><br><button class="copy" id="copy" type="button">⧉ Copier l'adresse</button>
   <p class="s"><a href="https://github.com/hbenguemalet" rel="noopener" style="color:var(--fg);font-weight:600">GitHub · hbenguemalet</a> · Saint-Amand-les-Eaux, Hauts-de-France</p>
 </footer>
 
 <div class="seg-dock" id="dock"><div class="seg"><span class="knob"></span><button data-b="management">Management</button><button data-b="data">Data</button></div></div>
-<div id="sheet"><div class="in"><button id="close" aria-label="Fermer">✕</button><div id="sheetBody"></div></div></div>
+<div id="sheet"><div class="in"><button id="close" aria-label="Fermer">✕</button><div id="sheetBody"></div><div class="snav"><button id="sprev" type="button"></button><button id="snext" type="button"></button></div></div></div>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -293,7 +345,9 @@ data:{title:'Projets <span class="gd">data.</span>',sub:"De mes premiers classeu
  {id:"disco",w:"w4",k:"Projet personnel · 2024 – en cours",t:"Ma collection d'albums, analysée.",p:"Une centaine d'albums alimentés par mes écoutes Apple Music. Notes, classements et mise à jour automatique.",term:1,
   meta:"Excel, IA, Python, Power BI · 2024 – en cours",li:["Base d'une centaine d'albums alimentée par mes données d'écoute Apple Music.","Notes et classements : chaque album est noté, classé par artiste et par genre, puis mis à jour sans ressaisie.","Mise à jour automatique de la collection par un bot Python piloté par l'IA.","Visualisation de la collection dans Power BI : tableaux de bord et indicateurs.","Bot Python écrit avec l'appui de l'IA ; règles et logique définies par moi, code testé et ajusté."],chips:["Excel","IA","Python","Power BI"],repo:"https://github.com/hbenguemalet/Excel_Melorata"},
  {id:"road",w:"w2 t6",k:"Feuille de route",t:"Prochaines étapes",road:1,
-  meta:"Bootcamp data autodidacte · depuis septembre 2026",li:["<b>SQL</b> : analyse e-commerce (jeu de données Olist), jointures, CTE, fonctions fenêtres.","<b>Python</b> : nettoyage, analyse et visualisation avec pandas.","<b>Power BI</b> : tableau de bord interactif avec DAX.","<b>Pipeline de données</b> : ETL automatisé, Docker, dbt, vers le data engineering."],chips:["SQL","Python","Power BI","ETL"]}
+  meta:"Bootcamp data autodidacte · depuis septembre 2026",li:["<b>SQL</b> : analyse e-commerce (jeu de données Olist), jointures, CTE, fonctions fenêtres.","<b>Python</b> : nettoyage, analyse et visualisation avec pandas.","<b>Power BI</b> : tableau de bord interactif avec DAX.","<b>Pipeline de données</b> : ETL automatisé, Docker, dbt, vers le data engineering."],chips:["SQL","Python","Power BI","ETL"]},
+ {id:"live",w:"w6",k:"En direct · GitHub",t:"Ma collection, en chiffres.",p:"Ces chiffres sont lus à l'instant dans les fichiers CSV que mon bot publie sur GitHub. Clique sur un style pour filtrer le classement.",live:1,
+  meta:"Modèle en étoile publié par le bot · lu en direct par cette page",li:["Le bot Python régénère après chaque mise à jour un modèle en étoile : <b>dim_artiste</b>, <b>dim_album</b>, <b>fait_son</b> et <b>pont_featuring</b>.","Cette page lit ces CSV directement sur GitHub, sans serveur : jointures, moyennes et classements sont calculés dans le navigateur.","Le classement ne retient que les albums avec au moins 5 titres notés, pour éviter qu'un album noté sur un seul titre passe en tête.","Les mêmes fichiers alimentent le tableau de bord Power BI."],chips:["CSV","Modèle en étoile","JavaScript","Power BI"],repo:"https://github.com/hbenguemalet/Excel_Melorata/tree/main/powerbi"}
 ]}};
 
 /* ---------- runner ---------- */
@@ -356,11 +410,14 @@ function setBranch(b,scroll){
     ${it.term?`<div class="term" aria-label="Exemple de requête SQL"><div class="dots"><i></i><i></i><i></i></div><span class="code"></span><span class="caret"></span></div>`:""}
     ${it.viz?`<div class="viz" data-viz="${it.viz}"></div>`:""}
     ${it.road?`<div class="viz" data-viz="road"></div>`:""}
+    ${it.live?`<div class="live nosheet" data-live><div class="skel" style="width:60%"></div><div class="skel"></div><div class="skel" style="width:80%"></div></div>`:""}
     <span class="more">+</span>
    </article>`).join("");
   document.querySelectorAll(".count:not([data-sync])").forEach(countUp);
   document.querySelectorAll("[data-viz]").forEach(el=>onSee(el,()=>VIZ[el.dataset.viz](el)));
   const tm=document.querySelector(".term .code");if(tm)typeSQL(tm);
+  document.querySelectorAll("[data-live]").forEach(el=>onSee(el,()=>LIVE(el)));
+  if(document.body.classList.contains("chosen"))history.replaceState(null,"","#"+b);
   bindTilt();
   if(scroll) $("projets").scrollIntoView({behavior:"smooth"});
 }
@@ -374,7 +431,15 @@ function typeSQL(el){clearTimeout(typing);let i=0,j=0;el.innerHTML="";
     const [c,s]=SQL[i];let span=el.lastChild;if(j===0){span=document.createElement("span");if(c)span.className=c;el.append(span)}
     span.textContent+=s[j++];if(j>=s.length){i++;j=0}typing=setTimeout(go,28+Math.random()*40)};
   const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){go();io.disconnect()}});io.observe(el)}
-function bindTilt(){}
+function bindTilt(){
+  if(!matchMedia("(hover:hover) and (pointer:fine)").matches||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  document.querySelectorAll(".card").forEach(c=>{
+    c.addEventListener("animationend",()=>c.classList.remove("fade"),{once:true});
+    c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%");
+      if(!c.classList.contains("w6"))c.style.transform=`perspective(900px) rotateX(${(.5-y)*5}deg) rotateY(${(x-.5)*5}deg)`});
+    c.addEventListener("pointerleave",()=>{c.style.transition="transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .3s";c.style.transform="";setTimeout(()=>c.style.transition="",500)});
+  })}
 
 
 /* ---------- visualisations par projet ---------- */
@@ -457,16 +522,73 @@ const VIZ={
   const bars=[...el.querySelectorAll(".rbar span")];for(let i=0;i<S.length;i++){await wait(220);bars[i].style.width=S[i][3]?"100%":S[i][1]+"%";if(S[i][3])bars[i].style.opacity=.45}}
 };
 
+/* ---------- collection en direct (CSV du dépôt Excel_Melorata) ---------- */
+const RAW="https://raw.githubusercontent.com/hbenguemalet/Excel_Melorata/main/powerbi/";
+let liveData=null;
+const csv=t=>{const L=t.replace(/^\ufeff/,"").trim().split(/\r?\n/),h=L.shift().split(";");return L.map(l=>{const v=l.split(";"),o={};h.forEach((k,i)=>o[k]=v[i]??"");return o})};
+const num=v=>v===""||v==null?null:parseFloat(String(v).replace(",","."));
+const fr=(v,d=1)=>v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+async function getLive(){
+  if(liveData)return liveData;
+  const [ar,al,so]=await Promise.all(["dim_artiste","dim_album","fait_son"].map(f=>fetch(RAW+f+".csv").then(r=>{if(!r.ok)throw r.status;return r.text()}).then(csv)));
+  let commit=null;try{const r=await fetch("https://api.github.com/repos/hbenguemalet/Excel_Melorata/commits?per_page=1&path=powerbi");if(r.ok){const c=(await r.json())[0];commit={msg:c.commit.message.split("\n")[0],date:c.commit.committer.date}}}catch(e){}
+  return liveData={ar,al,so,commit}}
+async function LIVE(el){const g=gen;let D;
+  try{D=await getLive()}catch(e){el.innerHTML=`<p class="lerr">Les données ne sont pas joignables pour le moment. <a href="https://github.com/hbenguemalet/Excel_Melorata" rel="noopener" style="color:var(--acc1)">Voir le dépôt ↗</a></p>`;return}
+  if(g!==gen)return;
+  const art={};D.ar.forEach(a=>art[a.artiste_id]=a.artiste);
+  const notes=D.so.map(s=>num(s.note)).filter(v=>v!=null);
+  const moy=notes.reduce((a,b)=>a+b,0)/(notes.length||1);
+  const albums=D.al.map(a=>({t:a.album.replace(/\*+$/,"").trim(),a:art[a.artiste_id]||"",st:a.style||"Non classé",n:num(a.note_moyenne),k:+a.nb_titres_notes||0,cd:a.cd_possede==="1",vi:a.vinyle_possede==="1"}));
+  const cd=albums.filter(a=>a.cd).length,vi=albums.filter(a=>a.vi).length;
+  const parStyle={};albums.filter(a=>a.n!=null&&a.st!=="Non classé").forEach(a=>{(parStyle[a.st]=parStyle[a.st]||[]).push(a.n)});
+  const styles=Object.entries(parStyle).filter(([,v])=>v.length>=2).map(([s,v])=>[s,v.reduce((a,b)=>a+b,0)/v.length,v.length]).sort((a,b)=>b[2]-a[2]).slice(0,6);
+  const dist=[...Array(10)].map((_,i)=>notes.filter(v=>Math.min(10,Math.max(1,Math.round(v)))===i+1).length),dmax=Math.max(...dist,1);
+  const quand=D.commit?(()=>{const j=Math.floor((Date.now()-Date.parse(D.commit.date))/864e5);return j<=0?"aujourd'hui":j===1?"hier":"il y a "+j+" jours"})():null;
+  el.innerHTML=`<div class="lhead"><i class="dot"></i>Données lues en direct${quand?` · dernière mise à jour du bot ${quand}`:""}</div>
+   <div class="kpis">
+    <div class="kpi"><b class="grad"><span class="count" data-to="${D.ar.length}">0</span></b><span>artistes</span></div>
+    <div class="kpi"><b class="grad"><span class="count" data-to="${D.al.length}">0</span></b><span>albums</span></div>
+    <div class="kpi"><b class="grad"><span class="count" data-to="${notes.length}">0</span></b><span>titres notés</span></div>
+    <div class="kpi"><b class="grad">${fr(moy)}<small style="font-size:.5em;color:var(--mute)"> /10</small></b><span>note moyenne · ${cd} CD · ${vi} vinyles</span></div>
+   </div>
+   <div class="lgrid">
+    <div><p class="lt">Top 5 albums <small id="ltf">tous styles</small></p><div class="top" id="ltop"></div></div>
+    <div><p class="lt">Styles <small>note moyenne · nb d'albums</small></p><div class="styles" id="lsty">${styles.map(s=>`<button class="sty" data-st="${s[0]}"><span>${s[0]}</span><i data-w="${(s[1]-5)/5*100}"></i><em>${fr(s[1])} · ${s[2]}</em></button>`).join("")}</div>
+     <p class="lt" style="margin-top:20px">Répartition des notes <small>${notes.length} titres</small></p>
+     <div class="dist">${dist.map((n,i)=>`<div title="${n} titres notés ${i+1}/10"><i data-h="${n/dmax*100}"></i><span>${i+1}</span></div>`).join("")}</div></div>
+   </div>`;
+  el.querySelectorAll(".count").forEach(countUp);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{el.querySelectorAll(".sty i").forEach(i=>i.style.width=Math.max(4,i.dataset.w)+"%");el.querySelectorAll(".dist i").forEach(i=>i.style.height=i.dataset.h+"%")}));
+  let filt=null;
+  const top=()=>{const L=albums.filter(a=>a.n!=null&&a.k>=5&&(!filt||a.st===filt)).sort((a,b)=>b.n-a.n||b.k-a.k).slice(0,5);
+    el.querySelector("#ltf").textContent=filt||"tous styles";
+    el.querySelector("#ltop").innerHTML=L.map((a,i)=>{const h=hue(a.t+a.a);return`<div class="tr" style="animation-delay:${i*60}ms"><span class="rk">${i+1}</span><span class="cv" style="background:linear-gradient(135deg,hsl(${h} 80% 60%),hsl(${(h+50)%360} 75% 45%))"></span><span class="nm"><b>${esc(a.t)}</b><span>${esc(a.a)}</span></span><span class="nt">${fr(a.n)}${a.vi?'<span class="own">vinyle</span>':a.cd?'<span class="own">CD</span>':""}</span></div>`}).join("")};
+  top();
+  el.querySelector("#lsty").addEventListener("click",e=>{const b=e.target.closest(".sty");if(!b)return;filt=filt===b.dataset.st?null:b.dataset.st;
+    el.querySelectorAll(".sty").forEach(x=>x.classList.toggle("on",x.dataset.st===filt));el.querySelector("#lsty").classList.toggle("filt",!!filt);top()});
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+
 /* ---------- fiche détail ---------- */
-function openSheet(id){const it=[...DATA.management.items,...DATA.data.items].find(x=>x.id===id);
+let sheetId=null;
+function openSheet(id){const it=[...DATA.management.items,...DATA.data.items].find(x=>x.id===id);if(!it)return;sheetId=id;
+  const br=DATA.management.items.includes(it)?"management":"data",L=DATA[br].items,i=L.indexOf(it),pv=L[i-1],nx=L[i+1];
+  $("sprev").disabled=!pv;$("snext").disabled=!nx;$("sprev").textContent=pv?"← "+pv.t:"";$("snext").textContent=nx?nx.t+" →":"";
+  $("sprev").onclick=()=>pv&&openSheet(pv.id);$("snext").onclick=()=>nx&&openSheet(nx.id);
+  history.replaceState(null,"","#"+id);$("sheet").querySelector(".in").scrollTop=0;
   $("sheetBody").innerHTML=`<h3>${it.t}</h3><p class="meta">${it.meta}</p>${it.blocs?it.blocs.map(b=>`<h4 class="ah">${b[0]}</h4><p class="ap">${b[1]}</p>`).join(""):`<ul>${it.li.map(l=>`<li>${l}</li>`).join("")}</ul>`}<div class="chips">${it.chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>${it.repo?`<a class="btn d" style="display:inline-block;margin-top:22px;text-decoration:none" href="${it.repo}" rel="noopener">Voir le code sur GitHub ↗</a>`:""}`;
   $("sheet").classList.add("open")}
-$("sheet").onclick=e=>{if(e.target.id==="sheet"||e.target.id==="close")$("sheet").classList.remove("open")};
-addEventListener("keydown",e=>{if(e.key==="Escape")$("sheet").classList.remove("open")});
+function closeSheet(){$("sheet").classList.remove("open");sheetId=null;if(document.body.classList.contains("chosen"))history.replaceState(null,"","#"+cur)}
+$("sheet").onclick=e=>{if(e.target.id==="sheet"||e.target.id==="close")closeSheet()};
+addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet();
+  if(sheetId&&(e.key==="ArrowRight"||e.key==="ArrowLeft")){const b=$(e.key==="ArrowRight"?"snext":"sprev");if(!b.disabled)b.click()}});
 
 /* ---------- interactions ---------- */
 document.addEventListener("click",e=>{
   const nl=e.target.closest("nav a");if(nl&&!document.body.classList.contains("chosen")&&/#(projets|contact)/.test(nl.getAttribute("href")||"")){e.preventDefault();J.scrollIntoView({behavior:"smooth"});return}
+  if(e.target.closest(".nosheet"))return;
   const c=e.target.closest(".card");if(c)return openSheet(c.dataset.id);
   const b=e.target.closest("[data-b]");if(!b)return;
   if(b.closest(".choose")||b.classList.contains("hit")){setBranch(b.dataset.b);goBranch(b.dataset.b).then(()=>{document.body.classList.add("chosen");busyUntil=performance.now()+900;syncSeg();setTimeout(toTop,60)})}
@@ -478,6 +600,18 @@ document.querySelectorAll(".reveal").forEach(el=>ro.observe(el));
 (()=>{const h=$("h1");let d=0;h.childNodes.forEach(n=>{if(n.nodeType===3){const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(w=>{if(!w.trim())return f.append(w);const s=document.createElement("span");s.className="w";s.style.animationDelay=(d++*.12)+"s";s.textContent=w;f.append(s)});n.replaceWith(f)}else{n.classList.add("w");n.style.animationDelay=(d++*.12+.1)+"s"}})})();
 setBranch("management");
 addEventListener("resize",syncSeg);
+
+/* ---------- thème clair / sombre ---------- */
+const tb=$("theme"),majT=()=>{const d=document.documentElement.dataset.theme==="dark";tb.textContent=d?"☀":"☾";tb.setAttribute("aria-label",d?"Thème clair":"Thème sombre")};
+majT();tb.onclick=()=>{const t=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=t;try{localStorage.setItem("theme",t)}catch(e){}majT()};
+
+/* ---------- copier l'e-mail ---------- */
+$("copy").onclick=async()=>{const b=$("copy");try{await navigator.clipboard.writeText("hugo.benguemalet@gmail.com");b.textContent="✓ Adresse copiée";b.classList.add("ok")}catch(e){b.textContent="Sélectionne l'adresse ci-dessus"}setTimeout(()=>{b.textContent="⧉ Copier l'adresse";b.classList.remove("ok")},2200)};
+
+/* ---------- liens partageables : #data, #management ou #id-de-projet ---------- */
+(()=>{const h=decodeURIComponent(location.hash.slice(1));if(!h)return;
+  const item=[...DATA.management.items,...DATA.data.items].find(x=>x.id===h),b=DATA[h]?h:item?(DATA.data.items.includes(item)?"data":"management"):null;if(!b)return;
+  playIntro();setBranch(b);goBranch(b).then(()=>{document.body.classList.add("chosen");syncSeg();history.replaceState(null,"","#"+b);toTop();if(item)setTimeout(()=>openSheet(item.id),650)})})();
 </script>
 </body>
 </html>
