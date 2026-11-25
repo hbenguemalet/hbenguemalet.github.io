@@ -15,3 +15,9 @@ d'intégration Notion que dans le dépôt `candidatures`). Puis onglet Actions �
 
 ## Liens
 `#id-du-projet` ouvre directement la fiche d'un projet (ex. `#disco`, `#live`, `#suivi`, `#arta`).
+
+## Fond et fluidité
+Le fond est un canvas 2D (`BGFX` dans `index.html`) : matrice de points façon heatmap, glyphes de graphiques en parallaxe,
+réaction à la souris, teinte bleue (data) ou orange (management). Il s'arrête quand l'onglet est caché et se fige si
+« réduire les animations » est activé. Pendant le défilement, le code n'écrit que des `transform` et des classes (aucune
+lecture de mise en page), ce qui garde le défilement à 60 images/s.
