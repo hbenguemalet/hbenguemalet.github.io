@@ -1,102 +1,122 @@
 {
- "maj": "2026-11-25T14:56:49+00:00",
- "debut": "2026-11-18",
- "fin_prevue": "2027-03-01",
- "total": 99,
- "faites": 2,
- "pct": 2,
- "cette_semaine": 0,
- "en_retard": 0,
- "phase_actuelle": "1. Excel & SQL",
- "prochaine": {
-  "tache": "SQL : agrégats, GROUP BY, HAVING – SQLBolt 6 à 12",
-  "date": "2026-11-25",
-  "competence": "SQL"
+ "pct": 9,
+ "phase_actuelle": "Excel & SQL",
+ "en_cours": {
+  "competence": "SQL",
+  "notions": [
+   "GROUP BY",
+   "HAVING",
+   "Agrégats"
+  ]
  },
  "competences": [
   {
    "nom": "SQL",
-   "faites": 1,
-   "total": 22,
-   "pct": 5,
-   "etat": "en cours"
+   "pct": 24,
+   "etat": "en cours",
+   "acquis": [
+    "SELECT",
+    "WHERE",
+    "ORDER BY",
+    "LIMIT"
+   ],
+   "en_cours": [
+    "GROUP BY",
+    "HAVING",
+    "Agrégats"
+   ],
+   "a_venir": [
+    "Jointures",
+    "Sous-requêtes",
+    "CTE",
+    "Fonctions fenêtres",
+    "CASE",
+    "Fonctions de dates",
+    "CREATE TABLE · contraintes",
+    "Modélisation MCD / MLD",
+    "Index · EXPLAIN",
+    "Cohortes"
+   ]
   },
   {
    "nom": "Python",
-   "faites": 0,
-   "total": 20,
    "pct": 0,
-   "etat": "à venir"
+   "etat": "à venir",
+   "acquis": [],
+   "en_cours": [],
+   "a_venir": [
+    "Bases du langage",
+    "Compréhensions · fichiers",
+    "pandas",
+    "groupby · merge · pivot_table",
+    "Nettoyage de données",
+    "matplotlib · seaborn",
+    "Statistiques descriptives",
+    "Tests statistiques",
+    "Régression linéaire",
+    "Python ↔ PostgreSQL",
+    "Scripts réutilisables"
+   ]
   },
   {
    "nom": "Power BI",
-   "faites": 0,
-   "total": 15,
    "pct": 0,
-   "etat": "à venir"
+   "etat": "à venir",
+   "acquis": [],
+   "en_cours": [],
+   "a_venir": [
+    "Power Query",
+    "Modèle en étoile",
+    "DAX",
+    "DAX temporel",
+    "Visuels · segments · drill-through",
+    "Rapports multi-pages",
+    "RLS · optimisation"
+   ]
   },
   {
    "nom": "Pipeline ETL",
-   "faites": 0,
-   "total": 11,
    "pct": 0,
-   "etat": "à venir"
+   "etat": "à venir",
+   "acquis": [],
+   "en_cours": [],
+   "a_venir": [
+    "ETL / ELT",
+    "API → base de données",
+    "Ligne de commande",
+    "Docker",
+    "dbt",
+    "Exécution planifiée",
+    "BigQuery",
+    "Airflow"
+   ]
   }
  ],
  "phases": [
   {
-   "nom": "1. Excel & SQL",
-   "faites": 2,
-   "total": 19,
+   "nom": "Excel & SQL",
    "pct": 11,
    "etat": "en cours"
   },
   {
-   "nom": "2. Python & stats",
-   "faites": 0,
-   "total": 20,
+   "nom": "Python & stats",
    "pct": 0,
    "etat": "à venir"
   },
   {
-   "nom": "3. Power BI & projet phare",
-   "faites": 0,
-   "total": 20,
+   "nom": "Power BI & projet phare",
    "pct": 0,
    "etat": "à venir"
   },
   {
-   "nom": "4. Data engineering",
-   "faites": 0,
-   "total": 21,
+   "nom": "Data engineering",
    "pct": 0,
    "etat": "à venir"
   },
   {
-   "nom": "5. Candidatures",
-   "faites": 0,
-   "total": 19,
+   "nom": "Candidatures",
    "pct": 0,
    "etat": "à venir"
   }
- ],
- "recentes": [
-  {
-   "tache": "Setup : GitHub + repo portfolio, VS Code, Anaconda, PostgreSQL/DBeaver, Power BI, titre LinkedIn",
-   "date": "2026-11-18",
-   "lien": null,
-   "competence": null
-  },
-  {
-   "tache": "SQL : SELECT, WHERE, ORDER BY, LIMIT – SQLBolt 1 à 5",
-   "date": "2026-11-17",
-   "lien": null,
-   "competence": "SQL"
-  }
- ],
- "livrables": [],
- "acquis": [
-  "Setup : GitHub + repo portfolio, VS Code, Anaconda, PostgreSQL/DBeaver, Power BI, titre LinkedIn",
-  "SQL : SELECT, WHERE, ORDER BY, LIMIT – SQLBolt 1 à 5"
  ]
 }

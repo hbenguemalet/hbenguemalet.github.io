@@ -14,4 +14,4 @@ d'intégration Notion que dans le dépôt `candidatures`). Puis onglet Actions �
 **Run workflow** pour tester.
 
 ## Liens
-`#id-du-projet` ouvre directement la fiche d'un projet (ex. `#disco`, `#live`, `#bootcamp`, `#arta`).
+`#id-du-projet` ouvre directement la fiche d'un projet (ex. `#disco`, `#live`, `#suivi`, `#arta`).

@@ -287,7 +287,7 @@ section.wrap+section.wrap{padding-top:40px}
 .next{margin-top:14px;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--acc1) 8%,transparent);font-size:14px;text-align:left}
 .next small{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--acc1);margin-bottom:3px}
 .skills{display:grid;gap:14px}
-.sk{display:grid;grid-template-columns:110px 1fr 86px;gap:12px;align-items:center;font-weight:700;font-size:15px}
+.sk{display:grid;grid-template-columns:110px 1fr 104px;gap:12px;align-items:center;font-weight:700;font-size:15px}
 .sk .tr2{height:10px;border-radius:5px;background:color-mix(in srgb,var(--line) 60%,transparent);overflow:hidden}
 .sk .tr2 i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--acc1),var(--acc2));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
 .sk.wip .tr2 i{background:linear-gradient(90deg,var(--acc1) 0 40%,var(--acc2) 50%,var(--acc1) 60%);background-size:250% 100%;animation:shim 1.6s linear infinite}
@@ -305,6 +305,15 @@ section.wrap+section.wrap{padding-top:40px}
 .phz small{display:block;font-size:10px;font-weight:600;color:var(--mute);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .phz .cur small{color:var(--acc1)}
 .bfoot{margin-top:18px;font-size:12px;color:var(--mute);font-weight:500}
+.skw{display:grid;gap:7px}
+.nts{display:flex;flex-wrap:wrap;gap:5px;margin-left:122px}
+.nts span,.legend2 span{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:980px}
+.nt-a{color:#fff;background:linear-gradient(90deg,var(--acc1),var(--acc2))}
+.nt-c{color:var(--acc1);box-shadow:inset 0 0 0 1.5px var(--acc1);background:color-mix(in srgb,var(--acc1) 8%,transparent);animation:pulseb 2s ease-in-out infinite}
+@keyframes pulseb{50%{background:color-mix(in srgb,var(--acc1) 18%,transparent)}}
+.nt-v{color:var(--mute);background:color-mix(in srgb,var(--line) 45%,transparent)}
+.legend2{display:flex;justify-content:center;gap:6px;margin-top:16px}
+@media(max-width:860px){.nts{margin-left:0}}
 /* parcours */
 .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:34px 0 10px;position:relative}
 .tl:before{content:"";position:absolute;left:12.5%;right:12.5%;top:9px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--m1),var(--m2),var(--d2),var(--d1))}
@@ -321,7 +330,7 @@ section.wrap+section.wrap{padding-top:40px}
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i class="glow-d"></i><i class="glow-m"></i><i class="dots"></i></div>
-<nav><b>Hugo Benguemalet</b><div><a class="hide" href="#projets">Projets</a><a class="hide" href="#bootcamp">Bootcamp</a><a class="hide" href="#parcours">Parcours</a><a href="#contact">Contact</a><a class="gh" href="https://github.com/hbenguemalet" rel="noopener">GitHub</a><button class="tbtn" id="theme" aria-label="Changer de thème">☾</button></div></nav>
+<nav><b>Hugo Benguemalet</b><div><a class="hide" href="#projets">Projets</a><a class="hide" href="#bootcamp">Bootcamp</a><a class="hide" href="#parcours">Parcours</a><a href="#contact">Contact</a><a class="gh hide" href="https://www.linkedin.com/in/hugo-benguemalet" rel="noopener">LinkedIn</a><a class="gh" href="https://github.com/hbenguemalet" rel="noopener">GitHub</a><button class="tbtn" id="theme" aria-label="Changer de thème">☾</button></div></nav>
 <div id="bar"></div>
 <div class="thread" id="thread" aria-hidden="true"><i class="tl"></i><i class="tf" id="tf"></i>
  <svg id="tsvg" viewBox="-14 -46 28 52" width="28" height="52"><g id="trunner" class="idle rn">
@@ -356,7 +365,7 @@ section.wrap+section.wrap{padding-top:40px}
 
 <section class="wrap" id="bootcamp">
   <h2 class="reveal">Le bootcamp, <span class="grad">en direct.</span></h2>
-  <p class="sub reveal">Ma formation data autodidacte, suivie dans Notion. Cette section se met à jour toute seule à chaque tâche cochée.</p>
+  <p class="sub reveal">Ma formation data autodidacte, notion par notion. Cette section se met à jour toute seule à chaque étape franchie.</p>
   <div class="bento" id="bento-boot"></div>
 </section>
 
@@ -366,7 +375,7 @@ section.wrap+section.wrap{padding-top:40px}
   <div class="tl reveal">
     <div><i></i><b>Licence Management</b><span>IAE Valenciennes · 2022–2025</span></div>
     <div><i></i><b>M2 Management digital</b><span>IAE Valenciennes · 2025–2027</span></div>
-    <div><i></i><b>Bootcamp data</b><span>depuis novembre 2026</span></div>
+    <div><i></i><b>Bootcamp data</b><span>depuis septembre 2026</span></div>
     <div><i></i><b>Master SIAD visé</b><span>Lille · alternance 2027</span></div>
   </div>
   <div class="bento" id="bento-mgmt"></div>
@@ -376,7 +385,7 @@ section.wrap+section.wrap{padding-top:40px}
   <h2>Me <span class="grad">contacter.</span></h2>
   <p class="sub" style="margin:12px auto 0">Je cherche une alternance data (data analyst, BI) à Lille ou Paris pour la rentrée 2027.</p>
   <a class="mail" href="mailto:hugo.benguemalet@gmail.com">hugo.benguemalet@gmail.com</a><br><button class="copy" id="copy" type="button">⧉ Copier l'adresse</button>
-  <p class="s"><a href="https://github.com/hbenguemalet" rel="noopener" style="color:var(--fg);font-weight:600">GitHub · hbenguemalet</a> · Saint-Amand-les-Eaux, Hauts-de-France</p>
+  <p class="s"><a href="https://www.linkedin.com/in/hugo-benguemalet" rel="noopener" style="color:var(--fg);font-weight:600">LinkedIn</a> · <a href="https://github.com/hbenguemalet" rel="noopener" style="color:var(--fg);font-weight:600">GitHub · hbenguemalet</a> · Saint-Amand-les-Eaux, Hauts-de-France</p>
 </footer>
 
 <button id="up" type="button" aria-label="Remonter en haut de la page">↑</button>
@@ -398,7 +407,7 @@ data:[
   meta:"Modèle en étoile publié par le bot · lu en direct par cette page",li:["Le bot Python régénère après chaque mise à jour un modèle en étoile : <b>dim_artiste</b>, <b>dim_album</b>, <b>fait_son</b> et <b>pont_featuring</b>.","Cette page lit ces CSV directement sur GitHub, sans serveur : jointures, moyennes et classements sont calculés dans le navigateur.","Le classement ne retient que les albums avec au moins 5 titres notés, pour éviter qu'un album noté sur un seul titre passe en tête.","Les mêmes fichiers alimentent le tableau de bord Power BI."],chips:["CSV","Modèle en étoile","JavaScript","Power BI"],repo:"https://github.com/hbenguemalet/Excel_Melorata/tree/main/powerbi"}
 ],
 boot:[
- {id:"bootcamp",w:"w6",k:"Synchronisé depuis Notion",t:"Où j'en suis.",boot:1,meta:"Bootcamp data autodidacte · depuis novembre 2026 · objectif Master SIAD et alternance",li:["<b>SQL</b> : analyse e-commerce (jeu de données Olist), jointures, CTE, fonctions fenêtres.","<b>Python</b> : nettoyage, analyse et visualisation avec pandas.","<b>Power BI</b> : tableau de bord interactif avec DAX.","<b>Pipeline de données</b> : ETL automatisé, Docker, dbt, vers le data engineering."],chips:["SQL","Python","Power BI","ETL"]}
+ {id:"suivi",w:"w6",k:"Synchronisé depuis Notion",t:"Où j'en suis.",boot:1,meta:"Bootcamp data autodidacte · depuis septembre 2026 · objectif Master SIAD et alternance",li:["<b>SQL</b> : analyse e-commerce (jeu de données Olist), jointures, CTE, fonctions fenêtres.","<b>Python</b> : nettoyage, analyse et visualisation avec pandas.","<b>Power BI</b> : tableau de bord interactif avec DAX.","<b>Pipeline de données</b> : ETL automatisé, Docker, dbt, vers le data engineering."],chips:["SQL","Python","Power BI","ETL"]}
 ],
 mgmt:[
  {id:"bsc",w:"w2",k:"Licence 2",t:"Black Swan Conseil",p:"Une association créée de A à Z.",big:6,unit:"personnes",
@@ -528,22 +537,22 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 /* ---------- bootcamp en direct (bootcamp.json, écrit depuis Notion par GitHub Actions) ---------- */
 let bootP=null;
 const getBoot=()=>bootP||(bootP=fetch("bootcamp.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw r.status;return r.json()}));
-const jourCourt=d=>new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"short"});
-const depuis=iso=>{const h=Math.round((Date.now()-Date.parse(iso))/36e5);return h<1?"il y a moins d'une heure":h<24?`il y a ${h} h`:`il y a ${Math.round(h/24)} j`};
 async function BOOT(el){let B;
   try{B=await getBoot()}catch(e){B=null}
-  const S=B?[{nom:"Excel · IA",pct:100,etat:"fait"},...B.competences]:[{nom:"Excel · IA",pct:100,etat:"fait"},{nom:"SQL",pct:5,etat:"en cours"},{nom:"Python",pct:0,etat:"à venir"},{nom:"Power BI",pct:0,etat:"à venir"},{nom:"Pipeline ETL",pct:0,etat:"à venir"}];
+  const S=B?[{nom:"Excel · IA",pct:100,etat:"fait",acquis:["Tableaux de bord","VBA","Automatisation","Prompt engineering"],en_cours:[],a_venir:[]},...B.competences]:[];
   const R=72,C=2*Math.PI*R,pct=B?B.pct:0;
-  el.innerHTML=`<div class="boot">
-   <div>${B?`<div class="ring"><svg viewBox="0 0 170 170" width="170" height="170"><circle class="bg" cx="85" cy="85" r="${R}"/><circle class="fg" cx="85" cy="85" r="${R}" style="stroke-dasharray:${C};stroke-dashoffset:${C}"/></svg><div><b>${pct}<small style="font-size:.45em"> %</small></b><span>${B.faites} / ${B.total} tâches</span></div></div>
-     <p class="bside">Phase en cours : <b>${esc(B.phase_actuelle.replace(/^\d\.\s*/,""))}</b>${B.cette_semaine?` · <b>${B.cette_semaine}</b> tâche${B.cette_semaine>1?"s":""} cette semaine`:""}</p>
-     ${B.prochaine?`<div class="next"><small>Prochaine étape</small>${esc(B.prochaine.tache)}</div>`:""}`:`<p class="bside">Avancée détaillée bientôt disponible.</p>`}
+  const puces=c=>[...c.acquis.map(n=>`<span class="nt-a">${esc(n)}</span>`),...c.en_cours.map(n=>`<span class="nt-c">${esc(n)}</span>`),...(c.etat==="à venir"?[]:c.a_venir.map(n=>`<span class="nt-v">${esc(n)}</span>`))].join("");
+  el.innerHTML=B?`<div class="boot">
+   <div><div class="ring"><svg viewBox="0 0 170 170" width="170" height="170"><circle class="bg" cx="85" cy="85" r="${R}"/><circle class="fg" cx="85" cy="85" r="${R}" style="stroke-dasharray:${C};stroke-dashoffset:${C}"/></svg><div><b>${pct}<small style="font-size:.45em"> %</small></b><span>des notions acquises</span></div></div>
+     <p class="bside">Phase en cours : <b>${esc(B.phase_actuelle)}</b></p>
+     ${B.en_cours&&B.en_cours.notions.length?`<div class="next"><small>En apprentissage · ${esc(B.en_cours.competence)}</small>${B.en_cours.notions.map(esc).join(" · ")}</div>`:""}
+     <p class="legend2"><span class="nt-a">acquis</span><span class="nt-c">en cours</span><span class="nt-v">à venir</span></p>
    </div>
-   <div><div class="skills">${S.map(s=>`<div class="sk ${s.etat==="fait"?"done":s.etat==="en cours"?"wip":""}"><span>${s.nom}</span><div class="tr2"><i data-w="${s.etat==="en cours"?Math.max(s.pct,8):s.pct}"></i></div><em>${s.etat==="fait"?"✓ acquis":s.etat==="en cours"?s.pct+" % · en cours":"à venir"}</em></div>`).join("")}</div>
-    ${B&&B.phases?`<div class="phz">${B.phases.map(p=>`<div class="${p.nom===B.phase_actuelle?"cur":""}" title="${esc(p.nom)} : ${p.faites}/${p.total}"><i><span data-w="${p.pct}"></span></i><small>${esc(p.nom)}</small></div>`).join("")}</div>`:""}
-    ${B&&B.recentes.length?`<div class="acq"><p>Derniers acquis</p>${B.recentes.slice(0,4).map((t,i)=>`<div style="animation-delay:${i*70}ms"><time>${t.date?jourCourt(t.date):""}</time><span>${t.lien?`<a href="${esc(t.lien)}" rel="noopener">${esc(t.tache)} ↗</a>`:esc(t.tache)}</span></div>`).join("")}</div>`:""}
-    ${B?`<p class="bfoot">Synchronisé depuis mon Notion ${depuis(B.maj)}.</p>`:""}
-   </div></div>`;
+   <div><div class="skills">${S.map(s=>`<div class="skw"><div class="sk ${s.etat==="fait"?"done":s.etat==="en cours"?"wip":""}"><span>${s.nom}</span><div class="tr2"><i data-w="${s.etat==="en cours"?Math.max(s.pct,6):s.pct}"></i></div><em>${s.etat==="fait"?"✓ acquis":s.etat==="en cours"?s.pct+" % · en cours":"à venir"}</em></div>
+      ${s.etat==="à venir"?`<p class="nts"><span class="nt-v">${s.a_venir.length} notions au programme</span></p>`:`<p class="nts">${puces(s)}</p>`}</div>`).join("")}</div>
+    <div class="phz">${B.phases.map(p=>`<div class="${p.nom===B.phase_actuelle?"cur":""}" title="${esc(p.nom)}"><i><span data-w="${p.pct}"></span></i><small>${esc(p.nom)}</small></div>`).join("")}</div>
+    <p class="bfoot">Synchronisé automatiquement depuis mon suivi Notion.</p>
+   </div></div>`:`<p class="bside" style="text-align:left">Avancée détaillée bientôt disponible.</p>`;
   requestAnimationFrame(()=>requestAnimationFrame(()=>{const f=el.querySelector(".ring .fg");if(f)f.style.strokeDashoffset=C*(1-pct/100);
     el.querySelectorAll("[data-w]").forEach(i=>i.style.width=i.dataset.w+"%")}));
 }
@@ -560,8 +569,7 @@ async function openSheet(id){const it=ALL.find(x=>x.id===id);if(!it)return;sheet
   $("sprev").onclick=()=>pv&&openSheet(pv.id);$("snext").onclick=()=>nx&&openSheet(nx.id);
   history.replaceState(null,"","#"+id);$("sheet").querySelector(".in").scrollTop=0;
   let li=it.li;
-  if(it.boot){try{const B=await getBoot();li=[...B.phases.map(p=>`<b>${esc(p.nom)}</b> : ${p.faites} / ${p.total} tâches${p.etat==="fait"?" ✓":p.etat==="en cours"?" · en cours":""}`),
-    ...(B.acquis.length?[`<b>Déjà fait</b> : ${B.acquis.map(esc).join(" · ")}`]:[]),...(B.prochaine?[`<b>Ensuite</b> : ${esc(B.prochaine.tache)}`]:[])]}catch(e){}}
+  if(it.boot){try{const B=await getBoot();li=B.competences.map(c=>`<b>${esc(c.nom)}</b> : ${[c.acquis.length?"acquis : "+c.acquis.map(esc).join(", "):"",c.en_cours.length?"en cours : "+c.en_cours.map(esc).join(", "):"",c.a_venir.length?"à venir : "+c.a_venir.map(esc).join(", "):""].filter(Boolean).join(" ; ")}.`)}catch(e){}}
   $("sheetBody").innerHTML=`<h3>${it.t}</h3><p class="meta">${it.meta}</p>${it.blocs?it.blocs.map(b=>`<h4 class="ah">${b[0]}</h4><p class="ap">${b[1]}</p>`).join(""):`<ul>${li.map(l=>`<li>${l}</li>`).join("")}</ul>`}<div class="chips">${it.chips.map(c=>`<span class="chip">${c}</span>`).join("")}</div>${it.repo?`<a class="btn d" style="display:inline-block;margin-top:22px;text-decoration:none" href="${it.repo}" rel="noopener">Voir le code sur GitHub ↗</a>`:""}`;
   $("sheet").querySelector(".in").classList.toggle("mgmt",DATA.mgmt.includes(it));
   $("sheet").classList.add("open")}
@@ -572,6 +580,7 @@ function openContact(){sheetId="contact";$("sheet").querySelector(".in").classLi
    <div class="ways">
     <a class="way" href="mailto:hugo.benguemalet@gmail.com?subject=${sujet}"><i>✉</i><span>Écrire un e-mail<small>hugo.benguemalet@gmail.com</small></span></a>
     <button class="way" id="copy2" type="button"><i>⧉</i><span>Copier l'adresse<small>pour la coller où vous voulez</small></span></button>
+    <a class="way" href="https://www.linkedin.com/in/hugo-benguemalet" rel="noopener" target="_blank"><i style="font-weight:800;font-size:15px">in</i><span>Me trouver sur LinkedIn<small>linkedin.com/in/hugo-benguemalet</small></span></a>
     <a class="way" href="https://github.com/hbenguemalet" rel="noopener"><i>⌥</i><span>Voir mon GitHub<small>github.com/hbenguemalet</small></span></a>
    </div><p class="meta" style="margin-top:18px">Saint-Amand-les-Eaux, Hauts-de-France · permis B, véhiculé</p></div>`;
   $("copy2").onclick=async()=>{const b=$("copy2");try{await navigator.clipboard.writeText("hugo.benguemalet@gmail.com");b.classList.add("ok");b.querySelector("small").textContent="Adresse copiée ✓"}catch(e){b.querySelector("small").textContent="hugo.benguemalet@gmail.com"}};
