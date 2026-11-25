@@ -328,9 +328,17 @@ section.wrap+section.wrap{padding-top:40px}
 @media(max-width:860px){.nts{margin-left:0}}
 /* parcours */
 .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:34px 0 10px;position:relative}
-.tl:before{content:"";position:absolute;left:12.5%;right:12.5%;top:9px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--m1),var(--m2),var(--d2),var(--d1))}
+.tl:before{content:"";position:absolute;left:12.5%;right:12.5%;top:15px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--m1),var(--m2),var(--d2),var(--d1))}
 .tl div{text-align:center;position:relative;padding:0 6px}
-.tl i{display:block;width:21px;height:21px;margin:0 auto 10px;border-radius:50%;background:var(--card);border:3px solid var(--m1)}
+.tl i{display:grid;place-items:center;width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:var(--card);border:3px solid var(--m1);color:var(--m1);position:relative}
+.tl i svg{width:23px;height:23px;display:block}
+.tl i.ok{background:linear-gradient(135deg,var(--m1),var(--m2));border-color:transparent;box-shadow:0 6px 16px -6px var(--m2);animation:pop .6s cubic-bezier(.3,1.6,.5,1) both}
+.tl i.ok svg{width:18px;height:18px}
+.tl i.cours{border-color:currentColor;box-shadow:0 0 0 5px color-mix(in srgb,currentColor 14%,transparent)}
+.tl i.cours:not(.mg){color:var(--d1)}
+.tl i.cours .needle{transform-origin:12px 12px;animation:needle 4.5s ease-in-out infinite}
+@keyframes needle{0%,100%{transform:rotate(-20deg)}30%{transform:rotate(38deg)}55%{transform:rotate(6deg)}80%{transform:rotate(48deg)}}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
 .tl div:nth-child(3) i,.tl div:nth-child(4) i{border-color:var(--d1)}.tl div:nth-child(4) i{border-style:dashed}
 .tl b{display:block;font-size:14px;letter-spacing:-.01em}.tl span{font-size:12px;color:var(--mute)}
 .mgmt .card{min-height:0}
@@ -385,9 +393,9 @@ section.wrap+section.wrap{padding-top:40px}
   <h2 class="reveal">Avant la data, <span class="grad">le management.</span></h2>
   <p class="sub reveal">Trois ans de projets en équipe : partir du besoin, coordonner, livrer. C'est ce qui oriente mes analyses aujourd'hui.</p>
   <div class="tl reveal">
-    <div><i></i><b>Licence Management</b><span>IAE Valenciennes · 2022–2025</span></div>
-    <div><i></i><b>M2 Management digital</b><span>IAE Valenciennes · 2025–2027</span></div>
-    <div><i></i><b>Bootcamp data</b><span>depuis septembre 2026</span></div>
+    <div><i class="ok" role="img" aria-label="Validé"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Licence Management</b><span>IAE Valenciennes · 2022–2025</span></div>
+    <div><i class="cours mg" role="img" aria-label="En cours"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".45"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><g class="needle"><path d="M12 5.2l3.1 6.8H8.9z" fill="currentColor"/><path d="M12 18.8L8.9 12h6.2z" fill="currentColor" opacity=".35"/><circle cx="12" cy="12" r="1.3" fill="var(--card)" stroke="currentColor" stroke-width="1"/></g></svg></i><b>M2 Management digital</b><span>IAE Valenciennes · 2025–2027</span></div>
+    <div><i class="cours" role="img" aria-label="En cours"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".45"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><g class="needle"><path d="M12 5.2l3.1 6.8H8.9z" fill="currentColor"/><path d="M12 18.8L8.9 12h6.2z" fill="currentColor" opacity=".35"/><circle cx="12" cy="12" r="1.3" fill="var(--card)" stroke="currentColor" stroke-width="1"/></g></svg></i><b>Bootcamp data</b><span>depuis septembre 2026</span></div>
     <div><i></i><b>Master SIAD visé</b><span>Lille · alternance 2027</span></div>
   </div>
   <div class="bento" id="bento-mgmt"></div>
