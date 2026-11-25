@@ -1,32 +1,30 @@
 {
- "pct": 9,
+ "pct": 16,
  "phase_actuelle": "Excel & SQL",
  "en_cours": {
   "competence": "SQL",
   "notions": [
-   "GROUP BY",
-   "HAVING",
-   "Agrégats"
+   "Jointures"
   ]
  },
  "competences": [
   {
    "nom": "SQL",
-   "pct": 24,
+   "pct": 41,
    "etat": "en cours",
    "acquis": [
     "SELECT",
     "WHERE",
     "ORDER BY",
-    "LIMIT"
-   ],
-   "en_cours": [
+    "LIMIT",
     "GROUP BY",
     "HAVING",
     "Agrégats"
    ],
+   "en_cours": [
+    "Jointures"
+   ],
    "a_venir": [
-    "Jointures",
     "Sous-requêtes",
     "CTE",
     "Fonctions fenêtres",
@@ -95,7 +93,7 @@
  "phases": [
   {
    "nom": "Excel & SQL",
-   "pct": 11,
+   "pct": 16,
    "etat": "en cours"
   },
   {
