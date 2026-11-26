@@ -1,5 +1,5 @@
 {
- "pct": 16,
+ "pct": 17,
  "phase_actuelle": "Excel & SQL",
  "en_cours": {
   "competence": "SQL",
@@ -80,7 +80,6 @@
    "en_cours": [],
    "a_venir": [
     "ETL / ELT",
-    "API → base de données",
     "Ligne de commande",
     "Docker",
     "dbt",
