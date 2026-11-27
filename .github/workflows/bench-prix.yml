@@ -14,10 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/bench_prix.py
+      - run: python3 scripts/bench_tarifs.py
+        continue-on-error: true
       - name: Commit si changement
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
-          git add bench-pc/prices.json
+          git add bench-pc/prices.json bench-pc/tarifs.json
           git diff --cached --quiet || git commit -m "Prix Bench PC $(date -u +%H:%M)"
           git push

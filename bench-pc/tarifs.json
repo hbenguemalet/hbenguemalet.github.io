@@ -1,0 +1,445 @@
+{
+ "updated": "2026-11-27T18:46:43Z",
+ "cartes": {
+  "RTX 5060 Ti 16 Go": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 13,
+     "nb_stock": 9,
+     "meilleur": {
+      "nom": "ASUS DUAL GeForce RTX 5060 Ti OC 16G, Carte graphique",
+      "prix": 887.0,
+      "url": "https://www.alternate.fr/ASUS/DUAL-GeForce-RTX-5060-Ti-OC-16G-Carte-graphique/html/product/100124310"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 15,
+     "nb_stock": 12,
+     "meilleur": {
+      "nom": "Gainward GeForce RTX 5060 Ti Python III 16GB - 16 Go GDDR7 - HDMI/Tri DisplayPort - DLSS 4 - PCI ",
+      "prix": 1029.95,
+      "url": "https://www.ldlc.com/fiche/PB00677295.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 12,
+     "nb_stock": 2,
+     "meilleur": {
+      "nom": "Gainward GeForce RTX 5060 Ti Ghost OC 16 Go - Occasion",
+      "prix": 899.96,
+      "url": "https://www.materiel.net/produit/202601080066.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 4,
+     "nb_stock": 2,
+     "meilleur": {
+      "nom": "MSI ! MSI GeForce RTX 5060 Ti 16G VENTUS 2X OC PLUS",
+      "prix": 849.99,
+      "url": "https://www.grosbill.com/msi-geforce-rtx-5060-ti-16g-ventus-2x-oc-plus-152615"
+     },
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 5070": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 26,
+     "nb_stock": 15,
+     "meilleur": {
+      "nom": "ASUS DUAL GeForce RTX 5070 OC, Carte graphique",
+      "prix": 933.0,
+      "url": "https://www.alternate.fr/ASUS/DUAL-GeForce-RTX-5070-OC-Carte-graphique/html/product/100132495"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 14,
+     "nb_stock": 10,
+     "meilleur": {
+      "nom": "Gainward GeForce RTX 5070 Python III - 12 Go GDDR7 - HDMI/Tri DisplayPort - DLSS 4 - PCI ",
+      "prix": 1079.95,
+      "url": "https://www.ldlc.com/fiche/PB00669922.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 13,
+     "nb_stock": 3,
+     "meilleur": {
+      "nom": "MSI GeForce RTX 5070 12G GAMING TRIO OC - Occasion",
+      "prix": 1061.96,
+      "url": "https://www.materiel.net/produit/202503250111.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 15,
+     "nb_stock": 3,
+     "meilleur": {
+      "nom": "Gigabyte GeForce RTX 5070 GAMING OC 12G",
+      "prix": 1059.99,
+      "url": "https://www.grosbill.com/gigabyte-geforce-rtx-5070-gaming-oc-12g-151709"
+     },
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 4070 Super": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 4070 Ti Super": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 4080 Super": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 3090 (occasion)": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 0,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 5070 Ti": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 21,
+     "nb_stock": 4,
+     "meilleur": {
+      "nom": "MSI GeForce RTX 5070 Ti 16G VENTUS 3X OC, Carte graphique",
+      "prix": 1553.0,
+      "url": "https://www.alternate.fr/MSI/GeForce-RTX-5070-Ti-16G-VENTUS-3X-OC-Carte-graphique/html/product/100111973"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 18,
+     "nb_stock": 10,
+     "meilleur": {
+      "nom": "Gainward GeForce RTX 5070 Ti Phoenix-S - 16 Go GDDR7 - HDMI/Tri DisplayPort - DLSS 4 - PCI ",
+      "prix": 1679.95,
+      "url": "https://www.ldlc.com/fiche/PB00686242.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 18,
+     "nb_stock": 1,
+     "meilleur": {
+      "nom": "Gigabyte AORUS GeForce RTX 5070 Ti INFINITY 16G",
+      "prix": 1879.95,
+      "url": "https://www.materiel.net/produit/202609300009.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 12,
+     "nb_stock": 4,
+     "meilleur": {
+      "nom": "Asus PRIME GeForce RTX 5070 Ti 16GB GDDR7 OC Edition",
+      "prix": 1649.9,
+      "url": "https://www.grosbill.com/asus-prime-geforce-rtx-5070-ti-16gb-gddr7-oc-edition-150479"
+     },
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 5080": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 35,
+     "nb_stock": 9,
+     "meilleur": {
+      "nom": "ZOTAC GeForce RTX 5080 SOLID CORE OC, Carte graphique",
+      "prix": 1939.0,
+      "url": "https://www.alternate.fr/ZOTAC/GeForce-RTX-5080-SOLID-CORE-OC-Carte-graphique/html/product/100119363"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 24,
+     "nb_stock": 16,
+     "meilleur": {
+      "nom": "Gigabyte GeForce RTX 5080 WINDFORCE OC V2 SFF 16G - 16 Go GDDR7 - HDMI/Tri DisplayPort - DLSS 4 - PCI ",
+      "prix": 2229.95,
+      "url": "https://www.ldlc.com/fiche/PB00753812.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 22,
+     "nb_stock": 6,
+     "meilleur": {
+      "nom": "Gigabyte GeForce RTX 5080 WINDFORCE OC V2 SFF 16G",
+      "prix": 2229.95,
+      "url": "https://www.materiel.net/produit/202609150197.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 16,
+     "nb_stock": 1,
+     "meilleur": {
+      "nom": "Gigabyte GeForce RTX 5080 AERO OC SFF 16G",
+      "prix": 2249.9,
+      "url": "https://www.grosbill.com/gigabyte-geforce-rtx-5080-aero-oc-sff-16g-150383"
+     },
+     "moins_cher_hors_stock": null
+    }
+   ]
+  },
+  "RTX 5090": {
+   "offres": [
+    {
+     "site": "Alternate",
+     "lu": true,
+     "erreur": null,
+     "nb": 23,
+     "nb_stock": 7,
+     "meilleur": {
+      "nom": "INNO3D GeForce RTX 5090 X3 OC, Carte graphique",
+      "prix": 9893.0,
+      "url": "https://www.alternate.fr/Inno3D/GeForce-RTX-5090-X3-OC-Carte-graphique/html/product/100121077"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "LDLC",
+     "lu": true,
+     "erreur": null,
+     "nb": 16,
+     "nb_stock": 13,
+     "meilleur": {
+      "nom": "MSI GeForce RTX 5090 32G VENTUS 3X OC - 32 Go GDDR7 - HDMI/Tri DisplayPort - DLSS 4 - PCI ",
+      "prix": 9299.95,
+      "url": "https://www.ldlc.com/fiche/PB00661910.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Materiel.net",
+     "lu": true,
+     "erreur": null,
+     "nb": 17,
+     "nb_stock": 4,
+     "meilleur": {
+      "nom": "Gigabyte AORUS GeForce RTX 5090 MASTER 32G",
+      "prix": 8929.96,
+      "url": "https://www.materiel.net/produit/202611190039.html"
+     },
+     "moins_cher_hors_stock": null
+    },
+    {
+     "site": "Grosbill",
+     "lu": true,
+     "erreur": null,
+     "nb": 12,
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": {
+      "nom": "Asus ROG Astral GeForce RTX 5090 32GB OC Edition WHITE",
+      "prix": 7999.0,
+      "url": "https://www.grosbill.com/asus-rog-astral-geforce-rtx-5090-32gb-oc-edition-white-157728"
+     }
+    }
+   ]
+  }
+ }
+}

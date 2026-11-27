@@ -2,8 +2,8 @@
 var D=window.BENCH,C=window.BENCH2,$=function(i){return document.getElementById(i)};
 var eur=function(n){return n.toLocaleString("fr-FR",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+"\u00a0€"};
 var ls={get:function(k,d){try{var v=localStorage.getItem("benchpc:"+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem("benchpc:"+k,JSON.stringify(v))}catch(e){}}};
-var S={tab:ls.get("tab","config"),card:ls.get("card","RTX 5070 Ti"),comp:ls.get("comp","gpu"),gpu:ls.get("gpu",0),res:ls.get("res","4k"),bsec:ls.get("bsec","cartes"),garde:ls.get("garde","cpu"),resale:ls.get("resale",0)};
-var P={items:{},updated:null};
+var S={tab:ls.get("tab","config"),card:ls.get("card","RTX 5070 Ti"),comp:ls.get("comp","gpu"),gpu:ls.get("gpu",0),res:ls.get("res","4k"),psec:ls.get("psec","panier"),bsec:ls.get("bsec","cartes"),garde:ls.get("garde","cpu"),resale:ls.get("resale",0)};
+var P={items:{},updated:null},T={cartes:{}};
 var COMPS=[["gpu","Carte graphique"],["psu","Alimentation"],["case","Boîtier"],["cooler","Refroidissement"],["fans","Ventilateurs"],["paste","Pâte"]];
 var MAPMA={gpu:"gpu",psu:"psu",case:"case",cooler:"cool",fans:"cool",paste:"cool"};
 var ICON={config:'<path d="M4 5h16v11H4zM9 20h6M12 16v4"/>',objectif:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/>',compo:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>',bench:'<path d="M5 20V10M12 20V4M19 20v-7"/>',goulot:'<path d="M4 5h16l-6 7v6l-4 2v-8z"/>',prix:'<path d="M3 12l9-9h8v8l-9 9z"/><circle cx="15.5" cy="8.5" r="1.3"/>'};
@@ -107,7 +107,7 @@ function vGoulot(){var spec=C.cartes[Math.min(S.gpu,C.cartes.length-1)],g=spec.n
   items.map(function(i){return '<div class="verdict"><span class="pill '+i.c+'">'+lab[i.c]+'</span><div><b>'+i.t+'</b>'+i.d+'</div></div>'}).join("")}
 
 /* ===== Prix ===== */
-function vPrix(){var p=pal();var rows=p.items.slice();var h='<h2>Prix</h2><p class="sub">'+(live()?"Relevé automatique toutes les heures, quand les sites répondent.":"Pour l'instant : prix du document du "+D.releve+". Le relevé automatique n'a pas encore lu de page.")+'</p>'+palSeg();
+function vPrix(){if(S.psec==='bench')return vTarifs();var p=pal();var rows=p.items.slice();var h='<h2>Prix</h2>'+seg([["panier","Mon panier"],["bench","Bench tarifaire"]],S.psec,"psec")+'<p class="sub">'+(live()?"Relevé automatique toutes les heures, quand les sites répondent.":"Pour l'instant : prix du document du "+D.releve+". Le relevé automatique n'a pas encore lu de page.")+'</p>'+palSeg();
   var deals=[];
   h+='<div class="card">'+rows.map(function(it){var x=pr(it),r=P.items[it.id]||{},ref=r.ref||it.lo;var d=x.live&&it.lo===it.hi?x.lo-ref:0;if(d<=-ref*0.03)deals.push([it,x.lo,ref]);
     var st=x.live?'<span class="pill good">Relevé '+ago(x.checked)+'</span>':'<span class="pill mid">Document</span>';
@@ -115,6 +115,27 @@ function vPrix(){var p=pal();var rows=p.items.slice();var h='<h2>Prix</h2><p cla
   '<div class="row2"><b>Total</b><span class="r"><b>'+tl(p,total(p))+'</b></span></div></div>';
   if(deals.length)h+='<div class="note ok"><b>Baisse détectée</b><br>'+deals.map(function(d){return d[0].k+" : "+eur(d[1])+" au lieu de "+eur(d[2])}).join("<br>")+'</div>';
   h+='<h2 style="margin-top:26px;font-size:20px">Bons plans</h2><div class="grid">'+D.bonsPlans.map(function(b){return '<div class="card"><span class="pill '+(b.warn?"bad":"good")+'">'+b.tag+'</span><b style="display:block;margin:10px 0 4px;font-size:17px">'+b.t+'</b><span class="big" style="font-size:26px">'+b.p+'</span><p class="mute small" style="margin-top:6px">'+b.d+'</p>'+(b.u?'<a class="lnk small" href="'+b.u+'" target="_blank" rel="noopener">Voir l\'offre →</a>':'')+'</div>'}).join("")+'</div>';
+  return h}
+
+/* ===== Bench tarifaire ===== */
+function vTarifs(){
+  var h='<h2>Prix</h2>'+seg([["panier","Mon panier"],["bench","Bench tarifaire"]],S.psec,"psec");
+  if(!T.updated)return h+'<div class="note">Le relevé tarifaire n\'est pas encore disponible.</div>';
+  var rows=C.cartes.filter(function(c){return !c.actuel}).map(function(c){var e=T.cartes[c.n],offs=e?e.offres:[];
+    var ok=offs.filter(function(o){return o.meilleur}).sort(function(x,y){return x.meilleur.prix-y.meilleur.prix});
+    return {c:c,offs:offs,ok:ok,best:ok[0]||null}});
+  var data=rows.filter(function(r){return r.best}).sort(function(x,y){return x.best.meilleur.prix-y.best.meilleur.prix});
+  var none=rows.filter(function(r){return !r.best});
+  var max=Math.max.apply(null,data.map(function(r){return r.best.meilleur.prix}));
+  h+='<p class="sub">Meilleur prix en stock chez Alternate, LDLC, Materiel.net et Grosbill. Relevé '+ago(T.updated)+' ('+fmtDate(T.updated)+').</p>';
+  h+='<div class="card"><div class="mute small" style="margin-bottom:6px">Du moins cher au plus cher, en stock</div>'+data.map(function(r){
+    return '<div class="br" style="grid-template-columns:118px 1fr 78px"><span class="nm">'+r.c.n.replace(" (occasion)","")+'</span><div class="track"><div class="fill" data-w="'+(r.best.meilleur.prix/max*100)+'" style="background:linear-gradient(90deg,#8fd3ff88,#8fd3ff)"></div></div><span class="v">'+eur(Math.round(r.best.meilleur.prix))+'</span></div>'}).join("")+'</div>';
+  h+='<h2 style="margin-top:26px;font-size:20px">Détail par revendeur</h2><div class="grid g2">'+data.map(function(r){var min=r.best.meilleur.prix;
+    return '<div class="card"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:17px">'+r.c.n+'</b><span class="pill good">'+eur(min)+'</span></div><div class="mute small" style="margin:2px 0 8px">'+r.c.vram+' Go '+r.c.type+' · soit '+eur(Math.round(min/r.c.vram))+' le Go</div>'+
+      r.offs.map(function(o){var m=o.meilleur,tag=o.ancien?' <span class="pill mid">ancien</span>':'';
+        return '<div class="row2"><span><b>'+o.site+'</b>'+tag+(m?'<br><span class="mute small">'+m.nom.replace(/, Carte graphique.*/,"").slice(0,48)+'</span>':'')+'</span><span class="r">'+(m?'<b>'+eur(m.prix)+'</b>'+(m.prix===min?'<br><span class="delta dn small">le moins cher</span>':'<br><span class="delta up small">+'+eur(Math.round(m.prix-min))+'</span>')+'<br><a class="lnk small" href="'+m.url+'" target="_blank" rel="noopener">Voir →</a>':(o.lu?(o.nb?'<span class="mute">Rupture</span>':'<span class="mute">Introuvable</span>'):'<span class="mute">Non lu</span>'))+'</span></div>'}).join("")+'</div>'}).join("")+'</div>';
+  if(none.length)h+='<div class="note" style="margin-top:14px"><b>Aucune offre en stock trouvée</b><br>'+none.map(function(r){return r.c.n}).join(" · ")+'<br><span class="mute small">Pas d\'offre neuve chez ces 4 revendeurs. Les cartes de la série 40 ne sont souvent plus produites, et la 3090 se trouve surtout d\'occasion.</span></div>';
+  h+='<div class="note ok" style="margin-top:14px">Seules les offres <b>en stock</b> comptent. Prix TTC tels qu\'affichés sur les pages de recherche (deux premières pages). Topachat et Galaxus ne sont pas lus ici. Vérifie le prix final sur la fiche avant d\'acheter.</div>';
   return h}
 function live(){return Object.keys(P.items).some(function(k){return P.items[k].source==="site"})}
 
@@ -126,12 +147,13 @@ function render(){
   var r=$("resale");if(r)r.addEventListener("input",function(e){save("resale",Math.max(0,+e.target.value||0));var pos=e.target.selectionStart;render();var n=$("resale");n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}});
   bars();
 }
-function head(){var ls=null;Object.keys(P.items).forEach(function(k){var i=P.items[k];if(i.source==="site"&&(!ls||i.checked>ls))ls=i.checked});
+function head(){var ls=T.updated||null;Object.keys(P.items).forEach(function(k){var i=P.items[k];if(i.source==="site"&&(!ls||i.checked>ls))ls=i.checked});
   $("dot").className=ls?"":"off";$("maj").textContent=ls?"Prix relevés "+ago(ls):"Prix du document · "+D.releve}
 $("tabbar").innerHTML=TABS.map(function(t){return '<button data-t="'+t[0]+'"><svg viewBox="0 0 24 24">'+ICON[t[0]]+'</svg>'+t[1]+'</button>'}).join("");
 $("tabbar").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;save("tab",b.dataset.t);render();window.scrollTo({top:0,behavior:"smooth"})});
 document.querySelector("main").addEventListener("click",function(e){var b=e.target.closest(".seg button");if(!b)return;var v=b.dataset.v;save(b.dataset.k,/^\d+$/.test(v)?+v:v);render()});
 render();head();
+fetch("tarifs.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j){T=j;render();head()}}).catch(function(){});
 fetch("prices.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j){P=j;render();head()}}).catch(function(){});
 setInterval(function(){head()},60000);
 })();
