@@ -16,10 +16,7 @@ window.BENCH2 = {
   cartes: [
     { n: "GTX 1070", m: "NVIDIA", vram: 8, type: "GDDR5", bus: 256, w: 150, psu: 500, perf: 20, src: "HowManyFPS (5070 Ti 392 % plus rapide, moyenne de 100+ jeux)", fiab: "faible", actuel: true },
     { n: "RTX 5060 Ti 16 Go", m: "NVIDIA", vram: 16, type: "GDDR7", bus: 128, w: 180, psu: 600, perf: null, src: "Écart 4K non sourcé", fiab: "-" },
-    { n: "RX 9060 XT 16 Go", m: "AMD", vram: 16, type: "GDDR6", bus: 128, w: 160, psu: 500, perf: null, src: "Notebookcheck : environ 7 % sous la 5060 Ti 16 Go", fiab: "-" },
-    { n: "RTX 5070", m: "NVIDIA", vram: 12, type: "GDDR7", bus: 192, w: 250, psu: 650, perf: 68, src: "Estimé : 9070 XT environ 31 % devant en 4K (TechSpot), 5070 Ti environ 12 % devant la 9070 XT", fiab: "faible" },
-    { n: "RX 9070", m: "AMD", vram: 16, type: "GDDR6", bus: 256, w: 220, psu: 650, perf: null, src: "Écart 4K non sourcé", fiab: "-" },
-    { n: "RX 9070 XT", m: "AMD", vram: 16, type: "GDDR6", bus: 256, w: 304, psu: 750, perf: 89, src: "TechSpot : 5070 Ti environ 12 % devant en 4K (varie selon les jeux)", fiab: "moyenne" },
+    { n: "RTX 5070", m: "NVIDIA", vram: 12, type: "GDDR7", bus: 192, w: 250, psu: 650, perf: null, src: "Écart 4K non sourcé", fiab: "-" },
     { n: "RTX 5070 Ti", m: "NVIDIA", vram: 16, type: "GDDR7", bus: 256, w: 300, psu: 750, perf: 100, src: "Référence", fiab: "bonne" },
     { n: "RTX 5080", m: "NVIDIA", vram: 16, type: "GDDR7", bus: 256, w: 360, psu: 850, perf: 114, src: "GamersNexus (5080 devant de 12 à 16 % en 4K)", fiab: "bonne" },
     { n: "RTX 5090", m: "NVIDIA", vram: 32, type: "GDDR7", bus: 512, w: 575, psu: 1000, perf: 166, src: "Notebookcheck (agrégat, 5070 Ti à 66 % derrière)", fiab: "moyenne" }
