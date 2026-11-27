@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T18:46:43Z",
+ "updated": "2026-11-27T21:24:22Z",
  "cartes": {
   "RTX 5060 Ti 16 Go": {
    "offres": [
@@ -336,7 +336,7 @@
      "lu": true,
      "erreur": null,
      "nb": 35,
-     "nb_stock": 9,
+     "nb_stock": 10,
      "meilleur": {
       "nom": "ZOTAC GeForce RTX 5080 SOLID CORE OC, Carte graphique",
       "prix": 1939.0,

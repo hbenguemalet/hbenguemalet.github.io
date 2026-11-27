@@ -1,24 +1,36 @@
 {
- "updated": "2026-11-27T00:00:00Z",
+ "updated": "2026-11-27T21:23:34Z",
  "note": "Valeurs initiales du document. Le workflow bench-prix remplace price/stock/checked quand la lecture réussit.",
  "items": {
   "p1-gpu": {
    "url": "https://www.alternate.fr/MSI/GeForce-RTX-5070-Ti-16G-VENTUS-3X-OC-Carte-graphique/html/product/100111973",
    "ref": 1553,
-   "price": 1553,
+   "price": 1553.0,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     1553.0
+    ]
+   ]
   },
   "p1-psu": {
    "url": "https://www.ldlc.com/fiche/PB00652458.html",
    "ref": 109.95,
-   "price": 109.95,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "price": 119.95,
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     119.95
+    ]
+   ]
   },
   "p1-case": {
    "url": "https://www.galaxus.fr/fr/s1/product/fractal-meshify-2-compact-atx-matx-mini-itx-boitier-pc-14654476",
@@ -27,25 +39,38 @@
    "stock": true,
    "checked": "2026-11-27T00:00:00Z",
    "status": "doc",
-   "source": "doc"
+   "source": "doc",
+   "erreur": "HTTPError"
   },
   "p1-cooler": {
    "url": "https://www.topachat.com/pages/detail2_cat_est_micro_puis_rubrique_est_w_ven_puis_ref_est_in20020816.html",
    "ref": 49.99,
    "price": 49.99,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     49.99
+    ]
+   ]
   },
   "p1-fans": {
    "url": "https://www.ldlc.com/fiche/PB00658862.html",
    "ref": 24.95,
    "price": 24.95,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     24.95
+    ]
+   ]
   },
   "p1-paste": {
    "url": null,
@@ -59,29 +84,47 @@
   "p1-alt": {
    "url": "https://www.alternate.fr/ZOTAC/GeForce-RTX-5070-Ti-SOLID-OC-SFF-Carte-graphique/html/product/100123137",
    "ref": 1385,
-   "price": 1385,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "price": 1385.0,
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     1385.0
+    ]
+   ]
   },
   "p2-gpu": {
    "url": "https://www.alternate.fr/ZOTAC/GeForce-RTX-5080-SOLID-CORE-OC-Carte-graphique/html/product/100119363",
    "ref": 1939,
-   "price": 1939,
+   "price": 1939.0,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     1939.0
+    ]
+   ]
   },
   "p2-psu": {
    "url": "https://www.ldlc.com/fiche/PB00652458.html",
    "ref": 119.95,
    "price": 119.95,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     119.95
+    ]
+   ]
   },
   "p2-case": {
    "url": "https://www.galaxus.fr/fr/s1/product/fractal-meshify-2-compact-atx-matx-mini-itx-boitier-pc-14654476",
@@ -90,25 +133,38 @@
    "stock": true,
    "checked": "2026-11-27T00:00:00Z",
    "status": "doc",
-   "source": "doc"
+   "source": "doc",
+   "erreur": "HTTPError"
   },
   "p2-cooler": {
    "url": "https://www.topachat.com/pages/detail2_cat_est_micro_puis_rubrique_est_w_ven_puis_ref_est_in20020816.html",
    "ref": 49.99,
    "price": 49.99,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     49.99
+    ]
+   ]
   },
   "p2-fans": {
    "url": "https://www.ldlc.com/fiche/PB00658862.html",
    "ref": 24.95,
    "price": 24.95,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     24.95
+    ]
+   ]
   },
   "p2-paste": {
    "url": null,
@@ -122,29 +178,47 @@
   "p2-alt": {
    "url": "https://www.alternate.fr/ASUS/PRIME-GeForce-RTX-5080-OC-Carte-graphique/html/product/100108203",
    "ref": 2205,
-   "price": 2205,
+   "price": 2205.0,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     2205.0
+    ]
+   ]
   },
   "p3-gpu": {
    "url": "https://www.topachat.com/pages/detail2_cat_est_micro_puis_rubrique_est_wgfx_pcie_puis_ref_est_in20026881.html",
    "ref": 9199.99,
    "price": 9199.99,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     9199.99
+    ]
+   ]
   },
   "p3-psu": {
    "url": "https://www.ldlc.com/fiche/PB00652458.html",
    "ref": 149.95,
-   "price": 149.95,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "price": 119.95,
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     119.95
+    ]
+   ]
   },
   "p3-case": {
    "url": "https://www.galaxus.fr/fr/s1/product/fractal-meshify-2-compact-atx-matx-mini-itx-boitier-pc-14654476",
@@ -153,25 +227,38 @@
    "stock": true,
    "checked": "2026-11-27T00:00:00Z",
    "status": "doc",
-   "source": "doc"
+   "source": "doc",
+   "erreur": "HTTPError"
   },
   "p3-cooler": {
    "url": "https://www.topachat.com/pages/detail2_cat_est_micro_puis_rubrique_est_w_ven_puis_ref_est_in20020816.html",
    "ref": 49.99,
    "price": 49.99,
-   "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "stock": false,
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     49.99
+    ]
+   ]
   },
   "p3-fans": {
    "url": "https://www.ldlc.com/fiche/PB00658862.html",
    "ref": 24.95,
    "price": 24.95,
    "stock": true,
-   "checked": "2026-11-27T00:00:00Z",
-   "status": "doc",
-   "source": "doc"
+   "checked": "2026-11-27T21:23:34Z",
+   "status": "live",
+   "source": "site",
+   "hist": [
+    [
+     "2026-11-27T21:23:34Z",
+     24.95
+    ]
+   ]
   },
   "p3-paste": {
    "url": null,
