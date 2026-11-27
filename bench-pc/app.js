@@ -2,7 +2,7 @@
 var D=window.BENCH,C=window.BENCH2,$=function(i){return document.getElementById(i)};
 var eur=function(n){return n.toLocaleString("fr-FR",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+"\u00a0€"};
 var ls={get:function(k,d){try{var v=localStorage.getItem("benchpc:"+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem("benchpc:"+k,JSON.stringify(v))}catch(e){}}};
-var S={tab:ls.get("tab","config"),pal:ls.get("pal",0),comp:ls.get("comp","gpu"),gpu:ls.get("gpu",0),res:ls.get("res","4k"),resale:ls.get("resale",0)};
+var S={tab:ls.get("tab","config"),pal:ls.get("pal",0),comp:ls.get("comp","gpu"),gpu:ls.get("gpu",0),res:ls.get("res","4k"),bsec:ls.get("bsec","cartes"),garde:ls.get("garde","cpu"),resale:ls.get("resale",0)};
 var P={items:{},updated:null};
 var COMPS=[["gpu","Carte graphique"],["psu","Alimentation"],["case","Boîtier"],["cooler","Refroidissement"],["fans","Ventilateurs"],["paste","Pâte"]];
 var MAPMA={gpu:"gpu",psu:"psu",case:"case",cooler:"cool",fans:"cool",paste:"cool"};
@@ -10,7 +10,6 @@ var ICON={config:'<path d="M4 5h16v11H4zM9 20h6M12 16v4"/>',objectif:'<circle cx
 var TABS=[["config","Ma config"],["objectif","Objectif"],["compo","Pièces"],["bench","Bench"],["goulot","Goulot"],["prix","Prix"]];
 function save(k,v){S[k]=v;ls.set(k,v)}
 function pal(){return D.paliers[S.pal]}
-function gpuName(i){return ["GTX 1070","RTX 5070 Ti","RTX 5080","RTX 5090"][i]}
 function item(p,id){for(var i=0;i<p.items.length;i++)if(p.items[i].id===id)return p.items[i];return null}
 /* prix : valeur relevée si dispo, sinon valeur du document */
 function pr(it){var r=P.items[it.id];
@@ -48,38 +47,52 @@ function vCompo(){var p=pal(),it=item(p,"p"+p.id+"-"+S.comp),m=C.ma.filter(funct
   h+='<div class="card" style="margin-top:12px"><div class="price-line" style="margin-top:0"><span class="big">'+(it.lo===it.hi?eur(x.lo):"env. "+eur(it.lo)+" à "+eur(it.hi))+'</span><span class="pill '+(x.live?"good":"mid")+'">'+(x.live?"Relevé "+ago(x.checked):"Prix du document")+'</span></div>'+
   (it.w?'<div class="note">⚠ '+it.w+'</div>':'')+(it.u?'<a class="btn" href="'+it.u+'" target="_blank" rel="noopener">Voir l\'offre →</a>':'<p class="mute small" style="margin-top:12px">Pas encore choisi : à chercher.</p>')+'</div>';
   var al=S.comp==="gpu"&&p.alt;if(al)h+='<div class="card" style="margin-top:12px"><div class="mute small">Alternative</div><b>'+al.n+'</b> · '+eur(prAlt(al))+'<p class="mute small" style="margin:4px 0">'+al.s+'. '+al.note+'</p><a class="lnk" href="'+al.u+'" target="_blank" rel="noopener">Voir →</a></div>';
-  var tips={gpu:"Vérifier la longueur de la carte dans le boîtier. 16 Go de mémoire vidéo : confortable pour le 4K.",psu:"Puissance recommandée par NVIDIA : "+(C.gpu[gpuName(S.pal+1)].psuReco)+" W minimum pour cette carte.",case:"Mesurer la hauteur maximale de ventirad et la longueur maximale de carte avant de commander.",cooler:"Le Peerless Assassin mesure 155 mm de haut : à comparer à la limite du boîtier.",fans:"Pack de 5 : prévoir le sens du flux (entrée devant, sortie derrière et dessus).",paste:"Refaire la pâte lors du changement de ventirad."};
+  var tips={gpu:"Vérifier la longueur de la carte dans le boîtier. 16 Go de mémoire vidéo : confortable pour le 4K.",psu:"Puissance recommandée par le fabricant : "+G(["RTX 5070 Ti","RTX 5080","RTX 5090"][S.pal]).psu+" W minimum pour cette carte.",case:"Mesurer la hauteur maximale de ventirad et la longueur maximale de carte avant de commander.",cooler:"Le Peerless Assassin mesure 155 mm de haut : à comparer à la limite du boîtier.",fans:"Pack de 5 : prévoir le sens du flux (entrée devant, sortie derrière et dessus).",paste:"Refaire la pâte lors du changement de ventirad."};
   return h+'<div class="note ok">'+tips[S.comp]+'</div>'}
 function prAlt(a){var r=P.items[a.id];return r&&r.source==="site"?r.price:a.p}
 
 /* ===== Bench ===== */
-function vBench(){var max=Math.max.apply(null,C.perf.map(function(x){return x.v}));
-  var h='<h2>Benchmarks</h2><p class="sub">Performance relative en jeu, RTX 5070 Ti = 100. Sources du '+C.bench_date+'.</p><div class="card">'+
-  C.perf.map(function(x,i){var col=x.nom==="GTX 1070"?"#6b7080":["#ffb877","#b9a6ff","#8fd3ff"][i];
-    return '<div><div class="br"><span class="nm">'+x.nom+'</span><div class="track"><div class="fill" data-w="'+(x.v/max*100)+'" style="background:'+col+'"></div></div><span class="v">'+x.v+'</span></div><div class="mute small" style="margin:-6px 0 0 114px">'+x.src+' · fiabilité : '+x.fiab+'</div></div>'}).join("")+'</div>'+
-  '<div class="note">Ces écarts viennent de plusieurs tests différents (jeux, réglages, dates). Ils donnent l\'ordre de grandeur, pas des FPS garantis. L\'écart avec la GTX 1070 est le moins fiable : les sources divergent.</div>'+
-  '<h2 style="margin-top:26px;font-size:20px">Sources</h2><div class="card">'+C.sources.map(function(s){return '<div class="row2"><a class="lnk" href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a></div>'}).join("")+'</div>';return h}
+function G(n){return C.cartes.filter(function(c){return c.n===n})[0]}
+function vBench(){var h='<h2>Benchmarks</h2><p class="sub">Cartes proposées et pièces que je garde. Sources du '+C.bench_date+'.</p>'+seg([["cartes","Cartes graphiques"],["gardes","Pièces que je garde"]],S.bsec,"bsec");
+  if(S.bsec==="gardes")return h+vGardes();
+  var withPerf=C.cartes.filter(function(c){return c.perf!=null}).sort(function(a,b){return b.perf-a.perf}),max=withPerf[0].perf;
+  var col=function(c){return c.actuel?"#6b7080":c.m==="AMD"?"#ff8a7a":"#8fd3ff"};
+  h+='<div class="card"><div class="mute small" style="margin-bottom:6px">Performance relative en jeu 4K · RTX 5070 Ti = 100 · bleu NVIDIA, rouge AMD</div>'+withPerf.map(function(c){
+    return '<div><div class="br"><span class="nm">'+c.n+'</span><div class="track"><div class="fill" data-w="'+(c.perf/max*100)+'" style="background:'+col(c)+'"></div></div><span class="v">'+c.perf+'</span></div><div class="mute small" style="margin:-6px 0 0 114px">'+c.src+' · fiabilité : '+c.fiab+'</div></div>'}).join("")+'</div>'+
+  '<div class="note">Ces écarts viennent de tests différents (jeux, réglages, dates). Ils donnent l\'ordre de grandeur, pas des FPS garantis. Les chiffres de la GTX 1070 et de la RTX 5070 sont les moins fiables.</div>'+
+  '<h2 style="margin-top:26px;font-size:20px">Toutes les cartes</h2><p class="sub">Fiche technique. Aucun prix inventé : ceux des paliers sont plus haut, les autres sont à relever.</p><div class="grid g2">'+C.cartes.map(function(c){
+    var low=c.vram<16;return '<div class="card"><div class="top" style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:17px">'+c.n+'</b>'+(c.actuel?'<span class="pill change">Actuelle</span>':low?'<span class="pill bad">Moins de 16 Go</span>':'<span class="pill good">16 Go ou +</span>')+'</div>'+
+    '<div class="row2"><span class="mute">Mémoire</span><span class="r">'+c.vram+' Go '+c.type+'</span></div><div class="row2"><span class="mute">Bus</span><span class="r">'+c.bus+' bits</span></div><div class="row2"><span class="mute">Consommation</span><span class="r">'+c.w+' W</span></div><div class="row2"><span class="mute">Alim conseillée</span><span class="r">'+c.psu+' W</span></div><div class="row2"><span class="mute">Perf. relative</span><span class="r">'+(c.perf!=null?c.perf:"non sourcée")+'</span></div></div>'}).join("")+'</div>'+
+  '<h2 style="margin-top:26px;font-size:20px">Sources</h2><div class="card">'+C.sources.map(function(x){return '<div class="row2"><a class="lnk" href="'+x[1]+'" target="_blank" rel="noopener">'+x[0]+'</a></div>'}).join("")+'</div>';return h}
+function vGardes(){var sel=C.gardes.filter(function(g){return g.id===S.garde})[0]||C.gardes[0];
+  var order=C.gardes.slice().sort(function(a,b){return a.prio-b.prio});
+  var h='<div class="note ok"><b>Ordre conseillé pour améliorer</b><br>'+order.map(function(g,i){return (i+1)+". "+g.nom}).join(" · ")+' <span class="mute">(après la carte graphique et l\'alimentation)</span></div>'+
+  seg(C.gardes.map(function(g){return [g.id,g.nom]}),sel.id,"garde");
+  h+='<div class="card"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b style="font-size:19px">'+sel.actuel+'</b><span class="pill '+(sel.prio<=2?"good":"mid")+'">Gain : '+sel.gain+'</span></div><p class="mute small" style="margin:6px 0 0">'+sel.sock+'</p><p style="margin-top:10px">'+sel.note+'</p></div>';
+  if(sel.opts.length){h+='<div class="card" style="margin-top:12px"><div class="sh mute small" style="margin-bottom:6px">Comparatif</div>'+sel.opts.map(function(o){return '<div class="row2"><span><b>'+o.n+'</b>'+(o.actuel?' <span class="pill change">Actuel</span>':'')+'<br><span class="mute small">'+o.c+'</span></span><span class="r mute small">'+o.f+(o.w?'<br>'+o.w+' W max':'')+'</span></div>'}).join("")+'</div>'}
+  h+='<div class="note">'+sel.verdict+'</div>';
+  if(sel.src.length)h+='<div class="card" style="margin-top:12px">'+sel.src.map(function(x){return '<div class="row2"><a class="lnk" href="'+x[1]+'" target="_blank" rel="noopener">'+x[0]+'</a></div>'}).join("")+'</div>';
+  return h}
 
 /* ===== Goulot ===== */
-function psuW(){var p=pal();var m=item(p,"p"+p.id+"-psu").n.match(/(\d{3,4})\s*W/);return m?+m[1]:650}
-function vGoulot(){var g=gpuName(S.gpu),spec=C.gpu[g];var cur=S.gpu===0;var psu=cur?650:Math.max(psuW(),0);
+function vGoulot(){var spec=C.cartes[Math.min(S.gpu,C.cartes.length-1)],g=spec.n,cur=!!spec.actuel,psu=650;
   var load=spec.w+C.cpuW+C.autresW,pct=Math.round(load/psu*100);var pc=pct>85?"bad":pct>75?"mid":"good";
-  var res=S.res;var gpuBound=res==="4k"||(res==="1440p"&&S.gpu<3)||(res==="1080p"&&S.gpu===0);
+  var res=S.res;var strong=spec.perf!=null&&spec.perf>=114;
+  var gpuBound=res==="4k"||(res==="1440p"&&!strong)||(res==="1080p"&&cur);
   var items=[];
   items.push({t:"Carte graphique",c:gpuBound?(cur?"bad":"mid"):"good",d:gpuBound?(cur?"La carte limite presque tout en "+res.toUpperCase()+" : le processeur attend la GTX 1070.":"En "+res.toUpperCase()+", c'est la carte qui fixe les FPS, pas le processeur. C'est le comportement voulu."):"En "+res.toUpperCase()+" avec la "+g+", le processeur peut commencer à limiter. Règle générale, pas une mesure."});
-  items.push({t:"Mémoire vidéo ("+spec.vram+" Go)",c:spec.vram<=8?"bad":spec.vram<16?"mid":"good",d:spec.vram<=8?"8 Go est souvent insuffisant en 4K avec textures élevées : risque de saccades.":"Suffisant pour le 4K sur les jeux actuels."});
-  items.push({t:"Alimentation ("+psu+" W)",c:pc,d:"Charge estimée "+load+" W ("+spec.w+" carte + "+C.cpuW+" processeur max + "+C.autresW+" reste) soit "+pct+" % de l'alim. "+(psu<spec.psuReco?"NVIDIA recommande "+spec.psuReco+" W : l'alim actuelle est trop juste.":"Marge correcte.")});
-  items.push({t:"Processeur i5-14600KF",c:"good",d:"14 cœurs, largement suffisant pour le 4K. À surveiller seulement en 1080p avec une 5090."});
-  items.push({t:"Mémoire DDR5 32 Go",c:"good",d:"Aucun frein pour le jeu."});
+  items.push({t:"Mémoire vidéo ("+spec.vram+" Go)",c:spec.vram<=8?"bad":spec.vram<16?"mid":"good",d:spec.vram<=8?"8 Go est souvent insuffisant en 4K avec textures élevées : risque de saccades.":spec.vram<16?"12 Go : juste pour le 4K, et sous ton minimum de 16 Go.":"Suffisant pour le 4K sur les jeux actuels."});
+  items.push({t:"Alimentation actuelle (650 W)",c:pc,d:"Charge estimée "+load+" W ("+spec.w+" carte + "+C.cpuW+" processeur max + "+C.autresW+" reste) soit "+pct+" % de l'alim. "+(spec.psu>650?"Le fabricant conseille "+spec.psu+" W : à remplacer.":"Marge correcte.")});
+  items.push({t:"Processeur i5-14600KF",c:"good",d:"14 cœurs, largement suffisant pour le 4K. À surveiller seulement en 1080p avec une carte très rapide."});
+  items.push({t:"Mémoire DDR5 32 Go",c:"good",d:"Aucun frein pour le jeu. Vérifie que XMP/EXPO est activé."});
   items.push({t:"Carte mère B760",c:"mid",d:"Pas un frein de performance, mais le BIOS doit être à jour pour la stabilité des 13e/14e générations."});
   var worst=items.filter(function(i){return i.c==="bad"});
   var lab={bad:"Limite",mid:"À surveiller",good:"OK"};
-  var h='<h2>Goulots d\'étranglement</h2><p class="sub">Où ma config se fait freiner, selon la carte et la résolution.</p>'+
-  seg([[0,"GTX 1070 (actuel)"],[1,"RTX 5070 Ti"],[2,"RTX 5080"],[3,"RTX 5090"]],S.gpu,"gpu")+seg([["1080p","1080p"],["1440p","1440p"],["4k","4K"]],S.res,"res")+
+  return '<h2>Goulots d\'étranglement</h2><p class="sub">Où ma config se fait freiner, selon la carte et la résolution.</p>'+
+  seg(C.cartes.map(function(c,i){return [i,c.actuel?c.n+" (actuel)":c.n]}),S.gpu,"gpu")+seg([["1080p","1080p"],["1440p","1440p"],["4k","4K"]],S.res,"res")+
   '<div class="note '+(worst.length?"bad":"ok")+'"><b>'+(worst.length?worst.length+" maillon"+(worst.length>1?"s":"")+" limitant"+(worst.length>1?"s":""):"Aucun maillon bloquant")+'</b><br>'+(worst.length?worst.map(function(w){return w.t}).join(" · "):"Cette configuration est équilibrée pour "+res.toUpperCase()+".")+'</div>'+
-  '<div class="card gauge" style="margin-top:12px"><div class="lab"><span>Charge de l\'alimentation</span><b>'+load+' / '+psu+' W</b></div><div class="track"><div class="fill" data-w="'+Math.min(pct,100)+'" style="background:'+(pc==="bad"?"var(--warn)":pc==="mid"?"var(--a3)":"var(--ok)")+'"></div></div><div class="mute small">Estimation : puissance max de la carte + processeur à pleine charge + 75 W pour le reste. Pas une mesure.</div></div>'+
-  items.map(function(i){return '<div class="verdict"><span class="pill '+i.c+'">'+lab[i.c]+'</span><div><b>'+i.t+'</b>'+i.d+'</div></div>'}).join("");
-  return h}
+  '<div class="card gauge" style="margin-top:12px"><div class="lab"><span>Charge de l\'alimentation actuelle</span><b>'+load+' / '+psu+' W</b></div><div class="track"><div class="fill" data-w="'+Math.min(pct,100)+'" style="background:'+(pc==="bad"?"var(--warn)":pc==="mid"?"var(--a3)":"var(--ok)")+'"></div></div><div class="mute small">Estimation : puissance max de la carte + processeur à pleine charge + 75 W pour le reste. Pas une mesure.</div></div>'+
+  items.map(function(i){return '<div class="verdict"><span class="pill '+i.c+'">'+lab[i.c]+'</span><div><b>'+i.t+'</b>'+i.d+'</div></div>'}).join("")}
 
 /* ===== Prix ===== */
 function vPrix(){var p=pal();var rows=p.items.slice();var h='<h2>Prix</h2><p class="sub">'+(live()?"Relevé automatique toutes les heures, quand les sites répondent.":"Pour l'instant : prix du document du "+D.releve+". Le relevé automatique n'a pas encore lu de page.")+'</p>'+palSeg();
