@@ -4,7 +4,7 @@ window.BENCH = {
   actuel: { cpu: "Intel Core i5-14600KF", gpu: "GTX 1070 (8 Go)", psu: "Corsair 650 W", ram: "32 Go DDR5", carte: "Carte mère B760" },
   gardes: [
     ["Processeur", "i5-14600KF", "Suffisant pour le 4K : le GPU est le facteur limitant."],
-    ["Carte mère", "B760", "Mettre le BIOS à jour pour la stabilité des 13e et 14e générations."],
+    ["Carte mère", "B760", "BIOS déjà à jour : stabilité des 13e et 14e générations couverte."],
     ["Mémoire", "32 Go DDR5", "Suffisant."],
     ["Stockage", "Inchangé", "Pas de changement prévu."]
   ],
@@ -57,7 +57,6 @@ window.BENCH = {
     "Vérifier la longueur de la carte graphique et de l'alimentation par rapport au boîtier.",
     "Le Peerless Assassin mesure 155 mm de haut : vérifier la hauteur maximale admise par le boîtier.",
     "Le Meshify 2 Compact n'est plus vendu chez LDLC, mais il est en stock chez Galaxus.",
-    "Dépoussiérer filtres et ventilateurs, et contrôler les températures avec HWiNFO avant et après.",
-    "Mettre à jour le BIOS de la B760 avant d'installer la nouvelle carte."
+    "Dépoussiérer filtres et ventilateurs, et contrôler les températures avec HWiNFO avant et après."
   ]
 };

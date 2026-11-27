@@ -5,7 +5,7 @@ window.BENCH2 = {
     { id: "gpu", nom: "Carte graphique", val: "GTX 1070 · 8 Go GDDR5", detail: "150 W, architecture Pascal (2016), sans DLSS ni ray tracing matériel", statut: "change", note: "Le maillon faible pour le 4K." },
     { id: "psu", nom: "Alimentation", val: "Corsair 650 W", detail: "Marge trop juste avec une RTX 5070 Ti ou plus", statut: "change", note: "À remplacer en même temps que la carte." },
     { id: "ram", nom: "Mémoire", val: "32 Go DDR5", detail: "Largement suffisant pour le jeu", statut: "garde", note: "Pas de changement." },
-    { id: "mb", nom: "Carte mère", val: "Chipset B760", detail: "Prévoir une mise à jour du BIOS (stabilité 13e/14e génération)", statut: "garde", note: "Mettre le BIOS à jour avant tout." },
+    { id: "mb", nom: "Carte mère", val: "Chipset B760", detail: "BIOS à jour (stabilité des 13e/14e générations)", statut: "garde", note: "Rien à faire." },
     { id: "case", nom: "Boîtier", val: "Actuel", detail: "Dimensions à mesurer : longueur de carte, hauteur de ventirad", statut: "change", note: "Remplacé dans le plan." },
     { id: "cool", nom: "Refroidissement CPU", val: "Actuel", detail: "Le 14600KF chauffe : un bon ventirad compte", statut: "change", note: "Remplacé dans le plan." },
     { id: "ssd", nom: "Stockage", val: "Inchangé", detail: "Non concerné ici", statut: "garde", note: "Pas de changement prévu." }
@@ -53,7 +53,7 @@ window.BENCH2 = {
         { n: "B760 (actuel)", c: "mémoire OC oui, CPU OC non", f: "PCIe 4.0 / 5.0 selon carte", w: 0, actuel: true },
         { n: "Z790", c: "CPU + mémoire OC", f: "plus de voies PCIe et USB", w: 0 }
       ],
-      verdict: "Pas un goulot pour le jeu. Priorité : mettre le BIOS à jour pour la stabilité des 13e/14e générations.",
+      verdict: "Pas un goulot pour le jeu, et le BIOS est déjà à jour. Rien à faire sur cette pièce.",
       src: [] },
     { id: "ssd", nom: "Stockage", actuel: "Non précisé", prio: 6, gain: "Temps de chargement seulement", sock: "M.2 / SATA",
       note: "Dis-moi le modèle de ton SSD pour que je le compare. Un SSD plus rapide change surtout les temps de chargement, pas les FPS.",

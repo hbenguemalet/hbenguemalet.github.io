@@ -85,7 +85,7 @@ function vGoulot(){var spec=C.cartes[Math.min(S.gpu,C.cartes.length-1)],g=spec.n
   items.push({t:"Alimentation actuelle (650 W)",c:pc,d:"Charge estimée "+load+" W ("+spec.w+" carte + "+C.cpuW+" processeur max + "+C.autresW+" reste) soit "+pct+" % de l'alim. "+(spec.psu>650?"Le fabricant conseille "+spec.psu+" W : à remplacer.":"Marge correcte.")});
   items.push({t:"Processeur i5-14600KF",c:"good",d:"14 cœurs, largement suffisant pour le 4K. À surveiller seulement en 1080p avec une carte très rapide."});
   items.push({t:"Mémoire DDR5 32 Go",c:"good",d:"Aucun frein pour le jeu. Vérifie que XMP/EXPO est activé."});
-  items.push({t:"Carte mère B760",c:"mid",d:"Pas un frein de performance, mais le BIOS doit être à jour pour la stabilité des 13e/14e générations."});
+  items.push({t:"Carte mère B760",c:"good",d:"Pas un frein de performance. BIOS à jour : la stabilité des 13e/14e générations est couverte."});
   var worst=items.filter(function(i){return i.c==="bad"});
   var lab={bad:"Limite",mid:"À surveiller",good:"OK"};
   return '<h2>Goulots d\'étranglement</h2><p class="sub">Où ma config se fait freiner, selon la carte et la résolution.</p>'+
