@@ -2,27 +2,40 @@
 var D=window.BENCH,C=window.BENCH2,$=function(i){return document.getElementById(i)};
 var eur=function(n){return n.toLocaleString("fr-FR",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+"\u00a0€"};
 var ls={get:function(k,d){try{var v=localStorage.getItem("benchpc:"+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem("benchpc:"+k,JSON.stringify(v))}catch(e){}}};
-var S={tab:ls.get("tab","config"),pal:ls.get("pal",0),comp:ls.get("comp","gpu"),gpu:ls.get("gpu",0),res:ls.get("res","4k"),bsec:ls.get("bsec","cartes"),garde:ls.get("garde","cpu"),resale:ls.get("resale",0)};
+var S={tab:ls.get("tab","config"),card:ls.get("card","RTX 5070 Ti"),comp:ls.get("comp","gpu"),gpu:ls.get("gpu",0),res:ls.get("res","4k"),bsec:ls.get("bsec","cartes"),garde:ls.get("garde","cpu"),resale:ls.get("resale",0)};
 var P={items:{},updated:null};
 var COMPS=[["gpu","Carte graphique"],["psu","Alimentation"],["case","Boîtier"],["cooler","Refroidissement"],["fans","Ventilateurs"],["paste","Pâte"]];
 var MAPMA={gpu:"gpu",psu:"psu",case:"case",cooler:"cool",fans:"cool",paste:"cool"};
 var ICON={config:'<path d="M4 5h16v11H4zM9 20h6M12 16v4"/>',objectif:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/>',compo:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>',bench:'<path d="M5 20V10M12 20V4M19 20v-7"/>',goulot:'<path d="M4 5h16l-6 7v6l-4 2v-8z"/>',prix:'<path d="M3 12l9-9h8v8l-9 9z"/><circle cx="15.5" cy="8.5" r="1.3"/>'};
 var TABS=[["config","Ma config"],["objectif","Objectif"],["compo","Pièces"],["bench","Bench"],["goulot","Goulot"],["prix","Prix"]];
 function save(k,v){S[k]=v;ls.set(k,v)}
-function pal(){return D.paliers[S.pal]}
-function item(p,id){for(var i=0;i<p.items.length;i++)if(p.items[i].id===id)return p.items[i];return null}
+var TIER=["RTX 5070 Ti","RTX 5080","RTX 5090"];
+function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,"-")}
+function manual(n){return +ls.get("gpuprice:"+n,0)||0}
+function G(n){return C.cartes.filter(function(c){return c.n===n})[0]}
+function item(p,k){for(var i=0;i<p.items.length;i++){var id=p.items[i].id;if(id.slice(-k.length-1)==="-"+k)return p.items[i]}return null}
+/* l'ensemble d'achat dépend de la carte choisie : paliers du document pour 5070 Ti/5080/5090, sinon même base avec l'alim conseillée */
+function pal(){var n=S.card,ti=TIER.indexOf(n);if(ti>=0)return D.paliers[ti];
+  var g=G(n)||G(TIER[0]),mp=manual(g.n),psuP=D.paliers[g.psu<=750?0:g.psu<=850?1:2];
+  return {id:0,nom:g.n,sous:g.vram+" Go "+g.type,cible:"à calculer",accent:"#8fd3ff",custom:true,alt:null,
+    items:D.paliers[0].items.map(function(it){
+      if(it.k==="Carte graphique")return {id:"x-"+slug(g.n)+"-gpu",k:"Carte graphique",n:g.n,lo:mp,hi:mp,s:mp?"prix saisi par toi":"prix à relever",u:null,inconnu:!mp};
+      if(it.k==="Alimentation")return psuP.items[1];
+      return it})}}
 /* prix : valeur relevée si dispo, sinon valeur du document */
-function pr(it){var r=P.items[it.id];
+function pr(it){if(it.inconnu)return{lo:0,hi:0,live:false,unknown:true};var r=P.items[it.id];
   if(it.lo!==it.hi&&!(r&&r.source==="site"))return{lo:it.lo,hi:it.hi,live:false};
   if(r&&r.source==="site")return{lo:r.price,hi:r.price,live:true,stock:r.stock,checked:r.checked};
   return{lo:it.lo,hi:it.hi,live:false}}
 function total(p){var lo=0,hi=0;p.items.forEach(function(i){var x=pr(i);lo+=x.lo;hi+=x.hi});return{lo:lo,hi:hi}}
+function tl(p,t){return p.items.some(function(i){return i.inconnu})?eur(Math.round(t.lo))+" + carte":rng(t)}
 function rng(t){return t.lo===t.hi?eur(t.lo):eur(Math.round(t.lo))+" – "+eur(Math.round(t.hi))}
 function ago(iso){var m=Math.round((Date.now()-new Date(iso))/60000);if(m<2)return "à l'instant";if(m<60)return "il y a "+m+" min";var h=Math.round(m/60);if(h<48)return "il y a "+h+" h";return "il y a "+Math.round(h/24)+" j"}
 function fmtDate(iso){return new Date(iso).toLocaleString("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}
 function seg(arr,cur,key,cls){return '<div class="seg '+(cls||"")+'">'+arr.map(function(a){return '<button data-k="'+key+'" data-v="'+a[0]+'" class="'+(String(a[0])===String(cur)?"on":"")+'">'+a[1]+'</button>'}).join("")+'</div>'}
 function bars(){requestAnimationFrame(function(){requestAnimationFrame(function(){document.querySelectorAll(".view.on .fill").forEach(function(f){f.style.width=f.dataset.w+"%"})})})}
-function palSeg(){return seg(D.paliers.map(function(p,i){return [i,"Palier "+p.id+" · "+p.nom]}),S.pal,"pal","pal")}
+function palSeg(){return seg(C.cartes.filter(function(c){return !c.actuel}).map(function(c){return [c.n,c.n]}),S.card,"card")}
+function gpuInput(p){return p.custom?'<div class="row2"><span>Prix de la '+p.nom+' (€), à saisir</span><input id="gpuprice" type="number" inputmode="numeric" min="0" placeholder="0" value="'+(manual(p.nom)||"")+'" style="width:100px;background:#101217;border:1px solid var(--line);border-radius:10px;padding:9px 10px;color:var(--fg);font-size:16px"></div>':""}
 
 /* ===== Ma config ===== */
 function vConfig(){
@@ -32,27 +45,26 @@ function vConfig(){
 
 /* ===== Objectif ===== */
 function vObjectif(){var p=pal(),t=total(p);var r=S.resale;var net={lo:Math.max(0,t.lo-r),hi:Math.max(0,t.hi-r)};
-  return '<h2>Ce que je dois avoir</h2><p class="sub">Choisis un palier : tout le site se cale dessus.</p>'+palSeg()+
-  '<div class="card"><div class="mute small">Budget annoncé '+p.cible+'</div><div class="big" style="color:'+p.accent+'">'+rng(t)+'</div><div class="mute small">total estimé · '+p.sous+'</div>'+
+  return '<h2>Ce que je dois avoir</h2><p class="sub">Choisis une carte : tout le site se cale dessus (alimentation comprise).</p>'+palSeg()+
+  '<div class="card"><div class="mute small">'+(p.custom?(manual(p.nom)?'Total avec la carte à ton prix':'Total hors carte graphique, tant que son prix n\'est pas saisi'):'Budget annoncé '+p.cible)+'</div><div class="big" style="color:'+p.accent+'">'+tl(p,t)+'</div><div class="mute small">total estimé · '+p.sous+'</div>'+gpuInput(p)+
   '<div class="row2" style="margin-top:14px"><span>Revente de la 1070 et de l\'alim (€)</span><input id="resale" type="number" inputmode="numeric" min="0" placeholder="0" value="'+(r||"")+'" style="width:100px;background:#101217;border:1px solid var(--line);border-radius:10px;padding:9px 10px;color:var(--fg);font-size:16px"></div>'+
-  (r?'<div class="row2"><span>Total après revente</span><span class="r"><b>'+rng(net)+'</b></span></div>':'')+'</div>'+
+  (r?'<div class="row2"><span>Total après revente</span><span class="r"><b>'+tl(p,net)+'</b></span></div>':'')+'</div>'+
   '<h2 style="margin-top:26px;font-size:20px">À acheter</h2><div class="grid">'+p.items.map(function(it){var x=pr(it);
-    return '<div class="card"><div class="mute small">'+it.k+'</div><b style="font-size:17px">'+it.n+'</b><div class="price-line"><span class="big" style="font-size:24px">'+(it.lo===it.hi?eur(x.lo):"env. "+eur(it.lo)+" à "+eur(it.hi))+'</span><span class="small mute">'+(x.live?"relevé "+ago(x.checked):it.s)+'</span></div></div>'}).join("")+'</div>'+
+    return '<div class="card"><div class="mute small">'+it.k+'</div><b style="font-size:17px">'+it.n+'</b><div class="price-line"><span class="big" style="font-size:24px">'+(it.inconnu?'À relever':it.lo===it.hi?eur(x.lo):"env. "+eur(it.lo)+" à "+eur(it.hi))+'</span><span class="small mute">'+(x.live?"relevé "+ago(x.checked):it.s)+'</span></div></div>'}).join("")+'</div>'+
   '<h2 style="margin-top:26px;font-size:20px">Je garde</h2><div class="card">'+D.gardes.map(function(g){return '<div class="row2"><span><b>'+g[0]+'</b><br><span class="mute small">'+g[2]+'</span></span><span class="r">'+g[1]+'</span></div>'}).join("")+'</div>'}
 
 /* ===== Pièces ===== */
-function vCompo(){var p=pal(),it=item(p,"p"+p.id+"-"+S.comp),m=C.ma.filter(function(c){return c.id===MAPMA[S.comp]})[0];var x=pr(it);
+function vCompo(){var p=pal(),it=item(p,S.comp),m=C.ma.filter(function(c){return c.id===MAPMA[S.comp]})[0];var x=pr(it);
   var h='<h2>Pièce par pièce</h2><p class="sub">Ce que j\'ai contre ce que je dois avoir.</p>'+palSeg()+seg(COMPS,S.comp,"comp");
   h+='<div class="vs"><div class="c"><small>Actuel</small><b>'+(S.comp==="gpu"?C.ma[1].val:S.comp==="psu"?C.ma[2].val:m.val)+'</b><span class="mute small">'+(S.comp==="gpu"?C.ma[1].detail:S.comp==="psu"?C.ma[2].detail:m.detail)+'</span></div><div class="c t"><small>Cible</small><b>'+it.n+'</b><span class="mute small">'+it.s+'</span></div></div>';
-  h+='<div class="card" style="margin-top:12px"><div class="price-line" style="margin-top:0"><span class="big">'+(it.lo===it.hi?eur(x.lo):"env. "+eur(it.lo)+" à "+eur(it.hi))+'</span><span class="pill '+(x.live?"good":"mid")+'">'+(x.live?"Relevé "+ago(x.checked):"Prix du document")+'</span></div>'+
-  (it.w?'<div class="note">⚠ '+it.w+'</div>':'')+(it.u?'<a class="btn" href="'+it.u+'" target="_blank" rel="noopener">Voir l\'offre →</a>':'<p class="mute small" style="margin-top:12px">Pas encore choisi : à chercher.</p>')+'</div>';
+  h+='<div class="card" style="margin-top:12px"><div class="price-line" style="margin-top:0"><span class="big">'+(it.inconnu?'À relever':it.lo===it.hi?eur(x.lo):"env. "+eur(it.lo)+" à "+eur(it.hi))+'</span><span class="pill '+(x.live?"good":"mid")+'">'+(x.live?"Relevé "+ago(x.checked):"Prix du document")+'</span></div>'+
+  (S.comp==='gpu'?gpuInput(p):'')+(it.w?'<div class="note">⚠ '+it.w+'</div>':'')+(it.u?'<a class="btn" href="'+it.u+'" target="_blank" rel="noopener">Voir l\'offre →</a>':'<p class="mute small" style="margin-top:12px">'+(S.comp==='gpu'?'Aucun lien : prix et stock à relever chez Alternate, LDLC ou Topachat.':'Pas encore choisi : à chercher.')+'</p>')+'</div>';
   var al=S.comp==="gpu"&&p.alt;if(al)h+='<div class="card" style="margin-top:12px"><div class="mute small">Alternative</div><b>'+al.n+'</b> · '+eur(prAlt(al))+'<p class="mute small" style="margin:4px 0">'+al.s+'. '+al.note+'</p><a class="lnk" href="'+al.u+'" target="_blank" rel="noopener">Voir →</a></div>';
-  var tips={gpu:"Vérifier la longueur de la carte dans le boîtier. 16 Go de mémoire vidéo : confortable pour le 4K.",psu:"Puissance recommandée par le fabricant : "+G(["RTX 5070 Ti","RTX 5080","RTX 5090"][S.pal]).psu+" W minimum pour cette carte.",case:"Mesurer la hauteur maximale de ventirad et la longueur maximale de carte avant de commander.",cooler:"Le Peerless Assassin mesure 155 mm de haut : à comparer à la limite du boîtier.",fans:"Pack de 5 : prévoir le sens du flux (entrée devant, sortie derrière et dessus).",paste:"Refaire la pâte lors du changement de ventirad."};
+  var tips={gpu:"Vérifier la longueur de la carte dans le boîtier. "+G(S.card).vram+" Go de mémoire vidéo ("+G(S.card).type+"), "+G(S.card).w+" W.",psu:"Puissance recommandée par le fabricant : "+G(S.card).psu+" W minimum pour cette carte.",case:"Mesurer la hauteur maximale de ventirad et la longueur maximale de carte avant de commander.",cooler:"Le Peerless Assassin mesure 155 mm de haut : à comparer à la limite du boîtier.",fans:"Pack de 5 : prévoir le sens du flux (entrée devant, sortie derrière et dessus).",paste:"Refaire la pâte lors du changement de ventirad."};
   return h+'<div class="note ok">'+tips[S.comp]+'</div>'}
 function prAlt(a){var r=P.items[a.id];return r&&r.source==="site"?r.price:a.p}
 
 /* ===== Bench ===== */
-function G(n){return C.cartes.filter(function(c){return c.n===n})[0]}
 function vBench(){var h='<h2>Benchmarks</h2><p class="sub">Cartes proposées et pièces que je garde. Sources du '+C.bench_date+'.</p>'+seg([["cartes","Cartes graphiques"],["gardes","Pièces que je garde"]],S.bsec,"bsec");
   if(S.bsec==="gardes")return h+vGardes();
   var withPerf=C.cartes.filter(function(c){return c.perf!=null}).sort(function(a,b){return b.perf-a.perf}),max=withPerf[0].perf;
@@ -99,8 +111,8 @@ function vPrix(){var p=pal();var rows=p.items.slice();var h='<h2>Prix</h2><p cla
   var deals=[];
   h+='<div class="card">'+rows.map(function(it){var x=pr(it),r=P.items[it.id]||{},ref=r.ref||it.lo;var d=x.live&&it.lo===it.hi?x.lo-ref:0;if(d<=-ref*0.03)deals.push([it,x.lo,ref]);
     var st=x.live?'<span class="pill good">Relevé '+ago(x.checked)+'</span>':'<span class="pill mid">Document</span>';
-    return '<div class="row2"><span><b>'+it.k+'</b><br><span class="mute small">'+it.n+'</span><br>'+st+(x.live&&x.stock===false?' <span class="pill bad">Rupture</span>':'')+'</span><span class="r"><b>'+(it.lo===it.hi?eur(x.lo):eur(it.lo)+" – "+eur(it.hi))+'</b>'+(d?'<br><span class="delta '+(d<0?"dn":"up")+' small">'+(d<0?"":"+")+eur(Math.round(d*100)/100)+' vs doc</span>':'')+(it.u?'<br><a class="lnk small" href="'+it.u+'" target="_blank" rel="noopener">Voir →</a>':'')+'</span></div>'}).join("")+
-  '<div class="row2"><b>Total</b><span class="r"><b>'+rng(total(p))+'</b></span></div></div>';
+    return '<div class="row2"><span><b>'+it.k+'</b><br><span class="mute small">'+it.n+'</span><br>'+st+(x.live&&x.stock===false?' <span class="pill bad">Rupture</span>':'')+'</span><span class="r"><b>'+(it.inconnu?'À relever':it.lo===it.hi?eur(x.lo):eur(it.lo)+" – "+eur(it.hi))+'</b>'+(d?'<br><span class="delta '+(d<0?"dn":"up")+' small">'+(d<0?"":"+")+eur(Math.round(d*100)/100)+' vs doc</span>':'')+(it.u?'<br><a class="lnk small" href="'+it.u+'" target="_blank" rel="noopener">Voir →</a>':'')+'</span></div>'}).join("")+
+  '<div class="row2"><b>Total</b><span class="r"><b>'+tl(p,total(p))+'</b></span></div></div>';
   if(deals.length)h+='<div class="note ok"><b>Baisse détectée</b><br>'+deals.map(function(d){return d[0].k+" : "+eur(d[1])+" au lieu de "+eur(d[2])}).join("<br>")+'</div>';
   h+='<h2 style="margin-top:26px;font-size:20px">Bons plans</h2><div class="grid">'+D.bonsPlans.map(function(b){return '<div class="card"><span class="pill '+(b.warn?"bad":"good")+'">'+b.tag+'</span><b style="display:block;margin:10px 0 4px;font-size:17px">'+b.t+'</b><span class="big" style="font-size:26px">'+b.p+'</span><p class="mute small" style="margin-top:6px">'+b.d+'</p>'+(b.u?'<a class="lnk small" href="'+b.u+'" target="_blank" rel="noopener">Voir l\'offre →</a>':'')+'</div>'}).join("")+'</div>';
   return h}
@@ -110,6 +122,7 @@ var V={config:vConfig,objectif:vObjectif,compo:vCompo,bench:vBench,goulot:vGoulo
 function render(){
   TABS.forEach(function(t){var v=$("v-"+t[0]);var on=t[0]===S.tab;v.classList.toggle("on",on);if(on)v.innerHTML=V[t[0]]()});
   document.querySelectorAll("#tabbar button").forEach(function(b){b.classList.toggle("on",b.dataset.t===S.tab)});
+  var gp=$("gpuprice");if(gp)gp.addEventListener("input",function(e){ls.set("gpuprice:"+S.card,Math.max(0,+e.target.value||0));var pos=e.target.selectionStart;render();var n=$("gpuprice");n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}});
   var r=$("resale");if(r)r.addEventListener("input",function(e){save("resale",Math.max(0,+e.target.value||0));var pos=e.target.selectionStart;render();var n=$("resale");n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}});
   bars();
 }
