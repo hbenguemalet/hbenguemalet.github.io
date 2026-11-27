@@ -1,5 +1,5 @@
 // Service worker : réseau d'abord (données toujours fraîches), cache en secours hors ligne.
-const CACHE = "benchpc-v2";
+const CACHE = "benchpc-v3";
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil(
   caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))
