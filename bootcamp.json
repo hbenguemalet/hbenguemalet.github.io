@@ -68,8 +68,7 @@
     "DAX",
     "DAX temporel",
     "Visuels · segments · drill-through",
-    "Rapports multi-pages",
-    "RLS · optimisation"
+    "Rapports multi-pages"
    ]
   },
   {
@@ -92,7 +91,7 @@
  "phases": [
   {
    "nom": "Excel & SQL",
-   "pct": 16,
+   "pct": 17,
    "etat": "en cours"
   },
   {
