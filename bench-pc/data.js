@@ -52,9 +52,6 @@ window.BENCH = {
     { t: "Alternative 5080 : ASUS PRIME RTX 5080 OC", p: "2 205 €", d: "En stock chez Alternate, pour comparer avec la Zotac à 1 939 €.", u: "https://www.alternate.fr/ASUS/PRIME-GeForce-RTX-5080-OC-Carte-graphique/html/product/100108203", tag: "Option" },
     { t: "RTX 5090 : à ne pas acheter à ce prix", p: "9 199,99 €", d: "Prix conseillé : 2 099 €. Il est raisonnable d'attendre une baisse.", u: null, tag: "Attendre", warn: true }
   ],
-  // FPS 4K : à remplir uniquement avec des mesures sourcées (site, date, version du test).
-  jeux: ["Cyberpunk 2077", "Alan Wake 2", "Black Myth: Wukong", "Stalker 2", "Battlefield 6", "Monster Hunter Wilds", "Indiana Jones"],
-  fps: {},
   verifs: [
     "Le stock et les prix peuvent changer entre le relevé et la commande.",
     "Vérifier la longueur de la carte graphique et de l'alimentation par rapport au boîtier.",

@@ -58,10 +58,6 @@ function vBench(){var max=Math.max.apply(null,C.perf.map(function(x){return x.v}
   C.perf.map(function(x,i){var col=x.nom==="GTX 1070"?"#6b7080":["#ffb877","#b9a6ff","#8fd3ff"][i];
     return '<div><div class="br"><span class="nm">'+x.nom+'</span><div class="track"><div class="fill" data-w="'+(x.v/max*100)+'" style="background:'+col+'"></div></div><span class="v">'+x.v+'</span></div><div class="mute small" style="margin:-6px 0 0 114px">'+x.src+' · fiabilité : '+x.fiab+'</div></div>'}).join("")+'</div>'+
   '<div class="note">Ces écarts viennent de plusieurs tests différents (jeux, réglages, dates). Ils donnent l\'ordre de grandeur, pas des FPS garantis. L\'écart avec la GTX 1070 est le moins fiable : les sources divergent.</div>'+
-  '<h2 style="margin-top:26px;font-size:20px">FPS par jeu en 4K</h2><p class="sub">Réglages, upscaling, jouable à 60 FPS ou plus.</p>'+
-  '<div class="brow h"><span class="jeu">Jeu</span><span>5070 Ti</span><span>5080</span><span>5090</span></div>'+D.jeux.map(function(j){var f=D.fps[j]||{};function c(k){return f[k]?'<span>'+f[k].fps+' FPS<br><small class="mute">'+f[k].reglage+' · '+f[k].up+'</small></span>':'<span class="mute">à confirmer</span>'}
-    return '<div class="brow"><span class="jeu">'+j+'</span>'+c("5070Ti")+c("5080")+c("5090")+'</div>'}).join("")+
-  '<div class="note">Aucun FPS par jeu n\'est publié tant qu\'il n\'a pas de source précise (site, date, réglages). Ils se remplissent dans <code>data.js</code>.</div>'+
   '<h2 style="margin-top:26px;font-size:20px">Sources</h2><div class="card">'+C.sources.map(function(s){return '<div class="row2"><a class="lnk" href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a></div>'}).join("")+'</div>';return h}
 
 /* ===== Goulot ===== */
