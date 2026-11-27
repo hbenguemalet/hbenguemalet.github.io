@@ -17,6 +17,10 @@ window.BENCH2 = {
     { n: "GTX 1070", m: "NVIDIA", vram: 8, type: "GDDR5", bus: 256, w: 150, psu: 500, perf: 20, src: "HowManyFPS (5070 Ti 392 % plus rapide, moyenne de 100+ jeux)", fiab: "faible", actuel: true },
     { n: "RTX 5060 Ti 16 Go", m: "NVIDIA", vram: 16, type: "GDDR7", bus: 128, w: 180, psu: 600, perf: null, src: "Écart 4K non sourcé", fiab: "-" },
     { n: "RTX 5070", m: "NVIDIA", vram: 12, type: "GDDR7", bus: 192, w: 250, psu: 650, perf: null, src: "Écart 4K non sourcé", fiab: "-" },
+    { n: "RTX 4070 Super", m: "NVIDIA", vram: 12, type: "GDDR6X", bus: 192, w: 220, psu: 650, perf: null, src: "Génération précédente : écart 4K non sourcé", fiab: "-" },
+    { n: "RTX 4070 Ti Super", m: "NVIDIA", vram: 16, type: "GDDR6X", bus: 256, w: 285, psu: 700, perf: null, src: "Génération précédente : écart 4K non sourcé", fiab: "-" },
+    { n: "RTX 4080 Super", m: "NVIDIA", vram: 16, type: "GDDR6X", bus: 256, w: 320, psu: 750, perf: null, src: "Génération précédente : écart 4K non sourcé", fiab: "-" },
+    { n: "RTX 3090 (occasion)", m: "NVIDIA", vram: 24, type: "GDDR6X", bus: 384, w: 350, psu: 750, perf: null, src: "Occasion, ancienne génération : écart 4K non sourcé", fiab: "-" },
     { n: "RTX 5070 Ti", m: "NVIDIA", vram: 16, type: "GDDR7", bus: 256, w: 300, psu: 750, perf: 100, src: "Référence", fiab: "bonne" },
     { n: "RTX 5080", m: "NVIDIA", vram: 16, type: "GDDR7", bus: 256, w: 360, psu: 850, perf: 114, src: "GamersNexus (5080 devant de 12 à 16 % en 4K)", fiab: "bonne" },
     { n: "RTX 5090", m: "NVIDIA", vram: 32, type: "GDDR7", bus: 512, w: 575, psu: 1000, perf: 166, src: "Notebookcheck (agrégat, 5070 Ti à 66 % derrière)", fiab: "moyenne" }
