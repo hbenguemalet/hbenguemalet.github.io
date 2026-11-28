@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T21:23:34Z",
+ "updated": "2026-11-28T03:57:12Z",
  "note": "Valeurs initiales du document. Le workflow bench-prix remplace price/stock/checked quand la lecture réussit.",
  "items": {
   "p1-gpu": {
@@ -7,7 +7,7 @@
    "ref": 1553,
    "price": 1553.0,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -22,7 +22,7 @@
    "ref": 109.95,
    "price": 119.95,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -47,7 +47,7 @@
    "ref": 49.99,
    "price": 49.99,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -62,7 +62,7 @@
    "ref": 24.95,
    "price": 24.95,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -86,7 +86,7 @@
    "ref": 1385,
    "price": 1385.0,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -101,7 +101,7 @@
    "ref": 1939,
    "price": 1939.0,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -116,7 +116,7 @@
    "ref": 119.95,
    "price": 119.95,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -141,7 +141,7 @@
    "ref": 49.99,
    "price": 49.99,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -156,7 +156,7 @@
    "ref": 24.95,
    "price": 24.95,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -180,7 +180,7 @@
    "ref": 2205,
    "price": 2205.0,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -195,7 +195,7 @@
    "ref": 9199.99,
    "price": 9199.99,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -210,7 +210,7 @@
    "ref": 149.95,
    "price": 119.95,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -235,7 +235,7 @@
    "ref": 49.99,
    "price": 49.99,
    "stock": false,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [
@@ -250,7 +250,7 @@
    "ref": 24.95,
    "price": 24.95,
    "stock": true,
-   "checked": "2026-11-27T21:23:34Z",
+   "checked": "2026-11-28T03:57:12Z",
    "status": "live",
    "source": "site",
    "hist": [

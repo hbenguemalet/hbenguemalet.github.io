@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T21:24:22Z",
+ "updated": "2026-11-28T03:58:01Z",
  "cartes": {
   "RTX 5060 Ti 16 Go": {
    "offres": [
@@ -64,7 +64,7 @@
      "lu": true,
      "erreur": null,
      "nb": 26,
-     "nb_stock": 15,
+     "nb_stock": 16,
      "meilleur": {
       "nom": "ASUS DUAL GeForce RTX 5070 OC, Carte graphique",
       "prix": 933.0,
@@ -375,13 +375,13 @@
      "lu": true,
      "erreur": null,
      "nb": 16,
-     "nb_stock": 1,
-     "meilleur": {
-      "nom": "Gigabyte GeForce RTX 5080 AERO OC SFF 16G",
-      "prix": 2249.9,
-      "url": "https://www.grosbill.com/gigabyte-geforce-rtx-5080-aero-oc-sff-16g-150383"
-     },
-     "moins_cher_hors_stock": null
+     "nb_stock": 0,
+     "meilleur": null,
+     "moins_cher_hors_stock": {
+      "nom": "Asus TUF Gaming GeForce RTX 5080 16GB GDDR7 OC Edition",
+      "prix": 1829.9,
+      "url": "https://www.grosbill.com/asus-tuf-gaming-geforce-rtx-5080-16gb-gddr7-oc-edition-149590"
+     }
     }
    ]
   },
